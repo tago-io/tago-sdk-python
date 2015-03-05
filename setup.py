@@ -3,11 +3,11 @@
 from setuptools import setup
 
 setup(name='tago',
-      version='1.0.0',
+      version='1.0.2',
       description='Official Python lib for Tago',
       classifiers=[
           'Development Status :: 5 - Production/Stable',
-          'License :: OSI Approved :: Copyright License',
+          'License :: Other/Proprietary License',
           'Programming Language :: Python :: 2.6',
           'Programming Language :: Python :: 2.7',
           'Topic :: Software Development :: Libraries :: Python Modules',
@@ -17,7 +17,7 @@ setup(name='tago',
       author='Tago LLC',
       author_email='dev@tago.io',
       license='Copyright',
-      packages=['tago'],
+      packages=['tago', 'tago/device'],
       test_suite='nose.collector',
       tests_require=['nose'],
       install_requires=['socketIO-client', 'requests'],

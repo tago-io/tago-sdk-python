@@ -1,8 +1,3 @@
-### ignore this block if you don't know what is.
-import sys
-sys.path.append("..")
-### ---
-
 from tago import Tago
 
 my_device = Tago('b61c4c00-b85b-11e4-b1a6-0f628ad58a3a').device

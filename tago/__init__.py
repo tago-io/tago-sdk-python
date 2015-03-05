@@ -1,5 +1,5 @@
-import device
+from device import Device
 
 class Tago:
     def __init__(self, token):
-        self.device = device.Device(token)
+        self.device = Device(token)
