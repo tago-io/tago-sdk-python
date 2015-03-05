@@ -13,25 +13,29 @@ class Device:
         self.token = token
         self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
 
-    def api_data_post(self, data):
-        url = API_TAGO + 'data/'
-        return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
+    def handle_url(self, id):
+        if id:
+            url = API_TAGO + 'data/' + id
+        else:
+            url = API_TAGO + 'data/'
+        return url
 
-    def api_data_update(self, id, data):
-        url = API_TAGO + 'data/' + id
-        return requests.put(url, data=json.dumps(data), headers=self.default_headers).json()
+    def api_data_post(self, data):
+        return requests.post(self.handle_url(id=False), data=json.dumps(data), headers=self.default_headers).json()
+
+    def api_data_update(self, data, id):
+        return requests.put(self.handle_url(id=id), data=json.dumps(data), headers=self.default_headers).json()
 
     def api_data_delete(self, id):
-        url = API_TAGO + 'data/' + id
-        return requests.delete(url, headers=self.default_headers).json()
+        return requests.delete(self.handle_url(id=id), headers=self.default_headers).json()
 
     def insert(self, data):
         return self.api_data_post(data)
 
-    def update(self, id, data):
-        return self.api_data_update(id, data)
+    def update(self, data, id=False):
+        return self.api_data_update(data, id)
 
-    def delete(self, id):
+    def delete(self, id=False):
         return self.api_data_delete(id)
 
     def listening(self, callback, wait=False):

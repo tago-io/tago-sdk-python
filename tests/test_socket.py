@@ -1,4 +1,5 @@
 from tago import Tago
+import os
 
 TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'TOKEN'
 
