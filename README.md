@@ -30,9 +30,9 @@ data_to_insert = {
     'value'    : 63
 }
 
-my_device.insert(data_to_insert) // Without response
+my_device.insert(data_to_insert) # Without response
 # or
-result = my_device.insert(data_to_insert) // With response
+result = my_device.insert(data_to_insert) # With response
 if result['status']:
     print 'Data added'
 else:
@@ -44,9 +44,9 @@ else:
 **.delete(/ID/)**
 ``` python
 
-my_device.delete('Data_ID') // Without response
+my_device.delete('Data_ID') # Without response
 # or
-result = my_device.delete('Data_ID') // With response
+result = my_device.delete('Data_ID') # With response
 if result['status']:
     print 'Data Removed'
 else:
@@ -62,9 +62,9 @@ data_to_update = {
     'value' : 32
 }
 
-my_device.update(data_to_update, 'Data_ID') // Without response
+my_device.update(data_to_update, 'Data_ID') # Without response
 # or
-result = my_device.update(data_to_update, 'Data_ID') // With response
+result = my_device.update(data_to_update, 'Data_ID') # With response
 if result['status']:
     print 'Data updated'
 else:
