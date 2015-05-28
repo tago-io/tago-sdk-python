@@ -3,10 +3,9 @@ import json
 import os
 from socket import TagoRealTime
 
-API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io/v0/'
+API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io/'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'realtime.tago.io'
 REALTIME_PORT = int(os.environ.get('TAGO_REALTIME_PORT') or 80)
-
 
 class Device:
     def __init__(self, token):
