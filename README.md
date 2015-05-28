@@ -2,9 +2,9 @@
 
 Official Python lib for Tago
 
-<!-- ## Code Status
+## Code Status
 
-[![wercker status](https://app.wercker.com/status/7eba1fa5503f7f5ad61a15a0a6e63234/m "wercker status")](https://app.wercker.com/project/bykey/7eba1fa5503f7f5ad61a15a0a6e63234) -->
+[![wercker status](https://app.wercker.com/status/16919e20780e3441fc3eb4c744e7bad3/m "wercker status")](https://app.wercker.com/project/bykey/16919e20780e3441fc3eb4c744e7bad3)
 
 ## Documentation
 
