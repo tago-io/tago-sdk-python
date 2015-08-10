@@ -40,6 +40,17 @@ else:
 
 ```
 
+##### Find Data
+**.find(OBJECT)**
+``` python
+result = my_device.find({'query': 'last_value'})
+if result['status']:
+    print result['result'] # Array with data
+else:
+    print result['result'] # Error (if status is False)
+
+```
+
 ##### Delete Data
 **.delete(/ID/)**
 ``` python
