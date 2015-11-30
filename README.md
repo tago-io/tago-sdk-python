@@ -36,7 +36,7 @@ result = my_device.insert(data_to_insert) # With response
 if result['status']:
     print 'Data added'
 else:
-    print result['result']
+    print result['message']
 
 ```
 
@@ -45,9 +45,9 @@ else:
 ``` python
 result = my_device.find({'query': 'last_value'})
 if result['status']:
-    print result['result'] # Array with data
+    print result['message'] # Array with data
 else:
-    print result['result'] # Error (if status is False)
+    print result['message'] # Error (if status is False)
 
 ```
 
@@ -61,7 +61,7 @@ result = my_device.delete('Data_ID') # With response
 if result['status']:
     print 'Data Removed'
 else:
-    print result['result']
+    print result['message']
 
 ```
 
@@ -79,7 +79,7 @@ result = my_device.update(data_to_update, 'Data_ID') # With response
 if result['status']:
     print 'Data updated'
 else:
-    print result['result']
+    print result['message']
 
 ```
 
