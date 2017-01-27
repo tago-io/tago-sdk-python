@@ -4,8 +4,7 @@ import os
 from socket import TagoRealTime
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
-REALTIME = os.environ.get('TAGO_REALTIME') or 'api.tago.io'
-REALTIME_PORT = int(os.environ.get('TAGO_REALTIME_PORT') or 433)
+REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Device:
     def __init__(self, token):
@@ -44,4 +43,4 @@ class Device:
         return self.api_data_delete(id)
 
     def listening(self, callback, wait=False):
-        return TagoRealTime(REALTIME, REALTIME_PORT, self.token, callback).listening(wait)
+        return TagoRealTime(REALTIME, self.token, callback).listening(wait)

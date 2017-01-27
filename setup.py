@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='tago',
-      version='1.0.6',
+      version='1.0.9',
       description='Official Python lib for Tago',
       classifiers=[
           'Development Status :: 5 - Production/Stable',
