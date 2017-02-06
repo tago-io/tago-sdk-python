@@ -99,4 +99,4 @@ my_device.listening(func_callback_data)
 
 ## License
 
-Tago lib client for Python is released under the [Apache-2.0 License](https://github.com/tago-io/tago-sdk-python/blob/master/LICENSE.md).
+Tago SDK for Python is released under the [Apache-2.0 License](https://github.com/tago-io/tago-sdk-python/blob/master/LICENSE.md).
