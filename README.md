@@ -1,3 +1,5 @@
+## While in Development the Doc URL is: http://tago-sdk-python.rtfd.io
+
 ### Tago Private Documentation
 
 #### Requirements
