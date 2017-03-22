@@ -30,6 +30,9 @@ class Device:
     def api_data_delete(self, id):
         return requests.delete(self.handle_url(id=id), headers=self.default_headers).json()
 
+    def info(self, data):
+        return requests.get('{api_endpoint}/info'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+
     def insert(self, data):
         return self.api_data_post(data)
 
@@ -39,7 +42,7 @@ class Device:
     def update(self, data, id=False):
         return self.api_data_update(data, id)
 
-    def delete(self, id=False):
+    def remove(self, id=False):
         return self.api_data_delete(id)
 
     def listening(self, callback, wait=False):
