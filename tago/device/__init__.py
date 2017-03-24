@@ -24,9 +24,6 @@ class Device:
     def api_data_get(self, query):
         return requests.get(self.handle_url(id=False), params=query, headers=self.default_headers).json()
 
-    def api_data_edit(self, data, id):
-        return requests.put(self.handle_url(id=id), data=json.dumps(data), headers=self.default_headers).json()
-
     def api_data_delete(self, id):
         return requests.delete(self.handle_url(id=id), headers=self.default_headers).json()
 
@@ -38,9 +35,6 @@ class Device:
 
     def find(self, query):
         return self.api_data_get(query)
-
-    def edit(self, data, id=False):
-        return self.api_data_edit(data, id)
 
     def remove(self, id=False):
         return self.api_data_delete(id)
