@@ -65,24 +65,6 @@ else:
 
 ```
 
-##### Update Data
-**.update(DATA, /ID/)**
-``` python
-
-data_to_update = {
-    'value' : 32
-}
-
-my_device.update(data_to_update, 'Data_ID') # Without response
-# or
-result = my_device.update(data_to_update, 'Data_ID') # With response
-if result['status']:
-    print 'Data updated'
-else:
-    print result['message']
-
-```
-
 ##### Listening new data by Socket
 **.listening(CALLBACK)**
 
