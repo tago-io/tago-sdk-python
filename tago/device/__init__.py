@@ -39,10 +39,10 @@ class Device:
     def remove(self, id=False):
         return self.api_data_delete(id)
 
-    def getparams(self, sent_status)
+    def getParams(self, sent_status)
         return requests.get('{api_endpoint}/device/params'.format(api_endpoint=API_TAGO), params=sent_status, headers=self.default_headers).json()
 
-    def markparams(self, param_id)
+    def markParam(self, param_id)
         return requests.put(self.'{api_endpoint}/device/params/{id}'.format(api_endpoint=API_TAGO,id=param_id), headers=self.default_headers).json()
 
     def listening(self, callback, wait=False):
