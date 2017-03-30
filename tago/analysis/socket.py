@@ -12,6 +12,14 @@ class TagoRealTime:
         self.token    = token
         self.callback = callback
 
+
+    def run(environment, data , token):
+        if data.empty():
+            data = []
+
+        context = {token, environment}
+        this.analysis(context, data)
+        
     def on_response(*arg):
         print arg
 

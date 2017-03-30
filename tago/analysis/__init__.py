@@ -8,13 +8,6 @@ class Analysis:
 		self.token = token
 		self.analysis = analysis
 
-	def run(environment, data , token):
-		if data.empty():
-			data = []
-
-		context = {token, environment}
-		this.analysis(context, data)
-
 	def localRuntime(self, callback, wait):
 		return TagoRealTime(REALTIME, self.token, callback).listening(wait)
 
