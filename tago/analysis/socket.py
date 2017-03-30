@@ -12,15 +12,13 @@ class TagoRealTime:
         self.token    = token
         self.callback = callback
 
-    def on_connect(self):
-        self.socket.emit('register', self.token)
-
-    def on_data(self, data):
-        self.callback(data)
+    def on_response(*arg):
+        print arg
 
     def listening(self, wait):
-        self.socket.on('connect', self.on_connect)
-        self.socket.on('data', self.on_data)
+        self.socket.on('register:analysis', on_response)
+        self.socket.on('run:analysis', on_response)
+        self.socket.emit('register:analysis', self.token)
 
         if wait:
             self.socket.wait(seconds=wait)
