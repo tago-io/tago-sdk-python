@@ -7,7 +7,9 @@ class Analysis:
 		self.token = token
 		self.analysis = analysis
 
-	def run(environment, data = [], token):
+	def run(environment, data , token):
+		if !data:
+			data = []
 
 		context = {token, environment}
 		this.analysis(context, data)
