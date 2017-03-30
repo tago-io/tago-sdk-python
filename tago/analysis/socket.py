@@ -3,7 +3,7 @@ import logging
 logging.getLogger('socketIO-client').setLevel(logging.DEBUG)
 logging.basicConfig()
 
-options = {'reconnectionDelay': 10000, 'reconnection': true}
+# options = {'reconnectionDelay': 10000, 'reconnection': true}
 
 class TagoRealTime:
 
