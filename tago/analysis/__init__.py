@@ -17,7 +17,7 @@ class Analysis:
 
 
 	def localRuntime(self, callback):
-		r_sock = new TagoRealTime(REALTIME, this.token)
+		r_sock = TagoRealTime(REALTIME, this.token)
 
 		r_sock.get_socket().emit('register:analysis', this.token)
 		r_sock.get_socket().on('register:analysis', on_response)
