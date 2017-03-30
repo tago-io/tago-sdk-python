@@ -1,3 +1,6 @@
+import sys
+sys.path.append('..')
+
 from tago import Tago
 import os
 
@@ -10,6 +13,6 @@ def func_callback(context, scope):
    print scope
 
 def test_socket():
-   s =  Tago(TOKEN).analysis.localRuntime(func_callback, 0)
+   s =  Tago(TOKEN).analysis.run_analysis(func_callback, 0)
 
 test_socket()

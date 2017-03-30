@@ -8,5 +8,5 @@ class Analysis:
 		self.token = token
 		self.analysis = analysis
 
-	def localRuntime(self, callback, wait):
+	def run_analysis(self, callback, wait):
 		return TagoRealTime(REALTIME, self.token, callback).listening(wait)
