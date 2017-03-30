@@ -8,7 +8,7 @@ class Analysis:
 		self.analysis = analysis
 
 	def run(environment, data , token):
-		if !data:
+		if data.empty():
 			data = []
 
 		context = {token, environment}
