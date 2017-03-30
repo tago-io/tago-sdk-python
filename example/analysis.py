@@ -1,8 +1,12 @@
-import Analysis
+from tago import Tago
+import os
 
-def parsePayload(context, scope):
-    print 'Hello World'
-    print context
-    print scope
+TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
 
-my_analysis = Analysis(parsePayload, '606109f0-bda3-11e6-a1e0-f13b10826644')
+def func_callback(data):
+   assert True
+
+def test_socket():
+   s =  Tago(TOKEN).analysis.localRuntime(func_callback, 1)
+
+test_socket()
