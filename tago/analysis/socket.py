@@ -8,7 +8,7 @@ options = {'reconnectionDelay': 10000, 'reconnection': true}
 class TagoRealTime:
 
     def __init__(self, address, token):
-        self.socket   = SocketIO(address, 443, options)
+        self.socket   = SocketIO(address, 443, LoggingNamespace)
         self.token    = token
         self.callback = callback
 
