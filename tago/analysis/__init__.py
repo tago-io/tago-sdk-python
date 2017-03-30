@@ -15,7 +15,7 @@ class Analysis:
 		context = {token, environment}
 		this.analysis(context, data)
 
-	def localRuntime(self, callback):
+	def localRuntime(self, callback, wait):
 		return TagoRealTime(REALTIME, self.token, callback).listening(wait)
 
 
