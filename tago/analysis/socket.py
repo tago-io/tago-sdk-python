@@ -16,9 +16,10 @@ class TagoRealTime:
         print arg
 
     def listening(self, wait):
+        self.socket.emit('register:analysis', self.token)
         self.socket.on('register:analysis', on_response)
         self.socket.on('run:analysis', on_response)
-        self.socket.emit('register:analysis', self.token)
+        
 
         if wait:
             self.socket.wait(seconds=wait)
