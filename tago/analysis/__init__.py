@@ -10,5 +10,3 @@ class Analysis:
 
 	def localRuntime(self, callback, wait):
 		return TagoRealTime(REALTIME, self.token, callback).listening(wait)
-
-
