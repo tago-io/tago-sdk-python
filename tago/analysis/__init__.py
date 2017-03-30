@@ -7,10 +7,10 @@ class Analysis:
 		self.token = token
 		self.analysis = analysis
 
-	def run(environment, data, token):
+	def run(environment, data = [], token):
 
 		context = {token, environment}
-		this.analysis(context, data || [])
+		this.analysis(context, data)
 
 	def on_response(*args):
 		print args
