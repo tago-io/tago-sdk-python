@@ -1,4 +1,5 @@
 from socket import TagoRealTime
+import os
 
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
