@@ -17,8 +17,8 @@ class TagoRealTime:
 
     def listening(self, wait):
         self.socket.emit('register:analysis', self.token)
-        self.socket.on('register:analysis', on_response)
-        self.socket.on('run:analysis', on_response)
+        self.socket.on('register:analysis', self.on_response)
+        self.socket.on('run:analysis', self.on_response)
         
 
         if wait:
