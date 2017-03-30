@@ -3,7 +3,7 @@ from socket import TagoRealTime
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Analysis:
-	def __init__(self, token, analysis):
+	def __init__(self, analysis, token):
 		self.token = token
 		self.analysis = analysis
 
@@ -18,7 +18,11 @@ class Analysis:
 
 	def localRuntime(self, callback):
 		r_sock = new TagoRealTime(REALTIME, this.token)
-		
+
 		r_sock.get_socket().emit('register:analysis', this.token)
 		r_sock.get_socket().on('register:analysis', on_response)
+
+		r_sock.get_socket().on('register:analysis', on_response)
+
+
 
