@@ -1,6 +1,3 @@
-import sys
-sys.path.append('../..')
-
 from tago import Tago
 import os
 
