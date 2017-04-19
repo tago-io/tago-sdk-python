@@ -61,13 +61,6 @@ class Devices:
     def paramRemove(self, device_id, param_id):
     	return requests.delete('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers).json()
 
-
-
-
-
-
-
-
-
-
+    def factory(self):
+        return self.create({'name': 'TestDeviceName'})
 

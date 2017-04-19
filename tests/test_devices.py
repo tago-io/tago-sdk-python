@@ -26,7 +26,7 @@ def test_device_create():
 
     # TODO: Passing as JSON string for now.  Should that change?
 
-    result = testDevices.create({'name': 'TestDeviceName'})
+    result = testDevices.factory()
 
     # print result
 
