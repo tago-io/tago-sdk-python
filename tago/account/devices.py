@@ -17,11 +17,11 @@ class Devices:
 
     def create(self, data):
     	data = data if data else {}
-    	return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    	return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
     def edit(self, device_id, data):
     	data = data if data else {}
-    	return requests.put('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=data).json()
+    	return requests.put('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=json.dumps(data)).json()
 
     def delete(self, device_id):
     	return requests.delete('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers).json()
