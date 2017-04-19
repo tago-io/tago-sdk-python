@@ -41,7 +41,7 @@ class Devices:
     def info(self, device_id):
     	# if device id is null, then call list
     	if device_id is None or device_id == '':
-    		return list(self)
+	    return list(self)
 
     	return requests.get('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers).json()
 
