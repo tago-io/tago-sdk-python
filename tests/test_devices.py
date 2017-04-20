@@ -35,7 +35,18 @@ def test_device_create():
         assert True
     else:
         assert False
+
     
+    #########################
+    # Testing device info 
+    #########################
+    deviceInfo = testDevices.info(result['result']['device_id'])
+
+    if deviceInfo['status']:
+        assert True
+    else:
+        assert False
+
     #########################
     # Testing device editing
     #########################
@@ -58,3 +69,64 @@ def test_device_create():
         assert True
     else:
         assert False
+
+def test_device_token_create():
+
+    testDevices = Devices(TOKEN)
+    testDevice = testDevices.factory()
+
+    print testDevice['result']['device_id']
+
+    #########################
+    # Testing device token creation
+    #########################
+    newToken = testDevices.tokenCreate(testDevice['result']['device_id'], {'name': 'NewDeviceToken', 'permission': 'full', 'device': ''})
+
+    print 'The token create response'
+    print newToken
+
+    if newToken['status']:
+        assert True
+    else:
+        assert False
+    #########################
+    # Testing device token listing
+    #########################
+
+    deviceList = testDevices.tokenList(testDevice['result']['device_id'])
+
+    print deviceList 
+
+    if deviceList['status']:
+        assert True
+    else:
+        assert False
+
+    #########################
+    # Testing deletion of a token
+    #########################
+
+    tokenDelete = testDevices.tokenDelete(newToken['result']['token'])
+
+    print tokenDelete
+
+    if tokenDelete['status']:
+        assert True
+    else:
+        assert False
+
+    # cleaning up the device we created for this test
+    testdevices.delete(testdevice['result']['device_id'])
+
+def test_device_param_create():
+    testDevices = Devices(TOKEN)
+    testDevice = testDevices.factory()
+
+    ########################
+    # Testing creation of params
+    ########################
+    testParam = testDevices.paramCreate(testDevice['result']['device_id'])
+
+
+    # cleaning up the device we created for this test
+    testdevices.delete(testdevice['result']['device_id'])

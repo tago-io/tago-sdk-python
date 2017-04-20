@@ -31,7 +31,7 @@ class Devices:
 
     def tokenCreate(self, device_id, data):
     	data = data if data else {}
-    	data.device = device_id
+    	data['device'] = device_id
 
     	return requests.post('{api_endpoint}/device/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
