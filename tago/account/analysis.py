@@ -48,8 +48,12 @@ class Analysis:
     	return requests.get('{api_endpoint}/analysis/{analyze_id}/token'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers).json()
 
     def uploadFile(self, file_name, file):
-    	#not sure how to pass file_name and file in request data...
-    	return None
+    	#think this is how we have to do it, using the variable names as the 'keys'
+    	data = {}
+    	data['file'] = file
+    	data['file_name'] = file_name
+
+    	return requests.post('{api_endpoint}/analysis/{analyze_id}/upload'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=json.dumps(data)).json()
 
 
 

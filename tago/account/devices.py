@@ -51,7 +51,7 @@ class Devices:
     def paramList(self, device_id, sent_status):
     	# not sure what the key should be b/c they do not put a key in JS method, but i tried this for now
     	# params = {}
-    	# params.sent_status = sent_status
+    	# params['sent_status'] = sent_status
 
     	# looking at the device/__init__.py they just pass sent_status as the params in the request...
     	return requests.get('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=sent_status).json()
