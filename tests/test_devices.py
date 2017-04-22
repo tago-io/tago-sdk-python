@@ -95,6 +95,7 @@ def test_device_token_create():
 
     deviceList = testDevices.tokenList(testDevice['result']['device_id'])
 
+    print 'The response to device list'
     print deviceList 
 
     if deviceList['status']:
@@ -108,6 +109,7 @@ def test_device_token_create():
 
     tokenDelete = testDevices.tokenDelete(newToken['result']['token'])
 
+    print 'The response to token delete'
     print tokenDelete
 
     if tokenDelete['status']:
@@ -116,17 +118,17 @@ def test_device_token_create():
         assert False
 
     # cleaning up the device we created for this test
-    testdevices.delete(testdevice['result']['device_id'])
+    testDevices.delete(testDevice['result']['device_id'])
 
-def test_device_param_create():
-    testDevices = Devices(TOKEN)
-    testDevice = testDevices.factory()
-
-    ########################
-    # Testing creation of params
-    ########################
-    testParam = testDevices.paramCreate(testDevice['result']['device_id'])
-
-
-    # cleaning up the device we created for this test
-    testdevices.delete(testdevice['result']['device_id'])
+# def test_device_param_create():
+#     testDevices = Devices(TOKEN)
+#     testDevice = testDevices.factory()
+# 
+#     ########################
+#     # Testing creation of params
+#     ########################
+#     testParam = testDevices.paramCreate(testDevice['result']['device_id'])
+# 
+# 
+#     # cleaning up the device we created for this test
+#     testdevices.delete(testdevice['result']['device_id'])
