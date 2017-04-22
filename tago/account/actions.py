@@ -6,7 +6,7 @@ API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Actions:
-	def __init__(self, token):
+    def __init__(self, token):
         self.token = token
         self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
 
