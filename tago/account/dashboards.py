@@ -1,156 +1,105 @@
 
-import requests
-from config import config
-from comum.default_headers import default_headers
-from dasboards.widgets import Widgets
-from utils import Realtime
-from _share import share
+import requests # Used to make HTTP requests
+import json # Used to parse JSON
+import os # Used to infer environment variables
+import _share as share
+from socket import TagoRealTime
+from dashboard.widgets import Widgets
+
+API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Dashboard:
 
 	def __init__(self, acc_token):
 		self.token = acc_token
-		self.default_options = {"json":True,"headers":default_headers(self)}
+		self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+		self.default_options = {"json":True,"headers":self.default_headers}
 
 	# List Dashboards
 	def list:
-		url = '{api_url}/dashbaord'.format(api_url=config.api_url)
-		method = "GET"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		return requests(options)
+		return requests.get('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
 	# Create a Dashboard
 	def create(data):
 		data = data if data else {}
-		url = '{api_url}/dashbaord'.format(api_url=config.api_url)
-		method = "POST"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		options["data"] = data
-		return requests(options)
+    	return requests.post('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
 	# Edit a Dashboard
 	def edit(dashboard_id, data):
 		data = data if data else {}
-		url = '{api_url}/dashbaord/{dashboard_id}'.format(api_url=config.api_url, dashboard_id=dashboard_id)
-		method = "PUT"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		options["data"] = data
-		return requests(options)
+    	return requests.put('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers, data=json.dumps(data)).json()
 
 	# Delete a Dashboard
 	def delete(dashboard_id):
-		url = '{api_url}/dashbaord/{dashboard_id}'.format(api_url=config.api_url, dashboard_id=dashboard_id)
-		method = "DELETE"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		return requests(options)
+		return requests.delete('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	# Get Information for a Dashboard
 	def info(dashboard_id):
-		if(!dashbaord or dashboard_id == ''):
-			return Promise
-		url = '{api_url}/dashbaord/{dashboard_id}'.format(api_url=config.api_url, dashboard_id=dashboard_id)
-		method = "GET"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		return requests(options)
+		if dashboard_id is None or dashboard_id == '':
+		    return None # Dashboard ID parameter is obligatory.
+	    return requests.get('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	# Get Information for a Dashboard
-	def listeneing(dashboard_id, func, realtime):
-		if(!dashbaord or dashboard_id == ''):
-			return Promise
-
+	def listening(dashboard_id, func, realtime):
+		if dashboard_id is None or dashboard_id == '':
+		    return None # Dashboard ID parameter is obligatory.
 		if(!this.realtime and !realtime):
-			self.realtime = Realtime(self.token)
-		realtime =  realtime if realtime or self.realtime
-		realtime.get_socket.on('{dashboard:{dashboard_id}'.format(dashboard_id=dashboard_id), func)
-		
-		return Promise
-
+			self.realtime = TagoRealTime(TAGO_REALTIME, self.token, func)
+		realtime = realtime if realtime else self.realtime
+		realtime.get_socket().on('{dashboard:{dashboard_id}'.format(dashboard_id=dashboard_id), func)
+		return "Listening to Dashboard "+dashboard_id
 
 	# Stop listening to a dashboard by its ID
 	def stopListening(id, realtime):
 		if(!self.realtime and !realtime):
 			return None
-
-		realtime =  realtime if realtime or self.realtime
-		realtime.get_socket.off("dashboard:{id}".format(id=id))
+		realtime =  realtime if realtime else self.realtime
+		realtime.get_socket().off("dashboard:{id}".format(id=id))
 
 	# Get share list of the dashboard
 	def shareList(dashboard_id):
-		if(!dashboard_id or dashboard_id == ''):
-			return Promise
+		if dashboard_id is None or dashboard_id == '':
+		    return None # Dashboard ID parameter is obligatory.
 		return share.list("dashboard",dashboard_id,self.default_options)
 
 	# Share the dashboard with another person
 	def shareSendInvite(dashboard_id, data):
 		data = data if data else {}
-		if(!dashboard_id or dashboard_id == ''):
-			return Promise
-		elif !data.email:
-			return Promise
+		if dashboard_id is None or dashboard_id == '':
+		    return None # Dashboard ID parameter is obligatory.
+		elif data['email'] is None or data['email'] == '':
+		    return None # data email parameter is obligatory.
 		return share.invite("dashboard",dashboard_id,this.default_options)
-
 
 	# Change permssions of bucket
 	def shareEdit(share_id, data):
 		data = data if data else {}
-		if(!share_id or share_id == ''):
-			return Promise
-		elif !data.email:
-			return Promise
+		if share_id is None or share_id == '':
+		    return None # Share ID parameter is obligatory.
+		elif data['email'] is None or data['email'] == '':
+		    return None # data email parameter is obligatory.
 		return share.edit("dashboard",share_id,this.default_options)
 
 	# Remove share of a bucket
 	def shareDelete(share_id):
-		if(!share_id or share_id == ''):
-			return Promise
+		if share_id is None or share_id == '':
+		    return None # Share ID parameter is obligatory.
 		return share.remove("dashboard",share_id,this.default_options)
 
 	# Generate new public token for the dashboard
 	def genPublicToken(dashboard_id):
-		if(!dashboard_id or dashboard_id == ''):
-			return Promise
-
-		url = "{api_url}/dashboard/{dashboard_id}/share/public".format(api_url=config.api_url,dashboard_id=dashboard_id)
-		method = "GET"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		return requests(options)
-
+		if dashboard_id is None or dashboard_id == '':
+		    return self.list() # Dashboard ID parameter is obligatory.
+		return requests.get('{api_endpoint}/dashboard/{dashboard_id}/share/public'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	# Clone the dashboard with special parameters
 	def shareClone(dashboard_id, data):
-		if (!dashboard_id or dashboard_id == ''):
-			return Promise
-		elif !data.email:
-			return Promise
-
-		url = "{api_url}/dashboard/{dashboard_id}/share/copy".format(api_url=config.api_url,dashboard_id=dashboard_id)
-		method = "POST"
-
-		options = this.default_options
-		options["url"] = url
-		options["method"] = method
-		return requests(options)
+		if dashboard_id is None or dashboard_id == '':
+		    return self.list() # Dashboard ID parameter is obligatory.
+		elif data.email is None:
+		    return self.list() # data.email parameter is obligatory.
+		return requests.post('{api_endpoint}/dashboard/{dashboard_id}/share/copy'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	def get_widgets():
 		return Widgets(self.token)
-
-
-
