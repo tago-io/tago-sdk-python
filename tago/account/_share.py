@@ -1,4 +1,5 @@
 import requests # Used to make HTTP requests
+import os
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 
