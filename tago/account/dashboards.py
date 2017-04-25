@@ -14,7 +14,6 @@ class Dashboards:
 	def __init__(self, acc_token):
 		self.token = acc_token
 		self.default_headers = { 'content-type': 'application/json', 'Device-Token': acc_token }
-		self.default_options = {"json":True,"headers":self.default_headers}
 
 	# List Dashboards
 	def list(self):
@@ -61,7 +60,7 @@ class Dashboards:
 	def shareList(self, dashboard_id):
 		if dashboard_id is None or dashboard_id == '':
 		    return None # Dashboard ID parameter is obligatory.
-		return share.list("dashboard",dashboard_id,self.default_options)
+		return share.list("dashboard",dashboard_id,self.default_headers)
 
 	# Share the dashboard with another person
 	def shareSendInvite(self, dashboard_id, data):
@@ -70,7 +69,7 @@ class Dashboards:
 		    return None # Dashboard ID parameter is obligatory.
 		elif data['email'] is None or data['email'] == '':
 		    return None # data email parameter is obligatory.
-		return share.invite("dashboard",dashboard_id,this.default_options)
+		return share.invite("dashboard",dashboard_id,data,self.default_headers)
 
 	# Change permssions of bucket
 	def shareEdit(self, share_id, data):
@@ -79,13 +78,13 @@ class Dashboards:
 		    return None # Share ID parameter is obligatory.
 		elif data['email'] is None or data['email'] == '':
 		    return None # data email parameter is obligatory.
-		return share.edit("dashboard",share_id,this.default_options)
+		return share.edit("dashboard",share_id,data,self.default_headers)
 
 	# Remove share of a bucket
 	def shareDelete(self, share_id):
 		if share_id is None or share_id == '':
 		    return None # Share ID parameter is obligatory.
-		return share.remove("dashboard",share_id,this.default_options)
+		return share.remove("dashboard",share_id,self.default_headers)
 
 	# Generate new public token for the dashboard
 	def genPublicToken(self, dashboard_id):

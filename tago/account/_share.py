@@ -1,5 +1,6 @@
 import requests # Used to make HTTP requests
 import os
+import json
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 
@@ -18,7 +19,6 @@ def edit(type, share_id, data, default_options):
     return requests.put('{api_endpoint}/share/{share_id}'.format(api_endpoint=API_TAGO,share_id=share_id), headers=default_options, data=json.dumps(data)).json()
 
 def list(type, ref_id, default_options):
-    data = data if data else {}
     if ref_id is None or ref_id == '':
         return None # Type ID parameter is obligatory
     return requests.get('{api_endpoint}/share/{type}/ref_id'.format(api_endpoint=API_TAGO,type=type), headers=default_options).json()
