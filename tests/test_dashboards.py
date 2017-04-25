@@ -1,7 +1,6 @@
 import os
 import sys
 sys.path.append(os.path.join('..', ''))
-from tago.account import Account
 from tago.account.dashboards import Dashboards
 
 TOKEN = os.environ.get('TAGO_ACCOUNT_TOKEN') or 'TOKEN'
