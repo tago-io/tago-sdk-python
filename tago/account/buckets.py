@@ -7,7 +7,7 @@ API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Buckets:
-	def __init__(self, token):
+    def __init__(self, token):
         self.token = token
         self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
 
@@ -37,7 +37,6 @@ class Buckets:
     def backupInfo(self, backup_id):
     	# if backup_id is null, then error!
     	if backup_id is None or backup_id == '':
-            # return None #TODO: Some error notification
             raise ValueError('backup_id must be set')
 
     	return requests.get('{api_endpoint}/backup/{backup_id}'.format(api_endpoint=API_TAGO, backup_id=backup_id), headers=self.default_headers).json()
@@ -48,7 +47,6 @@ class Buckets:
     def backupDelete(self, backup_id):
     	# if bkt_id is null, then error!
     	if backup_id is None or backup_id == '':
-            # return None #TODO: Some error notification
             raise ValueError('backup_id must be set')
 
     	return requests.delete('{api_endpoint}/backup/{backup_id}'.format(api_endpoint=API_TAGO, backup_id=backup_id), headers=self.default_headers).json()
@@ -60,7 +58,6 @@ class Buckets:
     def shareList(self, bucket_id):
     	# if bucket_id is null, then ERROR
     	if bucket_id is None or bucket_id == '':
-            # return None #TODO: Some error notification
             raise ValueError('bucket_id must be set')
 
         return _share.list('bucket', bucket_id, self.default_headers)
@@ -70,11 +67,9 @@ class Buckets:
 
     	# if bucket_id is null, then ERROR
     	if bucket_id is None or bucket_id == '':
-            # return None #TODO: Some error notification
             raise ValueError('bucket ID must be set')
 
         if data['email'] is None or data['email'] == '':
-            # return None #TODO: SOme error notification
             raise ValueError('email must be set')
 
     	return _share.invite('bucket', bucket_id, data, self.default_headers)
@@ -84,11 +79,9 @@ class Buckets:
 
     	# if share_id is null, then ERROR
     	if share_id is None or share_id == '':
-            # return None #TODO: Some error notification
             raise ValueError('share_id must be set')
 
         if data['email'] is None or data['email'] == '':
-            # return None #TODO: SOme error notification
             raise ValueError('email must be set')
 
     	return _share.edit('bucket', share_id, data, self.default_headers)
@@ -96,7 +89,6 @@ class Buckets:
     def shareDelete(self, share_id):
     	# if share_id is null, then ERROR
     	if share_id is None or share_id == '':
-            # return None #TODO: Some error notification
             raise ValueError('share_id must be set')
 
     	return _share.edit('bucket', share_id, self.default_headers)

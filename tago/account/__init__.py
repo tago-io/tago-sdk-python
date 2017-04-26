@@ -7,10 +7,10 @@ API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Account:
-	def __init__(self, token):
-		self.token = token
-		# Not sure about this next line..the 'default headers part'		
-		self.default_headers = { 'content-type': 'application/json', 'Account-Token': token }
+    def __init__(self, token):
+        self.token = token
+        # Not sure about this next line..the 'default headers part'		
+        self.default_headers = { 'content-type': 'application/json', 'Account-Token': token }
 	
     def info(self):
         return requests.get('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
@@ -18,7 +18,7 @@ class Account:
     def statistics(self, params):
         return requests.get('{api_endpoint}/statistics'.format(api_endpoint=API_TAGO), params=params, headers=self.default_headers).json()
     
-	def edit(self, data):
+    def edit(self, data):
         return requests.put('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
     def delete(self):
@@ -27,20 +27,20 @@ class Account:
     def profileList(self):
         return requests.get('{api_endpoint}/account/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
     
-	def profileCreate(self, data):
+    def profileCreate(self, data):
         return requests.post('{api_endpoint}/account/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
     def profileDelete(self, profile_id):
         return requests.delete('{api_endpoint}/account/profile/{profile_id}'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers).json()
 
-	def tokenList(self):
-		return requests.get('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+    def tokenList(self):
+        return requests.get('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
     def tokenCreate(self, data):
-		return requests.post('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+        return requests.post('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
     def tokenDelete(self):
-		return requests.delete('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+        return requests.delete('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
     def login(self, data):
         return requests.post('{api_endpoint}/account/profile/login'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
