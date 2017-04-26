@@ -1,6 +1,7 @@
 import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
+import _share # Used in share methods
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -62,7 +63,7 @@ class Buckets:
             # return None #TODO: Some error notification
             raise ValueError('bucket_id must be set')
 
-    	return None #something with Share.invite?
+        return _share.list('bucket', bucket_id, self.default_headers)
 
     def shareSendInvite(self, bucket_id, data):
     	data = data if data else {}
@@ -76,7 +77,7 @@ class Buckets:
             # return None #TODO: SOme error notification
             raise ValueError('email must be set')
 
-    	return None #something with Share.invite?
+    	return _share.invite('bucket', bucket_id, data, self.default_headers)
 
     def shareEdit(self, share_id, data):
     	data = data if data else {}
@@ -90,7 +91,7 @@ class Buckets:
             # return None #TODO: SOme error notification
             raise ValueError('email must be set')
 
-    	return None #something with Share.edit?
+    	return _share.edit('bucket', share_id, data, self.default_headers)
 
     def shareDelete(self, share_id):
     	# if share_id is null, then ERROR
@@ -98,11 +99,20 @@ class Buckets:
             # return None #TODO: Some error notification
             raise ValueError('share_id must be set')
 
-    	return None #something with Share.remove?
+    	return _share.edit('bucket', share_id, self.default_headers)
 
     def exportData(self, output, buckets, options):
-    	# TODO: this method
-    	return None
+    	if output is None or output == '':
+            raise ValueError('output must be set')
+        elif buckets is None or buckets[] is None:
+            raise ValueError('bucket must be set')
+
+        data = {}
+        data['buckets'] = buckets
+        data['start_date']
+        data['end_date']
+
+    	return requests.post('{api_endpoint}/data/export?output=${output}'.format(api_endpoint=API_TAGO, output=output), headers=self.default_headers, data=json.dumps(data)).json()
 
 
 
