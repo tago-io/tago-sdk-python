@@ -147,10 +147,51 @@ def test_analysis_tokenGenerate():
         assert False
 
 def test_analysis_uploadFile():
-    assert False
+    test_file = 'Hello, world!'
+    test_file_name = 'Testfile.txt'
+
+    ###########################
+    # Creating a new analysis
+    ###########################
+    analysisResult = testAnalysis.create({ "name": "Test Analysis" })
+
+    print DEBUG_MESSAGE.format('analysis creation', analysisResult)
+
+    if analysisResult['status']:
+        assert True
+    else:
+        assert False
+
+    fileResult = testAnalysis.uploadFile(analysisResult['result']['id'], test_file_name, test_file)
+
+    print DEBUG_MESSAGE.format('analysis file upload', fileResult)
+
+    if fileResult:
+        assert True
+    else:
+        assert False
 
 def test_analysis_run():
-    assert False
+    ###########################
+    # Creating a new analysis
+    ###########################
+    analysisResult = testAnalysis.create({ "name": "Test Analysis" })
+
+    print DEBUG_MESSAGE.format('analysis creation', analysisResult)
+
+    if analysisResult['status']:
+        assert True
+    else:
+        assert False
+
+    analysisRunResult = testAnalysis.run(analysisResult['result']['id'], {})
+
+    print DEBUG_MESSAGE.format('analysis run', analysisRunResult)
+
+    if analysisRunResult:
+        assert True
+    else:
+        assert False
 
 def test_analysis_listening():
     assert False
