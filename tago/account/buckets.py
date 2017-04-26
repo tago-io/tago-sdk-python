@@ -29,14 +29,15 @@ class Buckets:
     def info(self, bkt_id):
     	# if bkt_id is null, then call list
     	if bkt_id is None or bkt_id == '':
-	    	return self.list()
+            return self.list()
 
     	return requests.get('{api_endpoint}/bucket/{bkt_id}'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers).json()
 
     def backupInfo(self, backup_id):
     	# if backup_id is null, then error!
     	if backup_id is None or backup_id == '':
-	    	return None #TODO: Some error notification
+            # return None #TODO: Some error notification
+            raise ValueError('backup_id must be set')
 
     	return requests.get('{api_endpoint}/backup/{backup_id}'.format(api_endpoint=API_TAGO, backup_id=backup_id), headers=self.default_headers).json()
 
@@ -46,7 +47,8 @@ class Buckets:
     def backupDelete(self, backup_id):
     	# if bkt_id is null, then error!
     	if backup_id is None or backup_id == '':
-	    	return None #TODO: Some error notification
+            # return None #TODO: Some error notification
+            raise ValueError('backup_id must be set')
 
     	return requests.delete('{api_endpoint}/backup/{backup_id}'.format(api_endpoint=API_TAGO, backup_id=backup_id), headers=self.default_headers).json()
 
@@ -57,7 +59,8 @@ class Buckets:
     def shareList(self, bucket_id):
     	# if bucket_id is null, then ERROR
     	if bucket_id is None or bucket_id == '':
-	    	return None #TODO: Some error notification
+            # return None #TODO: Some error notification
+            raise ValueError('bucket_id must be set')
 
     	return None #something with Share.invite?
 
@@ -66,10 +69,12 @@ class Buckets:
 
     	# if bucket_id is null, then ERROR
     	if bucket_id is None or bucket_id == '':
-	    	return None #TODO: Some error notification
+            # return None #TODO: Some error notification
+            raise ValueError('bucket ID must be set')
 
-	    if data['email'] is None or data['email'] == '':
-	    	return None #TODO: SOme error notification
+        if data['email'] is None or data['email'] == '':
+            # return None #TODO: SOme error notification
+            raise ValueError('email must be set')
 
     	return None #something with Share.invite?
 
@@ -78,17 +83,20 @@ class Buckets:
 
     	# if share_id is null, then ERROR
     	if share_id is None or share_id == '':
-	    	return None #TODO: Some error notification
+            # return None #TODO: Some error notification
+            raise ValueError('share_id must be set')
 
-	    if data['email'] is None or data['email'] == '':
-	    	return None #TODO: SOme error notification
+        if data['email'] is None or data['email'] == '':
+            # return None #TODO: SOme error notification
+            raise ValueError('email must be set')
 
     	return None #something with Share.edit?
 
     def shareDelete(self, share_id):
     	# if share_id is null, then ERROR
     	if share_id is None or share_id == '':
-	    	return None #TODO: Some error notification
+            # return None #TODO: Some error notification
+            raise ValueError('share_id must be set')
 
     	return None #something with Share.remove?
 
