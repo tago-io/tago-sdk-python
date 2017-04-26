@@ -45,5 +45,5 @@ class Account:
     def login(self, data):
         return requests.post('{api_endpoint}/account/profile/login'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
-	# TODO: Should implement sub methods below
-	# ----------- Sub-methods -----------
+# TODO: Should implement sub methods below
+# ----------- Sub-methods -----------
