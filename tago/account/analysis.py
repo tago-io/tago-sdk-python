@@ -9,7 +9,7 @@ REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 class Analysis:
     def __init__(self, token):
         self.token = token
-        self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+        self.default_headers = { 'content-type': 'application/json', 'Account-Token': token }
 
         return
 
@@ -38,12 +38,12 @@ class Analysis:
     	return requests.post('{api_endpoint}/analysis/{analyze_id}/run'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=scope).json()
 
     def listening(self, analyze_id, func, realtime, wait):
-        if (!self.realtime and !realtime) self.realtime = TagoRealTime(REALTIME, self.token, func)
+        self.realtime = TagoRealTime(REALTIME, self.token, func)
 
         realtime = realtime or self.realtime
 
         realtime.listening(wait)
-    	return return "Listening to Analyze "+analyze_id
+    	return "Listening to Analyze "+analyze_id
 
     def stopListening(self, analyze_id, realtime):
     	#also do something, not sure yet
@@ -55,10 +55,10 @@ class Analysis:
     def tokenGenerate(self, analyze_id):
     	return requests.get('{api_endpoint}/analysis/{analyze_id}/token'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers).json()
 
-    def uploadFile(self, file_name, file):
+    def uploadFile(self, analyze_id, file_name, f):
     	#think this is how we have to do it, using the variable names as the 'keys'
     	data = {}
-    	data['file'] = file
+    	data['file'] = f
     	data['file_name'] = file_name
 
     	return requests.post('{api_endpoint}/analysis/{analyze_id}/upload'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=json.dumps(data)).json()
