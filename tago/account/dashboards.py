@@ -36,13 +36,17 @@ class Dashboards:
 	# Get Information for a Dashboard
 	def info(self, dashboard_id):
 		if dashboard_id is None or dashboard_id == '':
-		    return None # Dashboard ID parameter is obligatory.
+		    #return None # Dashboard ID parameter is obligatory.
+		    raise ValueError('dashboard_id must be set')
+
 		return requests.get('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	# Get Information for a Dashboard
 	def listening(self, dashboard_id, func, realtime):
 		if dashboard_id is None or dashboard_id == '':
-		    return None # Dashboard ID parameter is obligatory.
+		    #return None # Dashboard ID parameter is obligatory.
+		    raise ValueError('dashboard_id must be set')
+
 		# if(this.realtime is None and realtime is None):
 		# 	self.realtime = TagoRealTime(TAGO_REALTIME, self.token, func)
 		# realtime = realtime if realtime else self.realtime
@@ -59,45 +63,47 @@ class Dashboards:
 	# Get share list of the dashboard
 	def shareList(self, dashboard_id):
 		if dashboard_id is None or dashboard_id == '':
-		    return None # Dashboard ID parameter is obligatory.
+		    raise ValueError('dashboard_id must be set')
 		return share.list("dashboard",dashboard_id,self.default_headers)
 
 	# Share the dashboard with another person
 	def shareSendInvite(self, dashboard_id, data):
 		data = data if data else {}
 		if dashboard_id is None or dashboard_id == '':
-		    return None # Dashboard ID parameter is obligatory.
+		    raise ValueError('dashboard_id must be set')
 		elif data['email'] is None or data['email'] == '':
-		    return None # data email parameter is obligatory.
+		    raise ValueError('email must be set in data')
 		return share.invite("dashboard",dashboard_id,data,self.default_headers)
 
 	# Change permssions of bucket
 	def shareEdit(self, share_id, data):
 		data = data if data else {}
 		if share_id is None or share_id == '':
-		    return None # Share ID parameter is obligatory.
+		    raise ValueError('share_id must be set')
 		elif data['email'] is None or data['email'] == '':
-		    return None # data email parameter is obligatory.
+		    raise ValueError('email must be set in data')
 		return share.edit("dashboard",share_id,data,self.default_headers)
 
 	# Remove share of a bucket
 	def shareDelete(self, share_id):
 		if share_id is None or share_id == '':
-		    return None # Share ID parameter is obligatory.
+		    raise ValueError('share_id must be set')
 		return share.remove("dashboard",share_id,self.default_headers)
 
 	# Generate new public token for the dashboard
 	def genPublicToken(self, dashboard_id):
 		if dashboard_id is None or dashboard_id == '':
-		    return self.list() # Dashboard ID parameter is obligatory.
+		    raise ValueError('dashboard_id must be set')
+
 		return requests.get('{api_endpoint}/dashboard/{dashboard_id}/share/public'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	# Clone the dashboard with special parameters
 	def shareClone(self, dashboard_id, data):
 		if dashboard_id is None or dashboard_id == '':
-		    return self.list() # Dashboard ID parameter is obligatory.
+		    raise ValueError('dashboard_id must be set')
 		elif data.email is None:
-		    return self.list() # data.email parameter is obligatory.
+		    raise ValueError('email must be set in data')
+		    
 		return requests.post('{api_endpoint}/dashboard/{dashboard_id}/share/copy'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	def get_widgets(self):

@@ -1,6 +1,7 @@
 import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
+from socket import TagoRealTime
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -36,9 +37,9 @@ class Analysis:
     def run(self, analyze_id, scope):
     	return requests.post('{api_endpoint}/analysis/{analyze_id}/run'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=scope).json()
 
-    def listening(self, analyze_id, func, realtime):
-    	#do something not sure yet
-    	return None
+    def listening(self, analyze_id, func):
+        wait = False
+    	return TagoRealTime(REALTIME, self.token, func).listening(wait)
 
     def stopListening(self, analyze_id, realtime):
     	#also do something, not sure yet

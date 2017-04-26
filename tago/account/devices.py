@@ -45,8 +45,8 @@ class Devices:
 
     	return requests.get('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers).json()
 
-    def paramCreate(self, device_id, data):
-    	return requests.post('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=json.dumps(data)).json()
+    def paramSet(self, device_id, data):
+        return requests.post('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=json.dumps(data)).json()
 
     def paramList(self, device_id, sent_status):
     	# not sure what the key should be b/c they do not put a key in JS method, but i tried this for now
@@ -56,8 +56,6 @@ class Devices:
     	# looking at the device/__init__.py they just pass sent_status as the params in the request...
     	return requests.get('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=sent_status).json()
 
-    def paramEdit(self, device_id, param_id, data):
-    	return requests.put('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers, data=json.dumps(data)).json()
 
     def paramRemove(self, device_id, param_id):
     	return requests.delete('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers).json()
