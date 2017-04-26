@@ -109,8 +109,8 @@ class Buckets:
 
         data = {}
         data['buckets'] = buckets
-        data['start_date']
-        data['end_date']
+        data['start_date'] = options['start_date']
+        data['end_date'] = options['end_date']
 
     	return requests.post('{api_endpoint}/data/export?output=${output}'.format(api_endpoint=API_TAGO, output=output), headers=self.default_headers, data=json.dumps(data)).json()
 

@@ -21,11 +21,11 @@ def edit(type, share_id, data, default_options):
 def list(type, ref_id, default_options):
     if ref_id is None or ref_id == '':
         raise ValueError('ref_id must be set')
-    return requests.get('{api_endpoint}/share/{type}/ref_id'.format(api_endpoint=API_TAGO,type=type), headers=default_options).json()
+    return requests.get('{api_endpoint}/share/{type}/{ref_id}'.format(api_endpoint=API_TAGO,type=type, ref_id=ref_id), headers=default_options).json()
 
 def remove(type, share_id, default_options):
     if share_id is None or share_id == '':
         raise ValueError('share_id must be set')
-    return requests.delete('{api_endpoint}/share/{type}?id={share_id}'.format(api_endpoint=API_TAGO,type=type,share_id=share_id), headers=default_options).json()
+    return requests.delete('{api_endpoint}/share/{share_id}'.format(api_endpoint=API_TAGO,share_id=share_id), headers=default_options).json()
 
 # Not sure what exports do...
