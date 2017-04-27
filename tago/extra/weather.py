@@ -67,7 +67,7 @@ class Weather:
 
     def history(self, date, query, full, lang):
         def history_result(result):
-	    result = ast.literal_eval(result)
+            result = ast.literal_eval(result)
             result = result['history']
             Promise.resolve(result)
 
@@ -76,7 +76,6 @@ class Weather:
         try: 
             date = datetime.strptime(date, '%Y-%m-%d')
             date = str(date.year) + str(format(date.month,'02')) + str(format(date.day,'02'))
-            print date
         except Exception as e:
             return Promise.reject('Invalid date', + e)
         url = 'http://api.wunderground.com/api/'+self.key+'/lang:'+self._lang+'/history_'+str(date)+'/q/'+urllib.quote(self._query.encode("utf-8"))+'.json'
@@ -90,11 +89,10 @@ class Weather:
 
     def forecast(self, query, full, lang):
         def forecast_result(result):
-	    result = ast.literal_eval(result)
-            print result
+            result = ast.literal_eval(result)
             try:
-                result = result['response']['results']
-                '''for x in result:
+                result = result['forecast']
+                '''for x in result.keys():
                     del x['icon_url']
                     del x['skyicon']'''
             except Exception as e:
