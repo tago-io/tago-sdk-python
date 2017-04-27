@@ -3,7 +3,7 @@ import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
 import _share as share
-# from socket import TagoRealTime
+from socket import TagoRealTime
 #from dashboard.widgets import Widgets
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
@@ -41,29 +41,29 @@ class Dashboards:
 
 		return requests.get('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
-	# Get Information for a Dashboard
-	def listening(self, dashboard_id, func, realtime):
+
+	def listening(self, dashboard_id, func, wait):
 		if dashboard_id is None or dashboard_id == '':
-		    #return None # Dashboard ID parameter is obligatory.
-		    raise ValueError('dashboard_id must be set')
-
-		# if(this.realtime is None and realtime is None):
-		# 	self.realtime = TagoRealTime(TAGO_REALTIME, self.token, func)
-		# realtime = realtime if realtime else self.realtime
-		# realtime.get_socket().on('{dashboard:{dashboard_id}'.format(dashboard_id=dashboard_id), func)
+			raise ValueError('dashboard_id must be set')
+	
+		self.realtime = TagoRealTime(REALTIME, self.token, func)
+		self.realtime.listening(dashboard_id, wait)
+	
 		return "Listening to Dashboard "+dashboard_id
-
-	# Stop listening to a dashboard by its ID
-	def stopListening(self, id, realtime):
-		if(self.realtime is None and realtime is None):
-			return None
-		realtime =  realtime if realtime else self.realtime
-		realtime.get_socket().off("dashboard:{id}".format(id=id))
-
+		
+		
+	def stopListening(self, dashboard_id):
+		if self.realtime is None:
+			raise ValueError('realtime has not been initialized')
+	
+		self.realtime.stopListening(dashboard_id)
+		
+		return "Stop listening to Dashboard "+dashboard_id
+		
 	# Get share list of the dashboard
 	def shareList(self, dashboard_id):
 		if dashboard_id is None or dashboard_id == '':
-		    raise ValueError('dashboard_id must be set')
+			raise ValueError('dashboard_id must be set')
 		return share.list("dashboard",dashboard_id,self.default_headers)
 
 	# Share the dashboard with another person

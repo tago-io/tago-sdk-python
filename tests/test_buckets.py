@@ -239,42 +239,41 @@ def test_shareSendInvite_create_delete():
 # def test_shareEdit():
 #     assert False
 
-# TODO: Output format won't work! =<
-# def test_exportData():
-#     #######################
-#     # Creating a bucket
-#     ######################
-#     createRequest = testBuckets.create({'name':'Test Bucket'})
-# 
-#     print DEBUG_MESSAGE.format('bucket create', createRequest)
-# 
-#     if createRequest['status']:
-#         assert True
-#     else:
-#         assert False
-# 
-#     ######################
-#     # Exporting a bucket
-#     ######################
-# 
-#     exportDataRequest = testBuckets.exportData('json', [{'id': createRequest['result']['bucket'], 'origin': [], 'variables': []}], {'start_date': '3/3/2017', 'end_date': '4/30/2017'}) 
-# 
-#     print DEBUG_MESSAGE.format('bucket exportData', exportDataRequest)
-# 
-#     if exportDataRequest['status']:
-#         assert True
-#     else:
-#         assert False
-# 
-#     #######################
-#     # Deleting a bucket
-#     ######################
-# 
-#     deleteRequest = testBuckets.delete(createRequest['result']['bucket'])
-# 
-#     print DEBUG_MESSAGE.format('bucket delete', deleteRequest)
-# 
-#     if deleteRequest['status']:
-#         assert True
-#     else:
-#         assert False
+def test_exportData():
+    #######################
+    # Creating a bucket
+    ######################
+    createRequest = testBuckets.create({'name':'Test Bucket'})
+
+    print DEBUG_MESSAGE.format('bucket create', createRequest)
+
+    if createRequest['status']:
+        assert True
+    else:
+        assert False
+
+    ######################
+    # Exporting a bucket
+    ######################
+
+    exportDataRequest = testBuckets.exportData('json', [{'id': createRequest['result']['bucket'], 'origin': [], 'variables': []}], {'start_date': '3/3/2017', 'end_date': '4/30/2017'}) 
+
+    print DEBUG_MESSAGE.format('bucket exportData', exportDataRequest)
+
+    if exportDataRequest is not None:
+        assert True
+    else:
+        assert False
+
+    #######################
+    # Deleting a bucket
+    ######################
+
+    deleteRequest = testBuckets.delete(createRequest['result']['bucket'])
+
+    print DEBUG_MESSAGE.format('bucket delete', deleteRequest)
+
+    if deleteRequest['status']:
+        assert True
+    else:
+        assert False

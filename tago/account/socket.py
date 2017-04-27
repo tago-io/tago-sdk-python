@@ -13,12 +13,9 @@ class TagoRealTime:
     def on_connect(self):
         self.socket.emit('register', self.token)
 
-    def on_data(self, data):
-        self.callback(data)
-
-    def listening(self, wait):
+    def listening(self, channel, wait):
         self.socket.on('connect', self.on_connect)
-        self.socket.on('data', self.on_data)
+        self.socket.on(channel, self.callback)
 
         if wait:
             self.socket.wait(seconds=wait)
@@ -26,3 +23,6 @@ class TagoRealTime:
             self.socket.wait()
 
         return self.socket
+
+    def stopListening(self, channel):
+        self.socket.off(channel)

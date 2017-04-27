@@ -37,18 +37,23 @@ class Analysis:
     def run(self, analyze_id, scope):
     	return requests.post('{api_endpoint}/analysis/{analyze_id}/run'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=scope).json()
 
-    def listening(self, analyze_id, func, realtime, wait):
+    def listening(self, analyze_id, func, wait):
+        # if analyze_id is null, then call list
+        if analyze_id is None or analyze_id == '':
+            raise ValueError('analyze_id must be set')
+
         self.realtime = TagoRealTime(REALTIME, self.token, func)
 
-        realtime = realtime or self.realtime
+        #realtime = realtime or self.realtime
 
-        realtime.listening(wait)
+        self.realtime.listening(analyze_id, wait)
     	return "Listening to Analyze "+analyze_id
 
-    def stopListening(self, analyze_id, realtime):
-    	#also do something, not sure yet
-        realtime.socket.off('connect')
-        self.realtime = realtime
+    def stopListening(self, analyze_id):
+    	if self.realtime is None:
+            raise ValueError('realtime has not been initialized')
+
+        self.realtime.stopListening(analyze_id)
 
     	return "Stop listening to Analyze "+analyze_id
 
@@ -62,7 +67,6 @@ class Analysis:
     	data['file_name'] = file_name
 
     	return requests.post('{api_endpoint}/analysis/{analyze_id}/upload'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=json.dumps(data)).json()
-
 
 
 
