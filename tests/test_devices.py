@@ -3,10 +3,11 @@ from tago.account.devices import Devices  as Devices
 import os
 
 TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'TOKEN'
+DEBUG_MESSAGE = 'The response to {} \n{}'
 
 def test_device_list():
     # print dir(Devices)
-    
+
     testDevices = Devices(TOKEN)
 
     result = testDevices.list()
@@ -36,7 +37,7 @@ def test_device_create():
     else:
         assert False
 
-    
+
     #########################
     # Testing device info 
     #########################
@@ -53,7 +54,7 @@ def test_device_create():
     editedResult = testDevices.edit(result['result']['device_id'], {'name': 'RenamedDevice'})
 
     # print editedResult
-    
+
     # If true, the edit was successful
     if editedResult['status']:
         assert True
@@ -120,15 +121,34 @@ def test_device_token_create():
     # cleaning up the device we created for this test
     testDevices.delete(testDevice['result']['device_id'])
 
-# def test_device_param_create():
-#     testDevices = Devices(TOKEN)
-#     testDevice = testDevices.factory()
-# 
-#     ########################
-#     # Testing creation of params
-#     ########################
-#     testParam = testDevices.paramCreate(testDevice['result']['device_id'])
-# 
-# 
-#     # cleaning up the device we created for this test
-#     testdevices.delete(testdevice['result']['device_id'])
+def test_device_param_set():
+    testDevices = Devices(TOKEN)
+    testDevice = testDevices.factory()
+
+    ########################
+    # Testing creation of params
+    ########################
+    testParam = testDevices.paramSet(testDevice['result']['device_id'], [{"key": "TestKey", "value": "TestValue"},{"key": "Test Key2", "value": "TestValue2"}])
+
+    print DEBUG_MESSAGE.format('test_device_param_Set', testParam)
+
+    if testParam['status']:
+        assert True
+    else:
+        assert False
+
+    # cleaning up the device we created for this test
+    testDevices.delete(testDevice['result']['device_id'])
+
+def test_param_list():
+    testDevices = Devices(TOKEN)
+    testDevice = testDevices.factory()
+
+    paramListResult = testDevices.paramList(testDevice['result']['device_id'], str(True))
+
+    print DEBUG_MESSAGE.format('test_device_param_list', paramListResult)
+
+    if paramListResult['status']:
+        assert True
+    else:
+        assert False
