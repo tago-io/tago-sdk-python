@@ -9,11 +9,11 @@ REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 class Buckets:
     def __init__(self, token):
         self.token = token
-        self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+        self.default_headers = { 'content-type': 'application/json', 'Account-Token': token }
 
         return
 
-    def list(self, devices):
+    def list(self, devices = False):
     	return requests.get('{api_endpoint}/bucket?devices={devices}'.format(api_endpoint=API_TAGO, devices=devices), headers=self.default_headers).json()
 
     def create(self, data):
@@ -96,7 +96,7 @@ class Buckets:
     def exportData(self, output, buckets, options):
     	if output is None or output == '':
             raise ValueError('output must be set')
-        elif buckets is None or buckets[] is None:
+        elif buckets is None or buckets[0] is None:
             raise ValueError('bucket must be set')
 
         data = {}

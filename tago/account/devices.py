@@ -8,7 +8,7 @@ REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 class Devices:
     def __init__(self, token):
         self.token = token
-        self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+        self.default_headers = { 'content-type': 'application/json', 'Account-Token': token }
 
         return
 

@@ -13,7 +13,7 @@ class Dashboards:
 
 	def __init__(self, acc_token):
 		self.token = acc_token
-		self.default_headers = { 'content-type': 'application/json', 'Device-Token': acc_token }
+		self.default_headers = { 'content-type': 'application/json', 'Account-Token': acc_token }
 
 	# List Dashboards
 	def list(self):
