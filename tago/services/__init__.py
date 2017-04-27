@@ -9,18 +9,18 @@ class Services:
 		self.token = token
 
 	def sms(self): 
-		return new SMS(self.token)
+		return SMS(self.token)
 
 	def email(self): 
-		return new Email(self.token)
+		return Email(self.token)
 
 	def console(self):
-		return new Console(self.token)
+		return Console(self.token)
 
 	def socket(self):
-		return new Socket(self.token)
+		return Socket(self.token)
 
 	def MQTT(self):
-		return new MQTT(self.token)
+		return MQTT(self.token)
 
 
