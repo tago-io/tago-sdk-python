@@ -91,7 +91,7 @@ class Buckets:
     	if share_id is None or share_id == '':
             raise ValueError('share_id must be set')
 
-    	return _share.edit('bucket', share_id, self.default_headers)
+    	return _share.remove('bucket', share_id, self.default_headers)
 
     def exportData(self, output, buckets, options):
     	if output is None or output == '':
