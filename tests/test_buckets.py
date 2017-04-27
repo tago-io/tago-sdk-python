@@ -200,7 +200,7 @@ def test_shareSendInvite_create_delete():
     ######################
 
     # TODO: this just fails.  Not sure why.
-    shareSendInviteRequest = testBuckets.shareSendInvite(createRequest['result']['bucket'], {'email': 'zacherypd@gmail.com', 'message': 'Lorem ipsum', 'copy_me': False, 'permission': 'full'})
+    shareSendInviteRequest = testBuckets.shareSendInvite(createRequest['result']['bucket'], {'email': 'vchawla3@ncsu.edu', 'message': 'Lorem ipsum', 'copy_me': False, 'permission': 'full'})
 
     print DEBUG_MESSAGE.format('bucket shareSendInvite', shareSendInviteRequest)
 
@@ -213,7 +213,7 @@ def test_shareSendInvite_create_delete():
     # shareInvite delete 
     ######################
 
-    shareDeleteRequest = testBuckets.shareDelete(shareSendInviteRequest['result']['id'])
+    shareDeleteRequest = testBuckets.shareDelete(shareSendInviteRequest['result']['share_id'])
 
     print DEBUG_MESSAGE.format('bucket shareInviteDelete', shareDeleteRequest)
 

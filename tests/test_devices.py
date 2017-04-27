@@ -152,3 +152,6 @@ def test_param_list():
         assert True
     else:
         assert False
+
+    # cleaning up the device we created for this test
+    testDevices.delete(testDevice['result']['device_id'])

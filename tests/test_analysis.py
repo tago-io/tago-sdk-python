@@ -171,6 +171,18 @@ def test_analysis_uploadFile():
     else:
         assert False
 
+    ###########################
+    # Deleting the new analysis
+    ###########################
+    analysisResult = testAnalysis.delete(analysisResult['result']['id'])
+
+    print DEBUG_MESSAGE.format('analysis deletion', analysisResult)
+    
+    if analysisResult['status']:
+        assert True
+    else:
+        assert False
+
 def test_analysis_run():
     ###########################
     # Creating a new analysis
@@ -189,6 +201,18 @@ def test_analysis_run():
     print DEBUG_MESSAGE.format('analysis run', analysisRunResult)
 
     if analysisRunResult:
+        assert True
+    else:
+        assert False
+
+    ###########################
+    # Deleting the new analysis
+    ###########################
+    analysisResult = testAnalysis.delete(analysisResult['result']['id'])
+
+    print DEBUG_MESSAGE.format('analysis deletion', analysisResult)
+    
+    if analysisResult['status']:
         assert True
     else:
         assert False
