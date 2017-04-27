@@ -33,7 +33,7 @@ class Weather:
 
     def current(self, query, full, lang):
         def current_result(result):
-	    result = ast.literal_eval(result)
+            result = ast.literal_eval(result)
             if 'results' in result['response']:
 	        if 'current_observation' not in result:
                     return Promise.reject('Invalid address, ' + str(len(result['response']['results'])) + ' match.')
@@ -47,11 +47,11 @@ class Weather:
                 del result['history_url']
                 del result['ob_url']
                 del result['estimated']
-                if full not in self:
+                '''if not self.full:
                     del result['display_location']
-                    del result['observation_location']
+                    del result['observation_location']'''
             except Exception as e:
-                print 'weather system, '+ str(e)
+                return Promise.reject('weather system, '+ str(e))
             return Promise.resolve(result) 
 
         params = {'query':query, 'full':full, 'lang':lang, 'key':self.key}
@@ -86,10 +86,10 @@ class Weather:
         options = self.default_options
         return request(options).then(lambda result: history_result(result))
 
-
     def forecast(self, query, full, lang):
         def forecast_result(result):
             result = ast.literal_eval(result)
+            print result
             try:
                 result = result['forecast']
                 '''for x in result.keys():
@@ -111,7 +111,7 @@ class Weather:
 
     def alerts(self, query, full, lang):
         def alerts_result(result):
-	    result = ast.literal_eval(result)
+            result = ast.literal_eval(result)
             del result['response']
             return Promise.resolve(result)
 
@@ -124,4 +124,3 @@ class Weather:
         self.default_options['params'] = params
         options = self.default_options
         return request(options).then(lambda result: alerts_result(result))
-
