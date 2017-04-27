@@ -75,7 +75,7 @@ class Dashboards:
 		    raise ValueError('email must be set in data')
 		return share.invite("dashboard",dashboard_id,data,self.default_headers)
 
-	# Change permssions of bucket
+	# Change permssions of dashboard
 	def shareEdit(self, share_id, data):
 		data = data if data else {}
 		if share_id is None or share_id == '':
@@ -84,7 +84,7 @@ class Dashboards:
 		    raise ValueError('email must be set in data')
 		return share.edit("dashboard",share_id,data,self.default_headers)
 
-	# Remove share of a bucket
+	# Remove share of a dashboard
 	def shareDelete(self, share_id):
 		if share_id is None or share_id == '':
 		    raise ValueError('share_id must be set')
