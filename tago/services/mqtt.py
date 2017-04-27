@@ -6,12 +6,12 @@ class Console:
 		self.analysis_token = analysis_token
         self.default_headers = { 'content-type': 'application/json', 'Device-Token': analysis_token }
 
-    # Send MQTT
+    # publish MQTT
     # message{string} : Message
     # bucket{string} : Bucket to recive message 
     # returns promise
 
-    def send(self, message, bucket):
+    def publish(self, message, bucket):
     	data = {'message':message, 'bucket': bucket}
     	url = '{api_endpoint}/analysis/services/mqtt/publish'.format(api_endpoint=API_TAGO)
         return requests.post(self.url(id=False), data=json.dumps(data), headers=self.default_headers).json()

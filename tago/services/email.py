@@ -13,7 +13,8 @@ class Email:
     # s_from{string} : email to receive reply (optional)
     # attachment{json} : attachment to be sent
     # return promise
+
     def send(self, to, subject, message, s_from, attachment):
-    	data = {'to':to, 'subject':subject, 'message':message, 'from':s_from, 'attachment': attachment}
-    	url = '{api_endpoint}/analysis/services/email/send'.format(api_endpoint=API_TAGO)
+        data = {'to':to, 'subject':subject, 'message':message, 'from':s_from, 'attachment': attachment}
+        url = '{api_endpoint}/analysis/services/email/send'.format(api_endpoint=API_TAGO)
         return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
