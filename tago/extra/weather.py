@@ -69,7 +69,7 @@ class Weather:
         def history_result(result):
             result = ast.literal_eval(result)
             result = result['history']
-            Promise.resolve(result)
+            return Promise.resolve(result)
 
         params = {'query':query, 'full':full, 'lang':lang}
         self._setParams(params)
