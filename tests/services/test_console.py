@@ -2,7 +2,7 @@ from tago import Tago
 import os
 from tago.services.console import Console as console
 
-TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'TOKEN'
+TOKEN = os.environ.get('TAGO_TOKEN_ANALYSIS') or 'TOKEN'
 
 def test_console():
     result = console(TOKEN).send('test tago services', '')
