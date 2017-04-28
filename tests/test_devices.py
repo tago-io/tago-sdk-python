@@ -2,7 +2,7 @@ from tago import Tago
 from tago.account.devices import Devices  as Devices
 import os
 
-TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'TOKEN'
+TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
 DEBUG_MESSAGE = 'The response to {} \n{}'
 
 def test_device_list():

@@ -7,7 +7,7 @@
 # from tago.account.dashboards import Dashboards
 # import tago.account._share as share
 
-# TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'TOKEN'
+# TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
 # TYPE = 'dashboard'
 # DATA = {'email':'vchawla3@ncsu.edu','permission':'read'}
 # OPTIONS = {}

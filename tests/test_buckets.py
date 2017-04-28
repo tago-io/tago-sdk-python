@@ -2,7 +2,7 @@ from tago import Tago
 from tago.account.buckets import Buckets as Buckets 
 import os
 
-TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'TOKEN'
+TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
 DEBUG_MESSAGE = 'The response to {} \n{}'
 
 testBuckets = Buckets(TOKEN)
@@ -200,7 +200,7 @@ def test_shareSendInvite_create_delete():
     ######################
 
     # TODO: this just fails.  Not sure why.
-    shareSendInviteRequest = testBuckets.shareSendInvite(createRequest['result']['bucket'], {'email': 'vchawla3@ncsu.edu', 'message': 'Lorem ipsum', 'copy_me': False, 'permission': 'full'})
+    shareSendInviteRequest = testBuckets.shareSendInvite(createRequest['result']['bucket'], {'email': 'rubybank517oodd@gmail.com', 'message': 'Lorem ipsum', 'copy_me': False, 'permission': 'full'})
 
     print DEBUG_MESSAGE.format('bucket shareSendInvite', shareSendInviteRequest)
 

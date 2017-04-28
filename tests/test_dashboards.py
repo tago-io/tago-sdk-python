@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.join('..', ''))
 from tago.account.dashboards import Dashboards
 
-TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'TOKEN'
+TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
 DEBUG_MESSAGE = 'The response to {} \n{}'
 
 test_dashboard = Dashboards(TOKEN)

@@ -6,7 +6,7 @@ from tago.account.dashboards_widgets import DashboardsWidgets as DashboardsWidge
 from tago.account.dashboards import Dashboards
 
 
-TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or '0db3d028-2c43-4744-90d4-4c7566bc4f32'
+TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
 DEBUG_MESSAGE = "The response to {} \n{}\n"
 
 
