@@ -7,7 +7,7 @@ API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 class DashboardsWidgets:
     def __init__(self, token):
         self.token = token
-        self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+        self.default_headers = { 'content-type': 'application/json', 'Account-Token': token }
         return
 
     # Create a Dashboard Widget

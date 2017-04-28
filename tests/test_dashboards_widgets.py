@@ -12,7 +12,7 @@ DEBUG_MESSAGE = "The response to {} \n{}\n"
 
 testDashboardsWidgets = DashboardsWidgets(TOKEN)
 dashboard = Dashboards(TOKEN)
-test_data = { "name": "Test DashboardsWidgets", "label":"Test Label", "type": "Test Type", "data": {} }
+test_data = { "name": "Test DashboardsWidgets", "label": "test label", "type": "Dial", "data": {"data1": "data1"}}
 
 def test_dashboards_widgets_create_delete():
     ###################################
@@ -185,10 +185,13 @@ def test_dashboards_widgets_sendData():
     #########################################
     #  Retrieving dashboards.widgets send data
     #########################################
-    sendDataResult = testDashboardsWidgets.sendData(test_id, dashboardsWidgetsResult['result']['widget'], {"data":"test"})
+    print dashboardsWidgetsResult['result']['widget']
+    sendDataResult = testDashboardsWidgets.sendData(test_id, dashboardsWidgetsResult['result']['widget'], {})
 
     print DEBUG_MESSAGE.format('dashboards.widgets send data', sendDataResult)
-    assert sendDataResult is not None # Widget can't be found error
+
+    # Widget can't be found error?! Cannot debug/fix :(
+    assert sendDataResult is not None 
     # if sendDataResult['status']:
     #     assert True
     # else:
