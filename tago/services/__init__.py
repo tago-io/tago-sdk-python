@@ -11,7 +11,7 @@ class Services:
 	def sms(self): 
 		return SMS(self.token)
 
-	def email(self): 
+	def email(self):
 		return Email(self.token)
 
 	def console(self):
