@@ -208,4 +208,4 @@ def test_dashboards_widgets_sendData():
 
     dashboard.delete(test_id)
 
-test_dashboards_widgets_sendData()
+#test_dashboards_widgets_sendData()
