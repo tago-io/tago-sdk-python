@@ -183,8 +183,3 @@ def test_listening_stop_listening():
         assert True
     else:
         assert False
-
-    #######################
-    # DELETE WHEN DONE!!!!! JUST HERE FOR TESTING SO WE CAN SEE CONSOLE OUTPUT
-    #######################
-    assert False
