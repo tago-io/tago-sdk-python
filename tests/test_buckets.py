@@ -121,10 +121,6 @@ def test_info():
     else:
         assert False
 
-#TODO: need guidance
-# def test_backupInfo():
-#     assert False
-
 def test_backupList():
     backupListRequest = testBuckets.backupList()
 
@@ -134,14 +130,6 @@ def test_backupList():
         assert True
     else:
         assert False
-
-#TODO: need guidance
-
-# def test_backupDelete():
-#     assert False
-# 
-# def test_backupRecover():
-#     assert False
 
 def test_shareList():
     #######################
@@ -199,7 +187,6 @@ def test_shareSendInvite_create_delete():
     # shareInvite create
     ######################
 
-    # TODO: this just fails.  Not sure why.
     shareSendInviteRequest = testBuckets.shareSendInvite(createRequest['result']['bucket'], {'email': 'rubybank517oodd@gmail.com', 'message': 'Lorem ipsum', 'copy_me': False, 'permission': 'full'})
 
     print DEBUG_MESSAGE.format('bucket shareSendInvite', shareSendInviteRequest)
@@ -235,9 +222,72 @@ def test_shareSendInvite_create_delete():
     else:
         assert False
 
-# TODO: until we can test create we can not test edit
-# def test_shareEdit():
-#     assert False
+def test_shareEdit():
+     #######################
+    # Creating a bucket
+    ######################
+    createRequest = testBuckets.create({'name':'Test Bucket'})
+
+    print DEBUG_MESSAGE.format('bucket create', createRequest)
+
+    if createRequest['status']:
+        assert True
+    else:
+        assert False
+
+    ######################
+    # shareInvite create
+    ######################
+
+    shareSendInviteRequest = testBuckets.shareSendInvite(createRequest['result']['bucket'], {'email': 'rubybank517oodd@gmail.com', 'message': 'Lorem ipsum', 'copy_me': False, 'permission': 'full'})
+
+    print DEBUG_MESSAGE.format('bucket shareSendInvite', shareSendInviteRequest)
+
+    if shareSendInviteRequest['status']:
+        assert True
+    else:
+        assert False
+
+
+    ######################
+    # shareInvite edit
+    ######################    
+
+    shareSendInviteEditRequest = testBuckets.shareEdit(shareSendInviteRequest['result']['share_id'], {'email': 'rubybank517oodd@gmail.com', 'message': 'ipsum Lorem', 'copy_me': False, 'permission': 'full'})
+
+    print DEBUG_MESSAGE.format('bucket shareSendInviteRequest', shareSendInviteEditRequest)
+
+    if shareSendInviteRequest['status']:
+        assert True
+    else:
+        assert False
+
+
+    ######################
+    # shareInvite delete 
+    ######################
+
+    shareDeleteRequest = testBuckets.shareDelete(shareSendInviteRequest['result']['share_id'])
+
+    print DEBUG_MESSAGE.format('bucket shareInviteDelete', shareDeleteRequest)
+
+    if shareSendInviteRequest['status']:
+        assert True
+    else:
+        assert False
+
+    #######################
+    # Cleaning up bucket
+    ######################
+
+    deleteRequest = testBuckets.delete(createRequest['result']['bucket'])
+
+    print DEBUG_MESSAGE.format('bucket delete', deleteRequest)
+
+    if deleteRequest['status']:
+        assert True
+    else:
+        assert False
 
 def test_exportData():
     #######################
