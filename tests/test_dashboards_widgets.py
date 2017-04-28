@@ -10,13 +10,14 @@ DEBUG_MESSAGE = "The response to {} \n{}\n"
 
 
 testDashboardsWidgets = DashboardsWidgets(TOKEN)
-dashboard = Dashboards(TOKEN).create({'label':'Test Dash'})
+test_id = Dashboards(TOKEN).create({'label':'Test Dash'})['result']['dashboard']
+test_data = { "name": "Test DashboardsWidgets", "label":"Test Label", "type": "Test Type", "data": {} }
 
 def test_dashboards_widgets_create_delete():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    dashboardsWidgetsResult = testDashboardsWidgets.create(dashboard['result']['dashboard'], { "name": "Test DashboardsWidgets", "label":"Test Label", "type": "Test Type", "data": {} })
+    dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
     print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
 
@@ -28,7 +29,7 @@ def test_dashboards_widgets_create_delete():
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
-    dashboardsWidgetsResult = testDashboardsWidgets.delete(dashboard['result']['dashboard'], dashboardsWidgetsResult['result']['widget'])
+    dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
 
@@ -43,7 +44,7 @@ def test_dashboards_widgets_edit():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    dashboardsWidgetsResult = testDashboardsWidgets.create('xyz', { "name": "Test DashboardsWidgets" })
+    dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
     print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
 
@@ -55,7 +56,9 @@ def test_dashboards_widgets_edit():
     ####################################
     # Editing the new dashboards.widgets
     ####################################
-    editResult = testDashboardsWidgets.edit('xyz', dashboardsWidgetsResult['result']['id'], {"name": "A new dashboards.widgets name"})
+    data = dict(test_data)
+    data["name"] = "A new dashboards.widgets name"
+    editResult = testDashboardsWidgets.edit(test_id, dashboardsWidgetsResult['result']['widget'], data)
 
     print DEBUG_MESSAGE.format('dashboards.widgets editing', dashboardsWidgetsResult)
 
@@ -67,7 +70,7 @@ def test_dashboards_widgets_edit():
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
-    dashboardsWidgetsResult = testDashboardsWidgets.delete('xyz', dashboardsWidgetsResult['result']['id'])
+    dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
 
@@ -82,7 +85,7 @@ def test_dashboards_widgets_info():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    dashboardsWidgetsResult = testDashboardsWidgets.create('xyz', { "name": "Test DashboardsWidgets" })
+    dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
     print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
 
@@ -94,7 +97,7 @@ def test_dashboards_widgets_info():
     ###########################
     #  Retrieving dashboards.widgets info
     ###########################
-    infoResult = testDashboardsWidgets.info('xyz', dashboardsWidgetsResult['result']['id'])
+    infoResult = testDashboardsWidgets.info(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets information', infoResult)
 
@@ -106,7 +109,7 @@ def test_dashboards_widgets_info():
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
-    dashboardsWidgetsResult = testDashboardsWidgets.delete('xyz', dashboardsWidgetsResult['result']['id'])
+    dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
 
@@ -121,7 +124,7 @@ def test_dashboards_widgets_getData():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    dashboardsWidgetsResult = testDashboardsWidgets.create('xyz', { "name": "Test DashboardsWidgets" })
+    dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
     print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
 
@@ -133,7 +136,7 @@ def test_dashboards_widgets_getData():
     #########################################
     #  Retrieving dashboards.widgets get data
     #########################################
-    getDataResult = testDashboardsWidgets.getData('xyz', dashboardsWidgetsResult['result']['id'])
+    getDataResult = testDashboardsWidgets.getData(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets get data', getDataResult)
 
@@ -145,7 +148,7 @@ def test_dashboards_widgets_getData():
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
-    dashboardsWidgetsResult = testDashboardsWidgets.delete('xyz', dashboardsWidgetsResult['result']['id'])
+    dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
 
@@ -160,7 +163,7 @@ def test_dashboards_widgets_sendData():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    dashboardsWidgetsResult = testDashboardsWidgets.create('xyz', { "name": "Test DashboardsWidgets" })
+    dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
     print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
 
@@ -172,9 +175,9 @@ def test_dashboards_widgets_sendData():
     #########################################
     #  Retrieving dashboards.widgets send data
     #########################################
-    sendDataResult = testDashboardsWidgets.sendData('xyz', dashboardsWidgetsResult['result']['id'], {"name": "A new dashboards.widgets data"})
+    sendDataResult = testDashboardsWidgets.sendData(test_id, dashboardsWidgetsResult['result']['widget'], test_data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets get data', sendDataResult)
+    print DEBUG_MESSAGE.format('dashboards.widgets send data', sendDataResult)
 
     if sendDataResult['status']:
         assert True
@@ -184,7 +187,7 @@ def test_dashboards_widgets_sendData():
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
-    dashboardsWidgetsResult = testDashboardsWidgets.delete('xyz', dashboardsWidgetsResult['result']['id'])
+    dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
 
