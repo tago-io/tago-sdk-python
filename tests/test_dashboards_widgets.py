@@ -1,18 +1,22 @@
-from tago import Tago
-from tago.account.dashboards.widgets import DashboardsWidgets as DashboardsWidgets 
 import os
+import sys
+from tago import Tago
+from tago.account.dashboards_widgets import DashboardsWidgets as DashboardsWidgets
+from tago.account.dashboards import Dashboards
+
 
 TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'TOKEN'
 DEBUG_MESSAGE = "The response to {} \n{}\n"
 
 
 testDashboardsWidgets = DashboardsWidgets(TOKEN)
+dashboard = Dashboards(TOKEN).create({'label':'Test Dash'})
 
 def test_dashboards_widgets_create_delete():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    dashboardsWidgetsResult = testDashboardsWidgets.create('xyz', { "name": "Test DashboardsWidgets" })
+    dashboardsWidgetsResult = testDashboardsWidgets.create(dashboard['result']['dashboard'], { "name": "Test DashboardsWidgets", "label":"Test Label", "type": "Test Type", "data": {} })
 
     print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
 
@@ -20,11 +24,11 @@ def test_dashboards_widgets_create_delete():
         assert True
     else:
         assert False
-    
+
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
-    dashboardsWidgetsResult = testDashboardsWidgets.delete('xyz', dashboardsWidgetsResult['result']['id'])
+    dashboardsWidgetsResult = testDashboardsWidgets.delete(dashboard['result']['dashboard'], dashboardsWidgetsResult['result']['widget'])
 
     print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
 
@@ -59,7 +63,7 @@ def test_dashboards_widgets_edit():
         assert True
     else:
         assert False
-    
+
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
@@ -72,7 +76,7 @@ def test_dashboards_widgets_edit():
     else:
         assert False
 
-    
+
 
 def test_dashboards_widgets_info():
     ###################################
@@ -98,7 +102,7 @@ def test_dashboards_widgets_info():
         assert True
     else:
         assert False
-    
+
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
@@ -111,7 +115,7 @@ def test_dashboards_widgets_info():
     else:
         assert False
 
-        
+
 
 def test_dashboards_widgets_getData():
     ###################################
@@ -137,7 +141,7 @@ def test_dashboards_widgets_getData():
         assert True
     else:
         assert False
-    
+
     #####################################
     # Deleting the new dashboards.widgets
     #####################################
@@ -176,7 +180,7 @@ def test_dashboards_widgets_sendData():
         assert True
     else:
         assert False
-    
+
     #####################################
     # Deleting the new dashboards.widgets
     #####################################

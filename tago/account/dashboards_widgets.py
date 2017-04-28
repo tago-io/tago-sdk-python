@@ -57,10 +57,6 @@ class DashboardsWidgets:
     # @param  {String} widget_id
     # @param  {JSON} data
     # @return {Promise}
-    def sendData(self, dash_id, widget_id, data):        
+    def sendData(self, dash_id, widget_id, data):
     	data = data if data else {}
     	return requests.post('{api_endpoint}/data/{dash_id}/{widget_id}'.format(api_endpoint=API_TAGO, dash_id=dash_id, widget_id=widget_id), headers=self.default_headers, data=json.dumps(data)).json()
-
-
-
-

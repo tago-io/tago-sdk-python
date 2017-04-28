@@ -4,7 +4,7 @@ import json # Used to parse JSON
 import os # Used to infer environment variables
 import _share as share
 from socket import TagoRealTime
-#from dashboard.widgets import Widgets
+from dashboards_widgets import DashboardsWidgets
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -45,21 +45,21 @@ class Dashboards:
 	def listening(self, dashboard_id, func, wait):
 		if dashboard_id is None or dashboard_id == '':
 			raise ValueError('dashboard_id must be set')
-	
+
 		self.realtime = TagoRealTime(REALTIME, self.token, func)
 		self.realtime.listening(dashboard_id, wait)
-	
+
 		return "Listening to Dashboard "+dashboard_id
-		
-		
+
+
 	def stopListening(self, dashboard_id):
 		if self.realtime is None:
 			raise ValueError('realtime has not been initialized')
-	
+
 		self.realtime.stopListening(dashboard_id)
-		
+
 		return "Stop listening to Dashboard "+dashboard_id
-		
+
 	# Get share list of the dashboard
 	def shareList(self, dashboard_id):
 		if dashboard_id is None or dashboard_id == '':
@@ -103,8 +103,8 @@ class Dashboards:
 		    raise ValueError('dashboard_id must be set')
 		elif data.email is None:
 		    raise ValueError('email must be set in data')
-		    
+
 		return requests.post('{api_endpoint}/dashboard/{dashboard_id}/share/copy'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
 	def get_widgets(self):
-		return None #Widgets(self.token)
+		return DashboardsWidgets(self.token)
