@@ -10,7 +10,7 @@ build:
         code: pip install -U pytest
     - script:
         name: build
-        code: py.test
+        code: python -m pytest tests/*
     - script:
         name: echo python information
         code: |
