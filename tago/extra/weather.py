@@ -46,9 +46,6 @@ class Weather:
                 del result['history_url']
                 del result['ob_url']
                 del result['estimated']
-                '''if not self.full:
-                    del result['display_location']
-                    del result['observation_location']'''
             except Exception as e:
                 return Promise.reject('weather system, '+ str(e))
             return Promise.resolve(result) 

@@ -1,13 +1,13 @@
-from tago import Tago
-import os
-from weather import Weather
+import requests
+import requests_mock
+import json
+from tago.extra.weather import Weather 
 from promise import Promise
-
 
 TOKEN = 'fe1b837fb8f31dc6'
 
 def test_current():
-	result = Weather(TOKEN).current('27606',False,'EN')
+	result = Weather(TOKEN).current('27606', False, 'EN')
 	print result
 	if type(result) == Promise:
 		assert True
@@ -15,7 +15,7 @@ def test_current():
 		assert False
 
 def test_history():
-	result = Weather(TOKEN).current('2017-02-21','27606', False,'EN')
+	result = Weather(TOKEN).history('2017-02-21', '27606', False, 'EN')
 	print result
 	if type(result) == Promise:
 		assert True
@@ -23,7 +23,7 @@ def test_history():
 		assert False
 
 def test_forecast():
-	result = Weather(TOKEN).current('27606',False,'EN')
+	result = Weather(TOKEN).forecast('27606', False, 'EN')
 	print result
 	if type(result) == Promise:
 		assert True
@@ -31,7 +31,7 @@ def test_forecast():
 		assert False
 
 def test_alerts():
-	result = Weather(TOKEN).current('27606',False,'EN')
+	result = Weather(TOKEN).alerts('27606', False, 'EN')
 	print result
 	if type(result) == Promise:
 		assert True

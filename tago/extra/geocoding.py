@@ -1,44 +1,35 @@
-from promise import Promise
-from service_request import service_request as request
-from default_headers import default_headers
-from googlemaps import Client
+import requests
+import json
+import os
 
-class Geocoding :
-    def __init__(self,key):
-	self.key = key
-        self.default_options = {'json': True, 'headers':default_headers(self)}
+class Geocoding:
+	def __init__(self,key):
+		self.key = key
+		self.default_headers = { 'content-type': 'application/json', 'Device-Token': key }
 
-    def getAddress(self, geolocation):
-        if type(geolocation) == str:
-            geoplited = geolocation.split(',')
+	def getAddress(self, geolocation):
+		if type(geolocation) == str:
+			geoplited = geolocation.split(',')
 
-            if len(geolocation) > 1:
-                geolocation = [geoplited[0].strip(), geoplited[1].strip()]
-            else: 
-                return Promise.reject('Invalid geolocation')
-        elif geolocation.coordinates:
-            geolocation = geolocation.coordinates
-        else:
-            return Promise.reject('Invalid geolocation')
+			if len(geolocation) > 1:
+				geolocation = [geoplited[0].strip(), geoplited[1].strip()]
+			else:
+				raise ValueError("Invalid geolocation")
+		elif geolocation.coordinates:
+			geolocation = geolocation.coordinates
+		else:
+			raise ValueError("Invalid geolocation")
 
-        geolocation = ','.join([geolocation[0], geolocation[1]])
+		geolocation = ','.join([geolocation[0], geolocation[1]])
 
-        url    = 'https://maps.googleapis.com/maps/api/geocode/json'
-        method = 'GET'
-        params = {'latlng': geolocation, 'key':self.key}
-        self.default_options['url'] = url
-        self.default_options['method'] = method
-        self.default_options['params'] = params
-        options = self.default_options
-        return request(options)
+		url    = 'https://maps.googleapis.com/maps/api/geocode/json'
+		query = {'latlng': geolocation, 'key': self.key}
+		geoloc_response = requests.get(url, params=query, headers=self.default_headers).json()
+		return geoloc_response
 
-    def getGeolocation(self, address):
-        url    = 'https://maps.googleapis.com/maps/api/geocode/json'
-        method = 'GET'
-        params = { 'address':address, 'key': self.key }
-        self.default_options['url'] = url
-        self.default_options['method'] = method
-        self.default_options['params'] = params
-        options = self.default_options
-        return request(options)
+	def getGeolocation(self, address):
+		url    = 'https://maps.googleapis.com/maps/api/geocode/json'
+		query = { 'address':address, 'key': self.key }
+		geoloc_response = requests.get(url, params=query, headers=self.default_headers).json()
+		return geoloc_response
 
