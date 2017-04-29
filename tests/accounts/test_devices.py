@@ -6,8 +6,6 @@ TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7
 DEBUG_MESSAGE = 'The response to {} \n{}'
 
 def test_device_list():
-    # print dir(Devices)
-
     testDevices = Devices(TOKEN)
 
     result = testDevices.list()
