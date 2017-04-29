@@ -4,7 +4,6 @@ from default_headers import default_headers
 from datetime import datetime
 import urllib
 import ast
-#'use strict';
 
 # Wunderground docs: http://www.wunderground.com/weather/api/d/docs
 
