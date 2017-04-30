@@ -13,15 +13,15 @@ def mock_callback(request, context):
 	# Dictionary of params for the request
 	res_dict = json.loads(request.body)
 
-	# Check if the request has all the valid params
-	for key, value in schema.iteritems():
-		if not res_dict[key]: 
-			return {'result': 'failure'}
-
 	# Check if the request has all the valid keys
 	for key, value in schema.iteritems():
 		if key not in res_dict: 
 			return {'result': 'failure' }
+
+	# Check if the request has all the valid params
+	for key, value in schema.iteritems():
+		if not res_dict[key]: 
+			return {'result': 'failure'}
 
 	# Check length of phone number
 	if(len(res_dict['to']) > 15):
