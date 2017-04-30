@@ -14,6 +14,9 @@ class SMS:
 	# message{string} :
 	# Returns Promise
 	def send(self, to, message):
+		if not to or not message:
+			raise ValueError("Empty or Bad arguments")
+
 		data = {'to':to, 'message':message}
 		url = '{api_endpoint}/analysis/services/sms/send'.format(api_endpoint=API_TAGO)
 		return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
