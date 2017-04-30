@@ -1,0 +1,106 @@
+running test
+Searching for nose
+Reading https://pypi.python.org/simple/nose/
+Downloading https://pypi.python.org/packages/58/a5/0dc93c3ec33f4e281849523a5a913fa1eea9a3068acfa754d44d88107a44/nose-1.3.7.tar.gz#md5=4d3ad0ff07b61373d2cefc89c5d0b20b
+Best match: nose 1.3.7
+Processing nose-1.3.7.tar.gz
+Writing /var/folders/g6/bfgxwzyx3299zzp88c5d_dj00000gn/T/easy_install-1OMZfG/nose-1.3.7/setup.cfg
+Running nose-1.3.7/setup.py -q bdist_egg --dist-dir /var/folders/g6/bfgxwzyx3299zzp88c5d_dj00000gn/T/easy_install-1OMZfG/nose-1.3.7/egg-dist-tmp-nRY9PU
+no previously-included directories found matching 'doc/.build'
+creating /Users/kushagramishra/Desktop/tago/tago-sdk-python/.eggs/nose-1.3.7-py2.7.egg
+Extracting nose-1.3.7-py2.7.egg to /Users/kushagramishra/Desktop/tago/tago-sdk-python/.eggs
+
+Installed /Users/kushagramishra/Desktop/tago/tago-sdk-python/.eggs/nose-1.3.7-py2.7.egg
+running egg_info
+creating tago.egg-info
+writing requirements to tago.egg-info/requires.txt
+writing tago.egg-info/PKG-INFO
+writing top-level names to tago.egg-info/top_level.txt
+writing dependency_links to tago.egg-info/dependency_links.txt
+writing manifest file 'tago.egg-info/SOURCES.txt'
+reading manifest file 'tago.egg-info/SOURCES.txt'
+writing manifest file 'tago.egg-info/SOURCES.txt'
+running build_ext
+device.test_delete.test_insert ... FAIL
+device.test_get.test_insert ... FAIL
+device.test_insert.test_insert ... FAIL
+device.test_socket.test_socket ... ok
+services.test_console.test_console ... ok
+services.test_email.test_email ... ok
+services.test_sms.test_sms ... ok
+services.test_socket.test_socket ... ok
+
+======================================================================
+FAIL: device.test_delete.test_insert
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/kushagramishra/Desktop/tago/tago-sdk-python/.eggs/nose-1.3.7-py2.7.egg/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/Users/kushagramishra/Desktop/tago/tago-sdk-python/tests/device/test_delete.py", line 12, in test_insert
+    assert False
+AssertionError: 
+-------------------- >> begin captured stdout << ---------------------
+{u'status': False, u'message': u'Authorization denied'}
+
+--------------------- >> end captured stdout << ----------------------
+-------------------- >> begin captured logging << --------------------
+requests.packages.urllib3.connectionpool: DEBUG: Starting new HTTPS connection (1): api.tago.io
+requests.packages.urllib3.connectionpool: DEBUG: https://api.tago.io:443 "DELETE /data HTTP/1.1" 200 49
+--------------------- >> end captured logging << ---------------------
+
+======================================================================
+FAIL: device.test_get.test_insert
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/kushagramishra/Desktop/tago/tago-sdk-python/.eggs/nose-1.3.7-py2.7.egg/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/Users/kushagramishra/Desktop/tago/tago-sdk-python/tests/device/test_get.py", line 12, in test_insert
+    assert False
+AssertionError: 
+-------------------- >> begin captured stdout << ---------------------
+{u'status': False, u'message': u'Authorization denied'}
+
+--------------------- >> end captured stdout << ----------------------
+-------------------- >> begin captured logging << --------------------
+requests.packages.urllib3.connectionpool: DEBUG: Starting new HTTPS connection (1): api.tago.io
+requests.packages.urllib3.connectionpool: DEBUG: https://api.tago.io:443 "GET /data?query=last_value HTTP/1.1" 200 49
+--------------------- >> end captured logging << ---------------------
+
+======================================================================
+FAIL: device.test_insert.test_insert
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/kushagramishra/Desktop/tago/tago-sdk-python/.eggs/nose-1.3.7-py2.7.egg/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/Users/kushagramishra/Desktop/tago/tago-sdk-python/tests/device/test_insert.py", line 11, in test_insert
+    assert False
+AssertionError: 
+-------------------- >> begin captured logging << --------------------
+requests.packages.urllib3.connectionpool: DEBUG: Starting new HTTPS connection (1): api.tago.io
+requests.packages.urllib3.connectionpool: DEBUG: https://api.tago.io:443 "POST /data HTTP/1.1" 200 49
+--------------------- >> end captured logging << ---------------------
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.888s
+
+FAILED (failures=3)
+Test failed: <unittest.runner.TextTestResult run=8 errors=0 failures=3>
+error: Test failed: <unittest.runner.TextTestResult run=8 errors=0 failures=3>
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/atexit.py", line 24, in _run_exitfuncs
+    func(*targs, **kargs)
+  File "/Library/Python/2.7/site-packages/socketIO_client/__init__.py", line 203, in _close
+    self._transport_instance.send_packet(engineIO_packet_type)
+  File "/Library/Python/2.7/site-packages/socketIO_client/transports.py", line 162, in send_packet
+    packet = format_packet_text(engineIO_packet_type, engineIO_packet_data)
+TypeError: 'NoneType' object is not callable
+Error in sys.exitfunc:
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/atexit.py", line 24, in _run_exitfuncs
+    func(*targs, **kargs)
+  File "/Library/Python/2.7/site-packages/socketIO_client/__init__.py", line 203, in _close
+    self._transport_instance.send_packet(engineIO_packet_type)
+  File "/Library/Python/2.7/site-packages/socketIO_client/transports.py", line 162, in send_packet
+    packet = format_packet_text(engineIO_packet_type, engineIO_packet_data)
+TypeError: 'NoneType' object is not callable
