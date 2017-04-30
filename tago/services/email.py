@@ -18,6 +18,10 @@ class Email:
 	# return promise
 
 	def send(self, to, subject, message, s_from, attachment):
-		data = {'to':to, 'subject':subject, 'message':message, 'from':s_from, 'attachment': attachment}
+		if not to or not message or not subject:
+			raise ValueError("Empty or Bad arguments")
+
+		data = {'to':to, 'subject':subject, 'message':message, \
+				'from':s_from, 'attachment': attachment}
 		url = '{api_endpoint}/analysis/services/email/send'.format(api_endpoint=API_TAGO)
 		return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()

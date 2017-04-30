@@ -11,6 +11,9 @@ class Console:
 		self.default_headers = { 'content-type': 'application/json', 'Device-Token': analysis_token }
 
 	def send(self, message, timestamp):
+		if not message:
+			raise ValueError("Empty or Bad arguments")
+
 		if not timestamp:
 			timestamp = time.time() * 1000 # Time from epoch in sec*1000
 
