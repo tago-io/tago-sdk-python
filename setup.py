@@ -20,5 +20,5 @@ setup(name='tago',
       packages=['tago', 'tago/device'],
       test_suite='nose.collector',
       tests_require=['nose'],
-      install_requires=['socketIO-client', 'requests', 'promise', 'requests_mock'],
+      install_requires=['socketIO-client', 'requests', 'promise','requests-mock'],
       zip_safe=False)
