@@ -27,5 +27,3 @@ def remove(type, share_id, default_options):
     if share_id is None or share_id == '':
         raise ValueError('share_id must be set')
     return requests.delete('{api_endpoint}/share/{share_id}'.format(api_endpoint=API_TAGO,share_id=share_id), headers=default_options).json()
-
-# Not sure what exports do...
