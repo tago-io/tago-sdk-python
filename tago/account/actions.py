@@ -27,7 +27,6 @@ class Actions:
     	return requests.delete('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers).json()
 
     def info(self, action_id):
-    	# if action_id is null, then call list
     	if action_id is None or action_id == '':
 	    	return self.list()
 
