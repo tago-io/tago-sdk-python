@@ -88,9 +88,6 @@ class Weather:
             print result
             try:
                 result = result['forecast']
-                '''for x in result.keys():
-                    del x['icon_url']
-                    del x['skyicon']'''
             except Exception as e:
                 return Promise.reject('Error on parse weather forecast ' + str(e))
             return Promise.resolve(result)
