@@ -1,8 +1,8 @@
-import email
-import sms
-import socket
-import console
-import mqtt
+from email import Email
+from sms import SMS
+from socket import Socket
+from console import Console
+from mqtt import MQTT
 
 class Services:
 	def __init__(self, token):
