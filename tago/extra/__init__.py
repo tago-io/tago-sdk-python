@@ -1,22 +1,22 @@
-import currency
-import distance
-import geocoding
-import weather
+from currency import Currency
+from distance import Distance
+from geocoding import Geocoding
+from weather import Weather
 
-class Services:
+class Extra:
 	def __init__(self, API_KEY):
-		self.API_KEY = API_KEY
+		self.key = API_KEY
 
 	def currency(self): 
-		return Currency(self.API_KEY)
+		return Currency(self.key)
 
 	def distance(self):
-		return Distance(self.API_KEY)
+		return Distance(self.key)
 
 	def geocoding(self):
-		return Geocoding(self.API_KEY)
+		return Geocoding(self.key)
 
 	def weather(self):
-		return Weather(self.API_KEY)
+		return Weather(self.key)
 
 

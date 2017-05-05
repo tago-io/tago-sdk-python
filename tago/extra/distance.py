@@ -4,7 +4,7 @@ import os
 
 class Distance:
 	def __init__(self, key):
-		self.key = key;
+		self.key = key
 		self.default_headers = {'Device-Token': key}
 
 	#

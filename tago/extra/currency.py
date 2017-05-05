@@ -4,7 +4,7 @@ import os
 
 class Currency:
 	def __init__(self, key):
-		self.key = key;
+		self.key = key
 		self.default_headers = { 'content-type': 'application/json', 'Device-Token': key }
 
 	#
