@@ -94,7 +94,7 @@ class Weather:
 
         params = {'query':query, 'full':full, 'lang':lang, 'key':self.key}
         self._setParams(params)
-        url    = 'http://api.wunderground.com/api/'+self.key+'/lang:'+self._lang+'/forecast10day/q/'+urllib.quote(self._query.encode("utf-8"))+'.json'
+        url    = 'http://api.wunderground.com/api/'+ self.key +'/forecast/q/'+urllib.quote(self._query.encode("utf-8"))+'.json'
         method = 'GET'
         self.default_options['url'] = url
         self.default_options['method'] = method
@@ -110,7 +110,7 @@ class Weather:
 
         params = {'query':query, 'full':full, 'lang':lang}
         self._setParams(params)
-        url    = 'http://api.wunderground.com/api/'+self.key+'/lang:'+self._lang+'/alerts/q/'+urllib.quote(self._query.encode("utf-8"))+'.json'
+        url    = 'http://api.wunderground.com/api/'+self.key+'/alerts/q/'+urllib.quote(self._query.encode("utf-8"))+'.json'
         method = 'GET'
         self.default_options['url'] = url
         self.default_options['method'] = method
