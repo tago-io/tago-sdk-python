@@ -79,5 +79,3 @@ def test_email():
 		# Bad case
 		result = email('wrong_token').send('xyz@ncsu.edu', 'tago test', 'test tago services', 'xyz@ncsu.edu', 'q')
 		check_status(result, False)
-
-test_email()
