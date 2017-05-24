@@ -19,19 +19,22 @@ To setup an analysis, you first need a analysis token. That can be retrieved fro
 | *analysis_token(string) analysis token. Only needed if the script will run remotelly (Optional).*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
+    from tago import Tago
+    import os
+    analysis_token = os.environ.get('TAGO_TOKEN_DEVICE') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
+    
+    def func_callback(context, scope):
+       print "context"
+       print context
+       print "scope"
+       print scope
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        console.log('my context:', context);
-        console.log('my scope:', scope);
-        //Do anything you want here
-    }
+    def test_socket():
+       s =  Tago(analysis_token).analysis.run_analysis(func_callback, 0)
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+    test_socket()
 
 
 context
@@ -100,21 +103,25 @@ We provide some functions that can greatly help your application. When creating 
 
 When setting up a service, you need to pass an analysis-token. For convenience, the context returns a property token that you can use to setup a service object.
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
+    from tago import Tago
+    from tago.services.sms import SMS as sms
+    import os
+    
+    TOKEN = os.environ.get('TAGO_TOKEN_ANALYSIS') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        //Setting up a SMS service
-        const sms = new Services(context.token).sms;
-
+    # Main function to be executed when the analysis are called
+    def myanalysis(context, scope) {
+        # Setting up a SMS service
+        sms = Services(context.token).sms
     }
+    
+    def test_analysis():
+        s = Tago(analysis_token).analysis.run_analysis(myanalysis, 0)
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
-
+    test_analysis()
+    
 sms
 ===
 You can configure the system to send SMS directly from your analysis to yourself or your customers. Another option is to use the Actions to send SMS.
@@ -136,25 +143,26 @@ Whenever you need to send a sms, use .send function.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
-    function myanalysis(context, scope) {
-        const sms = new Services(context.token).sms;
+    from tago import Tago
+    from tago.services.sms import SMS as sms
+    import os
+    
+    TOKEN = os.environ.get('TAGO_TOKEN_ANALYSIS') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
 
-        const to      = '2693856214';
-        const message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
-
-        sms.send(to, message).then(console.log).catch(console.log);
-        //Print "Sending";
-
+    # Main function to be executed when the analysis are called
+    def myanalysis(context, scope) {
+        # Setting up a SMS service
+        sms = Services(context.token).sms
+        sms.send('+11234567890', 'test tago services')
     }
+    
+    def test_analysis():
+        s = Tago(analysis_token).analysis.run_analysis(myanalysis, 0)
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+    test_analysis()
 
 email
 =====
@@ -177,24 +185,23 @@ Whenever you need to send an email, use .send function.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        const email = new Services(context.token).email;
+    from tago import Tago
+    from tago.services.email import Email as email
+    import os
+    
+    TOKEN = os.environ.get('TAGO_TOKEN_ANALYSIS') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
 
-        const to      = 'myuser@gmail.com';
-        const subject = 'E-mail example';
-        const message = 'Hi! This is an email example. \nWith a breakline in the email message.';
-        const from    = 'me@gmail.com';
-
-        email.send(to, subject, message, from).then(console.log).catch(console.log);
-        //Print "Sending";
-
+    # Main function to be executed when the analysis are called
+    def myanalysis(context, scope) {
+        # Setting up a SMS service
+        email = Services(context.token).email
+        email.send('xyz@ncsu.edu', 'tago test', 'test tago services', 'xyz@ncsu.edu', '')
     }
+    
+    def test_analysis():
+        s = Tago(analysis_token).analysis.run_analysis(myanalysis, 0)
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+    test_analysis()
