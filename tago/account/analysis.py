@@ -1,10 +1,8 @@
 import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
-from socket import TagoRealTime # Used for realtime methods
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
-REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Analysis:
     def __init__(self, token):
@@ -36,26 +34,6 @@ class Analysis:
 
     def run(self, analyze_id, scope):
     	return requests.post('{api_endpoint}/analysis/{analyze_id}/run'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=scope).json()
-
-    def listening(self, analyze_id, func, wait):
-        # if analyze_id is null, then call list
-        if analyze_id is None or analyze_id == '':
-            raise ValueError('analyze_id must be set')
-
-        self.realtime = TagoRealTime(REALTIME, self.token, func)
-
-        #realtime = realtime or self.realtime
-
-        self.realtime.listening(analyze_id, wait)
-    	return "Listening to Analyze "+analyze_id
-
-    def stopListening(self, analyze_id):
-    	if self.realtime is None:
-            raise ValueError('realtime has not been initialized')
-
-        self.realtime.stopListening(analyze_id)
-
-    	return "Stop listening to Analyze "+analyze_id
 
     def tokenGenerate(self, analyze_id):
     	return requests.get('{api_endpoint}/analysis/{analyze_id}/token'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers).json()

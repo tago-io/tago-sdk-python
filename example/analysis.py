@@ -1,10 +1,10 @@
 import sys
-sys.path.append('..')
+sys.path.append('/Users/vitorfdl/Projects/tago-sdk-python')
 
 from tago import Tago
 import os
 
-TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
+TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'e11a8e89-9923-4571-8202-55e6a017f76c'
 
 def func_callback(context, scope):
    print "context"

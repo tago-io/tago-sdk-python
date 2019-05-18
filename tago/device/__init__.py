@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-from socket import TagoRealTime
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -44,6 +43,3 @@ class Device:
 
     def markParam(self, param_id):
         return requests.put('{api_endpoint}/device/params/{id}'.format(api_endpoint=API_TAGO,id=param_id), headers=self.default_headers).json()
-
-    def listening(self, callback, wait=False):
-        return TagoRealTime(REALTIME, self.token, callback).listening(wait)

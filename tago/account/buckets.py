@@ -4,7 +4,6 @@ import os # Used to infer environment variables
 import _share # Used in share methods
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
-REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Buckets:
     def __init__(self, token):
