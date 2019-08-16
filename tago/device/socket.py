@@ -15,14 +15,3 @@ class TagoRealTime:
 
     def on_data(self, data):
         self.callback(data)
-
-    def listening(self, wait):
-        self.socket.on('connect', self.on_connect)
-        self.socket.on('data', self.on_data)
-
-        if wait:
-            self.socket.wait(seconds=wait)
-        else:
-            self.socket.wait()
-
-        return self.socket

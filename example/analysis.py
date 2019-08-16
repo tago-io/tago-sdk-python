@@ -4,7 +4,7 @@ sys.path.append('..')
 from tago import Tago
 import os
 
-TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'f0ba1f34-2bec-4cba-80ba-088624e37fb2'
+TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'a5b992b1-0ad6-4752-893c-39969321417a'
 
 def func_callback(context, scope):
    print "context"
