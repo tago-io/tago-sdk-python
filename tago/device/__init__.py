@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-from socket import TagoRealTime
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -34,6 +33,7 @@ class Device:
     
     # need testing
     def markParam(self, param_id):
+<<<<<<< HEAD
         return requests.put('{api_endpoint}/device/params/{id}'.format(api_endpoint=API_TAGO,id=param_id), headers=self.default_headers).json()
     
     # Function to handle url and don't repeat code
@@ -47,3 +47,6 @@ class Device:
     # after fixing remove function this should go away
     def api_data_delete(self, id):
         return requests.delete(self.handle_url(id=id), headers=self.default_headers).json()
+=======
+        return requests.put('{api_endpoint}/device/params/{id}'.format(api_endpoint=API_TAGO,id=param_id), headers=self.default_headers).json()
+>>>>>>> f74b5d3e855b3d4cc143a184efe8a2d857692fbe
