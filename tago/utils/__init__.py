@@ -1,13 +1,9 @@
-from device import Device
-from analysis import Analysis
-from account import Account
-from services import Services
-from extra import Extra
-from connector import Connector
-from authorization import Authorization
-from run_user import RunUser
+# TODO: Create utils functions and then import it
+from getTokenByName import GetTokenByName
+from env_to_obj import 
+from run_user import 
 
-class Tago:
+class Utils:
     def __init__(self, token):
         # Pending functions
         self.account = Account(token)
