@@ -1,12 +1,27 @@
 import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
+
 from socket import TagoRealTime
 from actions import Actions
 from analysis import Analysis
+from files import Files
+from buckets import Buckets
 from dashboards import Dashboards
 from devices import Devices
-from buckets import Buckets
+from notifications import Notifications
+from middlewares import Middlewares
+from tags import Tags
+from paymentMethods import PaymentMethods
+from plan import Plan
+from paymentHistory import PaymentHistory
+from explore import Explore
+from connector import Connector
+from template import Template
+from accessManagement import AccessManagement
+from run import TagoIORUN
+from profiles import Profiles
+from service_authorization import ServiceAuth
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -111,7 +126,37 @@ class Account:
         return Actions(self.token)
     def getAnalysis(self):
         return Analysis(self.token)
+    def getBuckets(self):
+        return Buckets(self.token)
+    def getFiles(self):
+        return Files(self.token)
     def getDashboards(self):
         return Dashboards(self.token)
     def getDevices(self):
         return Devices(self.token)
+    def getNotifications(self):
+        return Notifications(self.token)
+    def getMiddlewares(self):
+        return Middlewares(self.token)
+    def getTags(self):
+        return Tags(self.token)
+    def getPaymentMethods(self):
+        return PaymentMethods(self.token)
+    def getPlan(self):
+        return Plan(self.token)
+    def getPaymentHistory(self):
+        return PaymentHistory(self.token)
+    def getExplore(self):
+        return Explore(self.token)
+    def getConnector(self):
+        return Connector(self.token)
+    def getTemplate(self):
+        return Template(self.token)
+    def getAccessManagement(self):
+        return AccessManagement(self.token)
+    def getRun(self):
+        return TagoIORUN(self.token)
+    def getServiceAuthorization(self):
+        return ServiceAuth(self.token)
+    def getProfiles(self):
+        return Profiles(self.token)

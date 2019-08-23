@@ -5,7 +5,7 @@ import os # Used to infer environment variables
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
-class Actions:
+class AccessManagement:
     def __init__(self, acc_token):
         self.token = acc_token
         self.default_headers = { 'content-type': 'application/json', 'Account-Token': acc_token }
@@ -39,6 +39,5 @@ class Actions:
     # TODO: need review
     def info(self, am_id):
     	if am_id is None or am_id == '':
-	    	return self.list()
-
+	    	raise ValueError('Access Management ID parameter is obrigatory.')
     	return requests.get('{api_endpoint}/am/{am_id}'.format(api_endpoint=API_TAGO, am_id=am_id), headers=self.default_headers).json()
