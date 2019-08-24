@@ -17,11 +17,11 @@ class Email:
 	# attachment{json} : attachment to be sent
 	# return promise
 
-	def send(self, to, subject, message, s_from, attachment):
+	def send(self, to, subject, message, s_from, attachment, html, whitelabel_url):
 		if not to or not message or not subject:
 			raise ValueError("Empty or Bad arguments")
 
 		data = {'to':to, 'subject':subject, 'message':message, \
-				'from':s_from, 'attachment': attachment}
+				'from':s_from, 'attachment': attachment, 'html': html, 'whitelabel_url': whitelabel_url}
 		url = '{api_endpoint}/analysis/services/email/send'.format(api_endpoint=API_TAGO)
 		return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()

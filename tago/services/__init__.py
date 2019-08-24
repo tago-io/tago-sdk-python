@@ -3,6 +3,8 @@ from sms import SMS
 from socket import Socket
 from console import Console
 from mqtt import MQTT
+from attachment import Attachment
+from notification import Notification
 
 class Services:
 	def __init__(self, token):
@@ -22,5 +24,11 @@ class Services:
 
 	def MQTT(self):
 		return MQTT(self.token)
+
+	def notification(self):
+		return Notification(self.token)
+
+	def attachment(self):
+		return Attachment(self.token)
 
 

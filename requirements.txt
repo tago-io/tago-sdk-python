@@ -1,9 +1,5 @@
 pytest==3.0.6
-<<<<<<< HEAD
-socketIO-client-2==0.7.5
-=======
 socketIO-client-nexus==0.7.6
->>>>>>> f74b5d3e855b3d4cc143a184efe8a2d857692fbe
 requests==2.13.0
 promise==2.0.1
 requests-mock==1.3.0

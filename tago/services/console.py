@@ -10,7 +10,7 @@ class Console:
 		self.analysis_token = analysis_token
 		self.default_headers = { 'content-type': 'application/json', 'Device-Token': analysis_token }
 
-	def send(self, message, timestamp):
+	def log(self, message, timestamp):
 		if not message:
 			raise ValueError("Empty or Bad arguments")
 

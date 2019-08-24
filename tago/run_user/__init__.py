@@ -7,7 +7,6 @@ API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class RunUser:
-    # needs to implement details
     def __init__(self, token):
         self.token = token
         self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
@@ -23,11 +22,16 @@ class RunUser:
     # TODO: create this function
     def create(self, tagoRunURL, newUserObj):
         @staticmethod
-        # return requests.post(self.handle_url(id=False), data=json.dumps(data), headers=self.default_headers).json()
+        return requests.post('{api_endpoint}/run/{tagoRunURL}/signup'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers=self.default_headers, data=json.dumps(newUserObj)).json()
 
     # email and password should be in a object?
-    def login(self, tagoRunURL, email, password):
+    def login(self, tagoRunURL, emailAndPasswordObject):
         @staticmethod
+        data = {
+            'email': emailAndPasswordObject.email,
+            'password': emailAndPasswordObject.password
+        }
+        return requests.post('{api_endpoint}/run/{tagoRunURL}/login'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers = self.default_headers, data = json.dumps(data)).json()
 
     # TODO: test it
     def confirmUser(self, tagoRunURL, token):
@@ -49,12 +53,17 @@ class RunUser:
         return requests.get('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
 
     # TODO: create this function
-    def notificationMarkRead(tagoRunURL, notifications):
+    def notificationMarkRead(self, tagoRunURL, notifications):
+        if not isinstance(notifications, list):
+            raise ValueError('Notifications parameter must be a list')
+        data = {'notification_ids': notifications}
+        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers = self.default_headers, data = json.dumps(data)).json()
 
     # TODO: test it
-    def notificationButton(tagoRunURL, notification_id, btn_id):
-        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}/{btn_id}'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+    def notificationButton(self, tagoRunURL, notification_id, btn_id):
+        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}/{btn_id}'.format(api_endpoint=API_TAGO, tagoRunURL = tagoRunURL, notification_id = notification_id, btn_id = btn_id), headers=self.default_headers).json()
 
     # TODO: create this function
-    def notificationDelete(tagoRunURL, notification_id):
+    def notificationDelete(self, tagoRunURL, notification_id):
+        return requests.delete('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}'.format(api_endpoint=API_TAGO, tagoRunURL = tagoRunURL, notification_id = notification_id), headers=self.default_headers).json()
 
