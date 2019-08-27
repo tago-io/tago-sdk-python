@@ -15,11 +15,11 @@ class Devices:
     # TODO: need review
     def list(self, page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc', resolveBucketName = False):
         params = {
-            'page' = page,
-            'filter' = filter,
-            'fields' = fields,
-            'amount' = amount,
-            'orderBy' = orderBy,
+            'page': page,
+            'filter': filter,
+            'fields': fields,
+            'amount': amount,
+            'orderBy': orderBy,
 			'resolveBucketName': resolveBucketName
         }
         return requests.get('{api_endpoint}/device'.format(api_endpoint=API_TAGO), headers=self.default_headers, params = json.dumps(params)).json()
@@ -40,13 +40,13 @@ class Devices:
 
 
     # TODO: need review
-    def list(self, device_id, page = 1, amount = 20, filter = {}, fields = ['name', 'token', 'permission'], orderBy = 'created_at,desc', resolveBucketName = False):
+    def tokenList(self, device_id, page = 1, amount = 20, filter = {}, fields = ['name', 'token', 'permission'], orderBy = 'created_at,desc', resolveBucketName = False):
         params = {
-            'page' = page,
-            'filter' = filter,
-            'amount' = amount,
-            'orderBy' = orderBy,
-            'fields' = fields,
+            'page': page,
+            'filter': filter,
+            'amount': amount,
+            'orderBy': orderBy,
+            'fields': fields,
         }
         return requests.get('{api_endpoint}/device/token/{device_id}'.format(api_endpoint=API_TAGO, device_id = device_id), headers=self.default_headers, params = json.dumps(params)).json()
 
@@ -83,10 +83,10 @@ class Devices:
 
 	# TODO test it
     def paramList(self, device_id, sent_status):
-		params = {
+        params = {
 			'sent_status': sent_status,
-		}
-    	return requests.get('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=json.dumps(params)).json()
+        }
+        return requests.get('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=json.dumps(params)).json()
 
     def paramRemove(self, device_id, param_id):
     	return requests.delete('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers).json()

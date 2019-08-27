@@ -15,11 +15,11 @@ class Buckets:
     # TODO: need review
     def list(self, page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc'):
         params = {
-            'page' = page,
-            'fields' = fields,
-            'filter' = filter,
-            'amount' = amount,
-            'orderBy' = orderBy,
+            'page': page,
+            'fields': fields,
+            'filter': filter,
+            'amount': amount,
+            'orderBy': orderBy,
         }
         return requests.get('{api_endpoint}/bucket'.format(api_endpoint=API_TAGO), headers=self.default_headers, data = json.dumps(params)).json()
 
@@ -54,13 +54,13 @@ class Buckets:
 	# TODO test it
 	def getDevicesAssociated(self, bkt_id):
 		if bkt_id is None or bkt_id == '':
-            raise ValueError('Bucket ID parameter is obrigatory.')
+			raise ValueError('Bucket ID parameter is obrigatory.')
 		return requests.get('{api_endpoint}/bucket/{bkt_id}/device'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
 
 	# TODO test it
 	def amount(self, bkt_id):
 		if bkt_id is None or bkt_id == '':
-            raise ValueError('Bucket ID parameter is obrigatory.')
+			raise ValueError('Bucket ID parameter is obrigatory.')
 		return requests.get('{api_endpoint}/bucket/{bkt_id}/data_amount'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
 
 	# TODO test it

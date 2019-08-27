@@ -3,8 +3,7 @@ import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
 import _share as share
-from socket import TagoRealTime
-from dashboards_widgets import DashboardsWidgets
+from dashboards_widgets import Widgets
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -15,15 +14,15 @@ class Dashboards:
 		self.default_headers = { 'content-type': 'application/json', 'Account-Token': acc_token }
 
 	# TODO: need review
-    def list(self, page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'label,asc'):
-        params = {
-            'page' = page,
-            'filter' = filter,
-            'fields' = fields,
-            'amount' = amount,
-            'orderBy' = orderBy,
-        }
-        return requests.get('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, data = json.dumps(params)).json()turn requests.get('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+	def list(self, page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'label,asc'):
+		params = {
+			'page': page,
+			'filter': filter,
+			'fields': fields,
+			'amount': amount,
+			'orderBy': orderBy,
+		}
+		return requests.get('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, data = json.dumps(params)).json()
 
 	# TODO test it
 	# Create a Dashboard
@@ -83,14 +82,14 @@ class Dashboards:
 		    raise ValueError('share_id must be set')
 		elif data['email'] is None or data['email'] == '':
 		    raise ValueError('email must be set in data')
-		return share.edit("dashboard",share_id,data,self.default_headers)
+		return share.edit(share_id, data, self.default_headers)
 
 	# TODO test it
 	# Remove share of a dashboard
 	def shareDelete(self, share_id):
 		if share_id is None or share_id == '':
 		    raise ValueError('share_id must be set')
-		return share.remove("dashboard",share_id,self.default_headers)
+		return share.remove(share_id, self.default_headers)
 
 	# TODO test it
 	# Generate new public token for the dashboard

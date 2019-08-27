@@ -15,11 +15,11 @@ class Actions:
     # TODO: need review
     def list(self, page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc'):
         params = {
-            'page' = page,
-            'fields' = fields,
-            'filter' = filter,
-            'amount' = amount,
-            'orderBy' = orderBy,
+            'page': page,
+            'fields': fields,
+            'filter': filter,
+            'amount': amount,
+            'orderBy': orderBy,
         }
         return requests.get('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data = json.dumps(params)).json()
 

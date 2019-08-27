@@ -4,7 +4,7 @@ import os
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 
-class SMS:
+class Sms:
 	def __init__(self, analysis_token):
 		self.analysis_token = analysis_token
 		self.default_headers = { 'content-type': 'application/json', 'Device-Token': analysis_token }

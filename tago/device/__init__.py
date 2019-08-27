@@ -26,8 +26,14 @@ class Device:
         return requests.get('{api_endpoint}/data'.format(api_endpoint = API_TAGO), headers=self.default_headers, params = json.dumps(query_obj)).json()
 
     # to do
-    def remove(self, args):
-        return self.api_data_delete(query)
+    def remove(self, args = {}):
+        queryOrID = args['queryOrID']
+        if not args:
+            queryOrID = {
+                'query': 'last_item'
+            }
+        query_obj = queryOrID if queryOrID else {}
+        return requests.delete('{api_endpoint}/data'.format(api_endpoint = API_TAGO), headers = self.default_headers, params = json.dumps(query_obj)).json()
     
     # need testing
     def getParams(self, sent_status):

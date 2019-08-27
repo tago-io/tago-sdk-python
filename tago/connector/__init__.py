@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-from socket import TagoRealTime
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'

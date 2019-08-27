@@ -41,5 +41,5 @@ class Files:
     def getFileURLSigned(self, url):
         if '.tago.io/file/' not in url:
             raise ValueError('{url} is not a TagoIO files url'.format(url = url))
-        return requests.get(url = url, headers = self.default_headers, params = json.dumps({'noRedirect' = True})).json()
+        return requests.get(url = url, headers = self.default_headers, params = json.dumps({'noRedirect': True})).json()
         

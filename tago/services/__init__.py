@@ -1,8 +1,8 @@
-from email import Email
-from sms import SMS
+from emailService import Email
+from sms import Sms
 from socket import Socket
 from console import Console
-from mqtt import MQTT
+from mqtt import Mqtt
 from attachment import Attachment
 from notification import Notification
 
@@ -11,7 +11,7 @@ class Services:
 		self.token = token
 
 	def sms(self): 
-		return SMS(self.token)
+		return Sms(self.token)
 
 	def email(self):
 		return Email(self.token)
@@ -23,7 +23,7 @@ class Services:
 		return Socket(self.token)
 
 	def MQTT(self):
-		return MQTT(self.token)
+		return Mqtt(self.token)
 
 	def notification(self):
 		return Notification(self.token)

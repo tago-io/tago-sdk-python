@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-from socket import TagoRealTime
 
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -20,13 +19,13 @@ class RunUser:
         return requests.put('{api_endpoint}/run/{tagoRunURL}/info'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
     # TODO: create this function
+    @staticmethod
     def create(self, tagoRunURL, newUserObj):
-        @staticmethod
         return requests.post('{api_endpoint}/run/{tagoRunURL}/signup'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers=self.default_headers, data=json.dumps(newUserObj)).json()
 
     # email and password should be in a object?
+    @staticmethod
     def login(self, tagoRunURL, emailAndPasswordObject):
-        @staticmethod
         data = {
             'email': emailAndPasswordObject.email,
             'password': emailAndPasswordObject.password
@@ -34,18 +33,18 @@ class RunUser:
         return requests.post('{api_endpoint}/run/{tagoRunURL}/login'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers = self.default_headers, data = json.dumps(data)).json()
 
     # TODO: test it
+    @staticmethod
     def confirmUser(self, tagoRunURL, token):
-        @staticmethod
         return requests.get('{api_endpoint}/run/{tagoRunURL}/confirm/{token}'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
     
     # TODO: test it
+    @staticmethod
     def passwordRecover(self, tagoRunURL, email):
-        @staticmethod
         return requests.get('{api_endpoint}/run/{tagoRunURL}/passwordreset/{email}'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
 
     # TODO: test it
+    @staticmethod
     def passwordChange(self, tagoRunURL, password):
-        @staticmethod
         return requests.post('{api_endpoint}/run/{tagoRunURL}/passwordreset/{email}'.format(api_endpoint = API_TAGO), data=json.dumps(password), headers = self.default_headers).json()
 
     # TODO: test it

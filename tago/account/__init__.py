@@ -2,7 +2,6 @@ import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
 
-from socket import TagoRealTime
 from actions import Actions
 from analysis import Analysis
 from files import Files
@@ -86,9 +85,9 @@ class Account:
     def login(self, data):
         return requests.post('{api_endpoint}/account/profile/login'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
+    @staticmethod
     # TODO: test it
     def passwordRecover(self, email):
-        @staticmethod
         return requests.get('{api_endpoint}/account/passwordreset/{email}'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
 
     # TODO: test it
@@ -98,21 +97,21 @@ class Account:
     # TODO: need review
     def create(self, name, email, password, cpassword, country, timezone, company, newsletter, developer):
         params = {
-            'name': name
+            'name': name,
             'email': email,
             'password': password,
             'cpassword': cpassword,
             'country': country,
             'timezone': timezone,
-            'company': company
-            'newsletter': newsletter
-            'developer': developer
+            'company': company,
+            'newsletter': newsletter,
+            'developer': developer,
         }
         return requests.post('{api_endpoint}/account'.format(api_endpoint = API_TAGO), headers = self.default_headers, data = json.dumps(params)).json()
 
     # TODO: test it
+    @staticmethod
     def resendConfirmation(self, email):
-        @staticmethod
         return requests.get('{api_endpoint}/account/resend_confirmation/{email}'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
 
     # TODO: test it

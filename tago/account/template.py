@@ -20,11 +20,11 @@ class Template:
         return requests.post('{api_endpoint}/template/{template_id}'.format(api_endpoint = API_TAGO, template_id = template_id), headers = self.default_headers, data = json.dumps(data)).json()
 
     # TODO need review
-    def getTemplate(self, template_id):
-        @staticmethod
+    @staticmethod
+    def staticGetTemplate(self, template_id):
         return requests.post('{api_endpoint}/template/{template_id}'.format(api_endpoint = API_TAGO, template_id = template_id), headers = self.default_headers).json()
 
     # TODO need review
     def getTemplate(self, template_id):
-        return Template.getTemplate(template_id)
+        return Template.staticGetTemplate(self, template_id)
     
