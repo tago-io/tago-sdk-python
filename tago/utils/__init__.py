@@ -1,7 +1,8 @@
 # TODO: Create utils functions and then import it
 from getTokenByName import GetTokenByName
-from env_to_obj import 
-from run_user import 
+from env_to_obj import
+from run_user import
+
 
 class Utils:
     def __init__(self, token):

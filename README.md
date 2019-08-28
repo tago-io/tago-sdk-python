@@ -34,9 +34,9 @@ my_device.insert(data_to_insert) # Without response
 # or
 result = my_device.insert(data_to_insert) # With response
 if result['status']:
-    print 'Data added'
+    print('Data added')
 else:
-    print result['message']
+    print(result['message'])
 
 ```
 
@@ -45,9 +45,9 @@ else:
 ``` python
 result = my_device.find({'query': 'last_value'})
 if result['status']:
-    print result['message'] # Array with data
+    print(result['message'] # Array with data)
 else:
-    print result['message'] # Error (if status is False)
+    print(result['message'] # Error (if status is False))
 
 ```
 
@@ -59,9 +59,9 @@ my_device.delete('Data_ID') # Without response
 # or
 result = my_device.delete('Data_ID') # With response
 if result['status']:
-    print 'Data Removed'
+    print('Data Removed')
 else:
-    print result['message']
+    print(result['message'])
 
 ```
 
@@ -73,7 +73,7 @@ When new data arrives into Tago.io for you, it will be sent it to your device if
 ``` python
 
 def func_callback_data(data):
-    print data
+    print(data)
 
 my_device.listening(func_callback_data)
 

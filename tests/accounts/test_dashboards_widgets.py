@@ -1,27 +1,29 @@
+from tago.account.dashboards import Dashboards
+from tago.account.dashboards_widgets import DashboardsWidgets as DashboardsWidgets
+from tago import Tago
 import os
 import sys
 sys.path.append(os.path.join('..', ''))
-from tago import Tago
-from tago.account.dashboards_widgets import DashboardsWidgets as DashboardsWidgets
-from tago.account.dashboards import Dashboards
 
 
-TOKEN = os.environ.get('TAGO_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
+TOKEN = os.environ.get(O_TOKEN_ACCOUNT') or 'a0030850-d585-4063-be6c-f59fdd7046c8'
 DEBUG_MESSAGE = "The response to {} \n{}\n"
 
 
 testDashboardsWidgets = DashboardsWidgets(TOKEN)
 dashboard = Dashboards(TOKEN)
-test_data = { "name": "Test DashboardsWidgets", "label": "test label", "type": "Dial", "data": {"data1": "data1"}}
+test_data = {"name": "Test DashboardsWidgets",
+             "label": "test label", "type": "Dial", "data": {"data1": "data1"}}
+
 
 def test_dashboards_widgets_create_delete():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    test_id = dashboard.create({'label':'Test Dash'})['result']['dashboard']
+    test_id = dashboard.create({'label': 'Test Dash'})['result']['dashboard']
     dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -33,7 +35,7 @@ def test_dashboards_widgets_create_delete():
     #####################################
     dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -42,14 +44,15 @@ def test_dashboards_widgets_create_delete():
 
     dashboard.delete(test_id)
 
+
 def test_dashboards_widgets_edit():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    test_id = dashboard.create({'label':'Test Dash'})['result']['dashboard']
+    test_id = dashboard.create({'label': 'Test Dash'})['result']['dashboard']
     dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -63,7 +66,7 @@ def test_dashboards_widgets_edit():
     data["name"] = "A new dashboards.widgets name"
     editResult = testDashboardsWidgets.edit(test_id, dashboardsWidgetsResult['result']['widget'], data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets editing', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets editing', dashboardsWidgetsResult))
 
     if editResult['status']:
         assert True
@@ -75,7 +78,7 @@ def test_dashboards_widgets_edit():
     #####################################
     dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -89,11 +92,11 @@ def test_dashboards_widgets_info():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    test_id = dashboard.create({'label':'Test Dash'})['result']['dashboard']
+    test_id = dashboard.create({'label': 'Test Dash'})['result']['dashboard']
 
     dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -105,7 +108,7 @@ def test_dashboards_widgets_info():
     ###########################
     infoResult = testDashboardsWidgets.info(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets information', infoResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets information', infoResult))
 
     if infoResult['status']:
         assert True
@@ -117,7 +120,7 @@ def test_dashboards_widgets_info():
     #####################################
     dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -126,15 +129,16 @@ def test_dashboards_widgets_info():
 
     dashboard.delete(test_id)
 
+
 def test_dashboards_widgets_getData():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    test_id = dashboard.create({'label':'Test Dash'})['result']['dashboard']
+    test_id = dashboard.create({'label': 'Test Dash'})['result']['dashboard']
 
     dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -146,7 +150,7 @@ def test_dashboards_widgets_getData():
     #########################################
     getDataResult = testDashboardsWidgets.getData(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets get data', getDataResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets get data', getDataResult))
 
     if getDataResult['status']:
         assert True
@@ -158,7 +162,7 @@ def test_dashboards_widgets_getData():
     #####################################
     dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -167,15 +171,16 @@ def test_dashboards_widgets_getData():
 
     dashboard.delete(test_id)
 
+
 def test_dashboards_widgets_sendData():
     ###################################
     # Creating a new dashboards.widgets
     ###################################
-    test_id = dashboard.create({'label':'Test Dash'})['result']['dashboard']
+    test_id = dashboard.create({'label': 'Test Dash'})['result']['dashboard']
 
     dashboardsWidgetsResult = testDashboardsWidgets.create(test_id, test_data)
 
-    print DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets creation', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -185,13 +190,12 @@ def test_dashboards_widgets_sendData():
     #########################################
     #  Retrieving dashboards.widgets send data
     #########################################
-    print dashboardsWidgetsResult['result']['widget']
+    print(dashboardsWidgetsResult['result']['widget'])
     sendDataResult = testDashboardsWidgets.sendData(test_id, dashboardsWidgetsResult['result']['widget'], {})
 
-    print DEBUG_MESSAGE.format('dashboards.widgets send data', sendDataResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets send data', sendDataResult))
 
-    # Widget can't be found error?! Cannot debug/fix :(
-    assert sendDataResult is not None 
+    # Widget can't be found error?! Cannot debug/fix :(rt sendDataResult is not None
     # if sendDataResult['status']:
     #     assert True
     # else:
@@ -202,7 +206,7 @@ def test_dashboards_widgets_sendData():
     #####################################
     dashboardsWidgetsResult = testDashboardsWidgets.delete(test_id, dashboardsWidgetsResult['result']['widget'])
 
-    print DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult)
+    print(DEBUG_MESSAGE.format('dashboards.widgets deletion', dashboardsWidgetsResult))
 
     if dashboardsWidgetsResult['status']:
         assert True
@@ -210,4 +214,3 @@ def test_dashboards_widgets_sendData():
         assert False
 
     dashboard.delete(test_id)
-

@@ -5,11 +5,13 @@ import os
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
+
 class Authorization:
     # needs to implement details
     def __init__(self, token):
         self.token = token
-        self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+        self.default_headers = {
+            'content-type': 'application/json', 'Device-Token': token}
 
     # NEED TESTS
     def info(self):
@@ -17,4 +19,4 @@ class Authorization:
 
     # NEED TESTS
     def createDevice(self, data):
-        return requests.post('{api_endpoint}/device'.format(api_endpoint = API_TAGO), data=json.dumps(data), headers=self.default_headers).json()
+        return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), data=json.dumps(data), headers=self.default_headers).json()

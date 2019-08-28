@@ -5,10 +5,12 @@ import os
 API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
+
 class RunUser:
     def __init__(self, token):
         self.token = token
-        self.default_headers = { 'content-type': 'application/json', 'Device-Token': token }
+        self.default_headers = {
+            'content-type': 'application/json', 'Device-Token': token}
 
     # TODO: test it
     def info(self, tagoRunURL):
@@ -21,7 +23,7 @@ class RunUser:
     # TODO: create this function
     @staticmethod
     def create(self, tagoRunURL, newUserObj):
-        return requests.post('{api_endpoint}/run/{tagoRunURL}/signup'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers=self.default_headers, data=json.dumps(newUserObj)).json()
+        return requests.post('{api_endpoint}/run/{tagoRunURL}/signup'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=json.dumps(newUserObj)).json()
 
     # email and password should be in a object?
     @staticmethod
@@ -30,39 +32,38 @@ class RunUser:
             'email': emailAndPasswordObject.email,
             'password': emailAndPasswordObject.password
         }
-        return requests.post('{api_endpoint}/run/{tagoRunURL}/login'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers = self.default_headers, data = json.dumps(data)).json()
+        return requests.post('{api_endpoint}/run/{tagoRunURL}/login'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=json.dumps(data)).json()
 
     # TODO: test it
     @staticmethod
     def confirmUser(self, tagoRunURL, token):
-        return requests.get('{api_endpoint}/run/{tagoRunURL}/confirm/{token}'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
-    
+        return requests.get('{api_endpoint}/run/{tagoRunURL}/confirm/{token}'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+
     # TODO: test it
     @staticmethod
     def passwordRecover(self, tagoRunURL, email):
-        return requests.get('{api_endpoint}/run/{tagoRunURL}/passwordreset/{email}'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
+        return requests.get('{api_endpoint}/run/{tagoRunURL}/passwordreset/{email}'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
     # TODO: test it
     @staticmethod
     def passwordChange(self, tagoRunURL, password):
-        return requests.post('{api_endpoint}/run/{tagoRunURL}/passwordreset/{email}'.format(api_endpoint = API_TAGO), data=json.dumps(password), headers = self.default_headers).json()
+        return requests.post('{api_endpoint}/run/{tagoRunURL}/passwordreset/{email}'.format(api_endpoint=API_TAGO), data=json.dumps(password), headers=self.default_headers).json()
 
     # TODO: test it
     def notificationList(self, tagoRunURL):
-        return requests.get('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint = API_TAGO), headers = self.default_headers).json()
+        return requests.get('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
     # TODO: create this function
     def notificationMarkRead(self, tagoRunURL, notifications):
         if not isinstance(notifications, list):
             raise ValueError('Notifications parameter must be a list')
         data = {'notification_ids': notifications}
-        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint = API_TAGO, tagoRunURL = tagoRunURL), headers = self.default_headers, data = json.dumps(data)).json()
+        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=json.dumps(data)).json()
 
     # TODO: test it
     def notificationButton(self, tagoRunURL, notification_id, btn_id):
-        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}/{btn_id}'.format(api_endpoint=API_TAGO, tagoRunURL = tagoRunURL, notification_id = notification_id, btn_id = btn_id), headers=self.default_headers).json()
+        return requests.put('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}/{btn_id}'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL, notification_id=notification_id, btn_id=btn_id), headers=self.default_headers).json()
 
     # TODO: create this function
     def notificationDelete(self, tagoRunURL, notification_id):
-        return requests.delete('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}'.format(api_endpoint=API_TAGO, tagoRunURL = tagoRunURL, notification_id = notification_id), headers=self.default_headers).json()
-
+        return requests.delete('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL, notification_id=notification_id), headers=self.default_headers).json()

@@ -8,6 +8,7 @@ import sys
 
 # options = {'reconnectionDelay': 10000, 'reconnection': true}
 
+
 class TagoRealTime:
 
     def __init__(self, address, token, callback):
@@ -17,26 +18,26 @@ class TagoRealTime:
             print('The server is down. Try again later.')
             raise
 
-        self.token    = token
+        self.token = token
         self.callback = callback
 
     def run(self, environment, data, token):
         if len(data) == 0:
             data = []
 
-        context = {"token":token, "environment":environment}
+        context = {"token": token, "environment": environment}
         self.callback(context, data)
 
     def on_connect(self, arg):
-        print arg['result']
+        print(arg['result'])
 
     def on_scope(self, arg):
-        print 'aaaa'
+        print('aaaa')
         for x in arg:
             self.run(x['environment'], x['data'], self.token)
 
     def on_register_analysis(self, analysis):
-        print 'Analysis', analysis['name'], 'Started.'
+        print('Analysis', analysis['name'], 'Started.')
 
     def on_reconnect(self, arg):
         self.socket.emit('register', self.token)
