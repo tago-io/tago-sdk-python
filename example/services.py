@@ -14,16 +14,16 @@ message = 'Tago test service object'
 
 
 def test_sms():
-    result = Tago(TOKEN).services.sms().send(to_phone, message)
-    print("SmS test result:")
-    print(result)
+  result = Tago(TOKEN).services.sms().send(to_phone, message)
+  print("SmS test result:")
+  print(result)
 
 
 def test_email():
-    result = Tago(TOKEN).services.email().send(
-        to_email, email_sub, message, '', '')
-    print("Email test result:")
-    print(result)
+  result = Tago(TOKEN).services.email().send(
+    to_email, email_sub, message, '', '')
+  print("Email test result:")
+  print(result)
 
 
 test_sms()

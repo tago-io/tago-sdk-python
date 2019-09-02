@@ -6,11 +6,13 @@ sys.path.append('..')
 from tago import Tago
 import os
 
-TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'b125e477-067f-46f4-86c5-830b426d25e9'
+TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'a5da3fc5-3cd5-4ee4-9ab4-d781aab65ffd'
 
 def func_callback(context, scope):
   print('token:', context.token)
   print('environment:', context.environment)
+  account_token = list(filter(lambda account_token: account_token['key'] == 'abc', context.environment))
+  print(account_token[0]['value'])
   print('analysis_id:', context.analysis_id)
   print('\n')
   context.log(scope[0])

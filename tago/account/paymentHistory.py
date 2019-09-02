@@ -7,12 +7,11 @@ REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 
 class PaymentHistory:
-    def __init__(self, acc_token):
-        self.token = acc_token
-        self.default_headers = {
-            'content-type': 'application/json', 'Account-Token': acc_token}
-        return
+  def __init__(self, acc_token):
+    self.token = acc_token
+    self.default_headers = {
+      'content-type': 'application/json', 'Account-Token': acc_token}
+    return
 
-    # TODO test it
-    def getHistory(self):
-        return requests.get('{api_endpoint}/account/payment_history'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+  def getHistory(self):
+    return requests.get('{api_endpoint}/account/payment_history'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()

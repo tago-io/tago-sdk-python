@@ -7,16 +7,14 @@ REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 
 class Explore:
-    def __init__(self, acc_token):
-        self.token = acc_token
-        self.default_headers = {
-            'content-type': 'application/json', 'Account-Token': acc_token}
-        return
+  def __init__(self, acc_token):
+    self.token = acc_token
+    self.default_headers = {
+      'content-type': 'application/json', 'Account-Token': acc_token}
+    return
 
-    # TODO test it
-    def addExplore(self, explore_id):
-        return requests.post('{api_endpoint}/explore/{explore_id}'.format(api_endpoint=API_TAGO, explore_id=explore_id), headers=self.default_headers).json()
+  def addExplore(self, explore_id):
+    return requests.post('{api_endpoint}/explore/{explore_id}'.format(api_endpoint=API_TAGO, explore_id=explore_id), headers=self.default_headers).json()
 
-    # TODO test it
-    def list(self):
-        return requests.get('{api_endpoint}/explore'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
+  def list(self):
+    return requests.get('{api_endpoint}/explore'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()

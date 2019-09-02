@@ -7,41 +7,34 @@ REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 
 class Actions:
-    def __init__(self, acc_token):
-        self.token = acc_token
-        self.default_headers = {
-            'content-type': 'application/json', 'Account-Token': acc_token}
+  def __init__(self, acc_token):
+    self.token = acc_token
+    self.default_headers = {
+      'content-type': 'application/json', 'Account-Token': acc_token}
+    return
 
-        return
+  def list(self, page=1, fields=['id', 'name'], filter={}, amount=20, orderBy='name,asc'):
+    params = {
+      'page': page,
+      'fields': fields,
+      'filter': filter,
+      'amount': amount,
+      'orderBy': orderBy,
+    }
+    return requests.get('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
 
-    # TODO: need review
-    def list(self, page=1, fields=['id', 'name'], filter={}, amount=20, orderBy='name,asc'):
-        params = {
-            'page': page,
-            'fields': fields,
-            'filter': filter,
-            'amount': amount,
-            'orderBy': orderBy,
-        }
-        return requests.get('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+  def create(self, data):
+    data = data if data else {}
+    return requests.post('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
-    # TODO test it
-    def create(self, data):
-        data = data if data else {}
-        return requests.post('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+  def edit(self, action_id, data):
+    data = data if data else {}
+    return requests.put('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers, data=json.dumps(data)).json()
 
-    # TODO test it
-    def edit(self, action_id, data):
-        data = data if data else {}
-        return requests.put('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers, data=json.dumps(data)).json()
+  def delete(self, action_id):
+    return requests.delete('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers).json()
 
-    # TODO test it
-    def delete(self, action_id):
-        return requests.delete('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers).json()
-
-    # TODO review it
-    def info(self, action_id):
-        if action_id is None or action_id == '':
-            return self.list()
-
-        return requests.get('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers).json()
+  def info(self, action_id):
+    if action_id is None or action_id == '':
+      return self.list()
+    return requests.get('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers).json()

@@ -4,10 +4,10 @@ import os
 
 
 class Currency:
-    def __init__(self, key):
-        self.key = key
-        self.default_headers = {
-            'content-type': 'application/json', 'Device-Token': key}
+  def __init__(self, key):
+    self.key = key
+    self.default_headers = {
+      'content-type': 'application/json', 'Device-Token': key}
 
     #
     # Find conversion rates for currency
@@ -19,15 +19,15 @@ class Currency:
     # example for multiple conversion : "convert('USD', 'EUR,GBP')"
     #
 
-    def convert(self, c_from, c_to):
-        if not c_from or not c_to:
-            raise ValueError("Empty or Bad arguments")
+  def convert(self, c_from, c_to):
+    if not c_from or not c_to:
+      raise ValueError("Empty or Bad arguments")
 
-        url = 'http://apilayer.net/api/live'
-        data = {'access_key': self.key, 'source': c_from,
-                'currencies': c_to, 'format': 1}
-        convert_cur = requests.get(
-            url, params=data, headers=self.default_headers).json()
-        convert_cur_json = {
-            'from': convert_cur['source'], 'result': convert_cur['quotes']}
-        return convert_cur_json
+    url = 'http://apilayer.net/api/live'
+    data = {'access_key': self.key, 'source': c_from,
+            'currencies': c_to, 'format': 1}
+    convert_cur = requests.get(
+      url, params=data, headers=self.default_headers).json()
+    convert_cur_json = {
+      'from': convert_cur['source'], 'result': convert_cur['quotes']}
+    return convert_cur_json

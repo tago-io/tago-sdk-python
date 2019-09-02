@@ -4,9 +4,9 @@ import os
 
 
 class Distance:
-    def __init__(self, key):
-        self.key = key
-        self.default_headers = {'Device-Token': key}
+  def __init__(self, key):
+    self.key = key
+    self.default_headers = {'Device-Token': key}
 
     #
     # Find distance between two locations
@@ -19,19 +19,19 @@ class Distance:
     # example destination : '35.7728213,-78.6865257'
     #
 
-    def measure(self, origin, destination, language, mode):
-        if not origin or not destination:
-            raise ValueError("Empty or Bad arguments")
+  def measure(self, origin, destination, language, mode):
+    if not origin or not destination:
+      raise ValueError("Empty or Bad arguments")
 
-        if not mode:
-            mode = 'car'
+    if not mode:
+      mode = 'car'
 
-        if not language:
-            language = 'en-US'
+    if not language:
+      language = 'en-US'
 
-        url = 'https://maps.googleapis.com/maps/api/distancematrix/json'
-        data = {'key': self.key, 'origins': origin, 'destinations': destination,
-                'mode': mode, 'language': language}
-        distance = requests.get(
-            url, params=data, headers=self.default_headers).json()
-        return distance
+    url = 'https://maps.googleapis.com/maps/api/distancematrix/json'
+    data = {'key': self.key, 'origins': origin, 'destinations': destination,
+        'mode': mode, 'language': language}
+    distance = requests.get(
+      url, params=data, headers=self.default_headers).json()
+    return distance
