@@ -1,6 +1,6 @@
-import requests# Used to make HTTP requests
-import json# Used to parse JSON
-import os# Used to infer environment variables
+import requests # Used to make HTTP requests
+import json # Used to parse JSON
+import os # Used to infer environment variables
 
 from.actions import Actions
 from.analysis import Analysis
