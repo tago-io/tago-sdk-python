@@ -1,6 +1,5 @@
 from .emailService import Email
 from .sms import Sms
-from .socket import Socket
 from .console import Console
 from .mqtt import Mqtt
 from .attachment import Attachment
@@ -19,9 +18,6 @@ class Services:
 
   def console(self):
     return Console(self.token)
-
-  def socket(self):
-    return Socket(self.token)
 
   def MQTT(self):
     return Mqtt(self.token)
