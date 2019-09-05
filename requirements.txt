@@ -1,8 +1,6 @@
-pytest==4.6.5
 asyncio==3.4.3
 python-socketio==4.3.1
 websocket-client>=0.54.0
 requests==2.22.0
 promise==2.2.1
-requests-mock==1.6.0
 websockets==8.0.2

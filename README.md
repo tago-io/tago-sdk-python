@@ -1,10 +1,6 @@
-## Tago - Python Lib
+## TagoIO - Python Lib
 
-Official Python lib for Tago
-
-## Code Status
-
-[![wercker status](https://app.wercker.com/status/16919e20780e3441fc3eb4c744e7bad3/m "wercker status")](https://app.wercker.com/project/bykey/16919e20780e3441fc3eb4c744e7bad3)
+Official Python lib for TagoIO
 
 ## Documentation
 
@@ -65,20 +61,6 @@ else:
 
 ```
 
-##### Listening new data by Socket
-**.listening(CALLBACK)**
-
-When new data arrives into Tago.io for you, it will be sent it to your device if you configure for this in the ‘Action’ (Left Menu in Admin). For this purpose, you need to create a new action and select the option ‘Send to Device’. All devices using the token associated with the bucket will receive the data.
-
-``` python
-
-def func_callback_data(data):
-    print(data)
-
-my_device.listening(func_callback_data)
-
-```
-
 ## License
 
-Tago SDK for Python is released under the [Apache-2.0 License](https://github.com/tago-io/tago-sdk-python/blob/master/LICENSE.md).
+TagoIO SDK for Python is released under the [Apache-2.0 License](https://github.com/tago-io/tago-sdk-python/blob/master/LICENSE.md).
