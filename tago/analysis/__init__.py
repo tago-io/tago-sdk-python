@@ -16,8 +16,10 @@ class Analysis:
 
   def init(self, analysis):
     self._analysis = analysis
-    if TAGO_RUNTIME == False:
+    if TAGO_RUNTIME is False:
       self.__localRuntime()
+    else:
+      return self.run
 
   def run(self, environment, data, analysis_id, token):
     def log(*args):
