@@ -2,12 +2,15 @@
 
 import setuptools
 
-with open("README.md", "r") as fh:
-  long_description = fh.read()
+with open('README.md', 'r') as f:
+  long_description = f.read()
+
+with open('requirements.txt', 'r') as f:
+  required = f.read().splitlines()
 
 setuptools.setup(
   name='tago',
-  version='3.0.0',
+  version='3.0.1',
   python_requires='>=3.6',
   description='Official Python lib for TagoIO',
   long_description=long_description,
@@ -24,5 +27,6 @@ setuptools.setup(
   author_email='dev@tago.io',
   license='Apache License',
   packages=setuptools.find_packages(),
+  install_requires=required,
   zip_safe=False
 )
