@@ -22,7 +22,7 @@ from.run import TagoIORUN
 from.profiles import Profiles
 from.service_authorization import ServiceAuth
 
-API_TAGO=os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+API_TAGO=os.environ.get('TAGO_API') or 'https://api.tago.io'
 REALTIME=os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
 
 class Account:

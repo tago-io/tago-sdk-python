@@ -3,7 +3,7 @@ import requests
 import json
 import os
 
-API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 
 class Console:
   def __init__(self, analysis_token):

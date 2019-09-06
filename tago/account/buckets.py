@@ -3,7 +3,7 @@ import json  # Used to parse JSON
 import os  # Used to infer environment variables
 from ._share import * # Used in share methods
 
-API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 
 
 class Buckets:

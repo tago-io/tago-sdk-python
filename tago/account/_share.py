@@ -2,7 +2,7 @@ import requests  # Used to make HTTP requests
 import os
 import json
 
-API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 
 def invite(type, ref_id, data, default_options):
   data = data if data else {}

@@ -2,7 +2,7 @@ import requests  # Used to make HTTP requests
 import json  # Used to parse JSON
 import os  # Used to infer environment variables
 
-API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 
 
 class Analysis:

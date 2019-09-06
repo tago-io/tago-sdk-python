@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-API_TAGO = os.environ.get('TAGO_SERVER') or 'https://api.tago.io'
+API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 
 def getTokenByName(account, device_id, names=None):
   tokens = account.devices.tokenList(device_id)
