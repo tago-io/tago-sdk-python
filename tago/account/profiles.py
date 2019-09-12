@@ -67,6 +67,9 @@ class Profiles:
   def tokenDelete(self, profile_id, token):
     return requests.delete('{api_endpoint}/profile/{profile_id}/token/{token}'.format(api_endpoint=API_TAGO, profile_id=profile_id, token=token), headers=self.default_headers).json()
 
+  def auditlog(self, profile_id, params = {}):
+    return requests.get('{api_endpoint}/profile/{profile_id}/auditlog'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=json.dumps(params)).json()
+
   def addonList(self, profile_id):
     return requests.get('{api_endpoint}/profile/{profile_id}/addons'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers).json()
 

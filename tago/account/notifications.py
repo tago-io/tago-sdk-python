@@ -42,7 +42,7 @@ class Notifications:
     }
     return requests.post('{api_endpoint}/notification/push/register'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
-  def unregisterDevice(self, device_token):
+  def unRegisterDevice(self, device_token):
     data = {
       'device_token': device_token,
     }

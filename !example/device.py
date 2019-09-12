@@ -1,10 +1,10 @@
 import sys
 sys.path.append('..')
 
-from tago import Tago
+from tago import Device
 
 MY_DEVICE_TOKEN = 'add your device token here'
-my_device = Tago(MY_DEVICE_TOKEN).device
+my_device = Device(MY_DEVICE_TOKEN)
 
 data_to_insert = {
     'variable': 'temperature',

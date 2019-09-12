@@ -104,59 +104,59 @@ def confirmAction(self, token):
   return requests.get('{api_endpoint}/account/confirm/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers).json()
 
 
-def getActions(self):
+def actions(self):
   return Actions(self.token)
 
-def getAnalysis(self):
+def analysis(self):
   return Analysis(self.token)
 
-def getBuckets(self):
+def buckets(self):
   return Buckets(self.token)
 
-def getFiles(self):
+def files(self):
   return Files(self.token)
 
-def getDashboards(self):
+def dashboards(self):
   return Dashboards(self.token)
 
-def getDevices(self):
+def devices(self):
   return Devices(self.token)
 
-def getNotifications(self):
+def notifications(self):
   return Notifications(self.token)
 
-def getMiddlewares(self):
+def middlewares(self):
   return Middlewares(self.token)
 
-def getTags(self):
+def tags(self):
   return Tags(self.token)
 
-def getPaymentMethods(self):
+def paymentMethods(self):
   return PaymentMethods(self.token)
 
-def getPlan(self):
+def plan(self):
   return Plan(self.token)
 
-def getPaymentHistory(self):
+def paymentHistory(self):
   return PaymentHistory(self.token)
 
-def getExplore(self):
+def explore(self):
   return Explore(self.token)
 
-def getConnector(self):
+def connector(self):
   return Connector(self.token)
 
-def getTemplate(self):
+def template(self):
   return Template(self.token)
 
-def getAccessManagement(self):
+def accessManagement(self):
   return AccessManagement(self.token)
 
-def getRun(self):
+def run(self):
   return TagoIORUN(self.token)
 
-def getServiceAuthorization(self):
+def ServiceAuthorization(self):
   return ServiceAuth(self.token)
 
-def getProfiles(self):
+def profiles(self):
   return Profiles(self.token)

@@ -40,12 +40,11 @@ class Widgets:
     # @param  {String} dashboard id
     # @param  {String} widget id
     # @return {Promise}
-    # def info(self, dash_id, widget_id):
-    # 	# if widget_id is null, then call list
-    # 	if widget_id is None or widget_id == '':
-    #     return self.list()
-
-    # 	return requests.get('{api_endpoint}/dashboard/{dash_id}/widget/{widget_id}'.format(api_endpoint=API_TAGO, dash_id=dash_id, widget_id=widget_id), headers=self.default_headers).json()
+  def info(self, dash_id, widget_id):
+    # if widget_id is null, then call list
+    if widget_id is None or widget_id == '':
+      raise ValueError('Widget ID parameter is obrigatory.')
+    return requests.get('{api_endpoint}/dashboard/{dash_id}/widget/{widget_id}'.format(api_endpoint=API_TAGO, dash_id=dash_id, widget_id=widget_id), headers=self.default_headers).json()
 
     # Get all data for the current widget
     # @param  {String} dashboard id

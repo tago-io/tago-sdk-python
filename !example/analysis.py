@@ -1,10 +1,10 @@
 # To run it, you should have inside the example folder
 
+import os
 import sys
 sys.path.append('..')
 
-from tago import Tago
-import os
+from tago import Analysis
 
 TOKEN = os.environ.get('TAGO_TOKEN_DEVICE') or 'a5da3fc5-3cd5-4ee4-9ab4-d781aab65ffd'
 
@@ -21,4 +21,4 @@ def func_callback(context, scope):
   context.log(True)
 
 
-Tago(TOKEN).analysis.init(func_callback)
+Analysis(TOKEN).init(func_callback)
