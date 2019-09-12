@@ -14,10 +14,10 @@ $ sudo pip3 install -U tago
 ##### Insert Data
 **.insert(OBJECT)**
 ``` python
-from tago import Tago
+import tago
 
 MY_DEVICE_TOKEN = 'add your device token here'
-my_device = Tago(MY_DEVICE_TOKEN).device
+my_device = tago.Device(MY_DEVICE_TOKEN)
 
 data_to_insert = {
   'variable': 'temperature',
@@ -39,10 +39,10 @@ else:
 ##### Find Data
 **.find(OBJECT)**
 ``` python
-from tago import Tago
+import tago
 
 MY_DEVICE_TOKEN = 'add your device token here'
-my_device = Tago(MY_DEVICE_TOKEN).device
+my_device = tago.Device(MY_DEVICE_TOKEN)
 
 findData = my_device.find({'query': 'last_value'})
 if findData['status'] is True:
