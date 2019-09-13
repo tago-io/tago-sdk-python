@@ -102,5 +102,6 @@ class Dashboards:
   def listDevicesRelated(self, dashboard_id):
     return requests.get('{api_endpoint}/dashboard/{dashboard_id}/devices'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers).json()
 
+  @property
   def widgets(self):
     return Widgets(self.token)
