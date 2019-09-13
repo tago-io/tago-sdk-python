@@ -1,6 +1,7 @@
 import requests # Used to make HTTP requests
 import json # Used to parse JSON
 import os # Used to infer environment variables
+from ..internal import fixFilter
 
 from.actions import Actions
 from.analysis import Analysis
@@ -66,6 +67,8 @@ class Account:
       'orderBy': orderBy,
       'fields': fields,
     }
+    params = fixFilter(params, filter)
+
     return requests.get('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
 
   def tokenCreate(self, data):

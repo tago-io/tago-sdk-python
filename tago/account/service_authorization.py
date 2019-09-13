@@ -1,6 +1,7 @@
 import requests  # Used to make HTTP requests
 import json  # Used to parse JSON
 import os  # Used to infer environment variables
+from ..internal import fixFilter
 
 API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
@@ -21,6 +22,8 @@ class ServiceAuth:
       'orderBy': orderBy,
       'fields': fields,
     }
+    params = fixFilter(params, filter)
+
     return requests.get('{api_endpoint}/serviceauth'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=json.dumps(params)).json()
 
   def tokenCreate(self, data):

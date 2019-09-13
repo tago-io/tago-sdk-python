@@ -1,6 +1,7 @@
 import requests  # Used to make HTTP requests
 import json  # Used to parse JSON
 import os  # Used to infer environment variables
+from ..internal import fixFilter
 
 API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 
@@ -21,6 +22,8 @@ class Connector:
       'amount': amount,
       'orderBy': orderBy,
     }
+    params = fixFilter(params, filter)
+
     return requests.get('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
 
   def info(self, connector_id, no_parent=False):
@@ -48,6 +51,8 @@ class Connector:
       'orderBy': orderBy,
       'fields': fields,
     }
+    params = fixFilter(params, filter)
+
     return requests.get('{api_endpoint}/connector/token/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, params=json.dumps(params)).json()
 
   def tokenCreate(self, connector_id, data):

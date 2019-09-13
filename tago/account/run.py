@@ -4,7 +4,7 @@ import os  # Used to infer environment variables
 
 API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
 REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
-
+from ..internal import fixFilter
 
 class TagoIORUN:
   def __init__(self, acc_token):
@@ -28,6 +28,8 @@ class TagoIORUN:
       'amount': amount,
       'orderBy': orderBy,
     }
+    params = fixFilter(params, filter)
+
     return requests.get('{api_endpoint}/run/users'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=json.dumps(params)).json()
 
   def getUserInfo(self, userID):
