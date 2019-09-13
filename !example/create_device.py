@@ -5,7 +5,7 @@ sys.path.append('..')
 
 import tago
 
-ANALYSYS_TOKEN = 'your analysis token here'
+ANALYSYS_TOKEN = 'a5da3fc5-3cd5-4ee4-9ab4-d781aab65ffd'
 
 def my_analysis(context, scope):
   # Getting the account token from analysis environment variables
@@ -13,7 +13,7 @@ def my_analysis(context, scope):
   account_token = account_token[0]['value']
 
   # Initializing account devices object
-  account_devices = tago.Account(account_token).devices()
+  account_devices = tago.Account(account_token).devices
 
   # Creating an object with all device info
   new_device = {

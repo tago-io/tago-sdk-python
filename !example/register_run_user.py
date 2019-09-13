@@ -13,7 +13,7 @@ def my_analysis(context, scope):
   account_token = account_token[0]['value']
 
   # Instantiating run object from Account Class
-  run = tago.Account(account_token).run()
+  run = tago.Account(account_token).run
 
   # Creating user object with all info inside
   userObject = {

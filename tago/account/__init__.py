@@ -32,6 +32,7 @@ class Account:
       'content-type': 'application/json',
       'Account-Token': token
     }
+    # self.devices = Devices(self.token)
 
   def info(self):
     return requests.get('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
@@ -103,59 +104,78 @@ class Account:
   def confirmAction(self, token):
     return requests.get('{api_endpoint}/account/confirm/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers).json()
 
+  @property
   def actions(self):
     return Actions(self.token)
 
+  @property
   def analysis(self):
     return Analysis(self.token)
 
+  @property
   def buckets(self):
     return Buckets(self.token)
 
+  @property
   def files(self):
     return Files(self.token)
 
+  @property
   def dashboards(self):
     return Dashboards(self.token)
 
+  @property
   def devices(self):
     return Devices(self.token)
 
+  @property
   def notifications(self):
     return Notifications(self.token)
 
+  @property
   def middlewares(self):
     return Middlewares(self.token)
 
+  @property
   def tags(self):
     return Tags(self.token)
 
+  @property
   def paymentMethods(self):
     return PaymentMethods(self.token)
 
+  @property
   def plan(self):
     return Plan(self.token)
 
+  @property
   def paymentHistory(self):
     return PaymentHistory(self.token)
 
+  @property
   def explore(self):
     return Explore(self.token)
 
+  @property
   def connector(self):
     return Connector(self.token)
 
+  @property
   def template(self):
     return Template(self.token)
 
+  @property
   def accessManagement(self):
     return AccessManagement(self.token)
 
+  @property
   def run(self):
     return TagoIORUN(self.token)
 
+  @property
   def ServiceAuthorization(self):
     return ServiceAuth(self.token)
 
+  @property
   def profiles(self):
     return Profiles(self.token)
