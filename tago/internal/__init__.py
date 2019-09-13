@@ -7,7 +7,8 @@ def fixFilter(params, filter):
           q['filter[{}][{}][{}]'.format(f, i, 'value')] = filter[f][i]['value']
       else:
           q['filter[{}]'.format(f, 'value')] = filter[f]
-
+  
+    params.pop('filter', None)
     params.update(q)
 
     return params
