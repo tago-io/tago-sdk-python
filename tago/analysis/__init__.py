@@ -24,7 +24,7 @@ class Analysis:
   def run(self, environment, data, analysis_id, token):
     def log(*args):
       print(*args)
-      Services(token).console().log(str(args)[1:][:-2])
+      Services(token).console.log(str(args)[1:][:-2])
 
     def context():
       pass
