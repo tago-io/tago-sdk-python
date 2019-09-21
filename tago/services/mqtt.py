@@ -16,11 +16,7 @@ class Mqtt:
   # bucket{string} : Bucket to recive message
   # returns promise
 
-  def publish(self, message, bucket, options):
-    if not bucket or not message:
-      raise ValueError("Empty or Bad arguments")
-
-    data = {'message': message, 'bucket': bucket}
-    url = '{api_endpoint}/analysis/services/mqtt/publish'.format(
-      api_endpoint=API_TAGO)
+  def publish(self, topic, message, bucket, options={}):
+    url = '{api_endpoint}/analysis/services/mqtt/publish'.format(api_endpoint=API_TAGO)
+    data = dict(**{'topic': topic, 'message': message, 'bucket': bucket}, **options)
     return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
