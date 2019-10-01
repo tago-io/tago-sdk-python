@@ -24,7 +24,7 @@ class Notifications:
         raise ValueError('Parameter should be iterable')
     else:
       data = {'notification_ids': notifications}
-    return requests.put('{api_endpoint}/notification/read'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.put('{api_endpoint}/notification/read'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def accept(self, notification_id):
     return requests.post('{api_endpoint}/notification/accept/{notification_id}'.format(api_endpoint=API_TAGO, notification_id=notification_id), headers=self.default_headers).json()
@@ -40,10 +40,10 @@ class Notifications:
       'device_token': device_token,
       'platform': platform,
     }
-    return requests.post('{api_endpoint}/notification/push/register'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/notification/push/register'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def unRegisterDevice(self, device_token):
     data = {
       'device_token': device_token,
     }
-    return requests.post('{api_endpoint}/notification/push/unregister'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/notification/push/unregister'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()

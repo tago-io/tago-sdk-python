@@ -17,7 +17,7 @@ class Device:
 
   def insert(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/data'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/data'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def find(self, query_obj):
     query_obj = query_obj if query_obj else {}

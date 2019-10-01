@@ -18,4 +18,4 @@ class Notification:
       'message': message,
       'ref_id': ref_id
     }
-    return requests.post('{api_endpoint}/analysis/services/notification/send'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/analysis/services/notification/send'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
