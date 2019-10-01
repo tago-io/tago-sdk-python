@@ -19,7 +19,7 @@ class Files:
       'pagination_token': pagination_token,
       'qty': qty,
     }
-    return requests.get('{api_endpoint}/files/'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/files/'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=params).json()
 
   def uploadBase64(self, arrayOfFileObjects):
     return requests.post('{api_endpoint}/files'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(arrayOfFileObjects)).json()

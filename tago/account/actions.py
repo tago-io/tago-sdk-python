@@ -21,15 +21,15 @@ class Actions:
       'amount': amount,
       'orderBy': orderBy,
     }
-    return requests.get('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/action'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def edit(self, action_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers, data=data).json()
 
   def delete(self, action_id):
     return requests.delete('{api_endpoint}/action/{action_id}'.format(api_endpoint=API_TAGO, action_id=action_id), headers=self.default_headers).json()

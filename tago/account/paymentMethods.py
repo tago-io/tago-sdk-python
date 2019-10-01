@@ -15,15 +15,15 @@ class PaymentMethods:
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def list(self):
     return requests.get('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
   def setDefaultPaymentMethod(self, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def deletePaymentMethod(self, data):
     data = data if data else {}
-    return requests.delete('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.delete('{api_endpoint}/account/payment_method'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()

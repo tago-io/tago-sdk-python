@@ -24,21 +24,21 @@ class Connector:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
 
   def info(self, connector_id, no_parent=False):
     if connector_id is None or connector_id == '':
       return self.list()
     params = {'no_parent': no_parent}
-    return requests.get('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, params=params).json()
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def edit(self, connector_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, data=data).json()
 
   def delete(self, connector_id):
     return requests.delete('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers).json()
@@ -53,12 +53,12 @@ class Connector:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/connector/token/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/connector/token/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, params=params).json()
 
   def tokenCreate(self, connector_id, data):
     data = data if data else {}
     data['connector'] = connector_id
-    return requests.post('{api_endpoint}/connector/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/connector/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def tokenDelete(self, token):
     return requests.delete('{api_endpoint}/connector/token/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers).json()

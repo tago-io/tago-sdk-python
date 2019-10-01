@@ -24,21 +24,21 @@ class Profiles:
 
   def edit(self, profile_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/profile/{profile_id}'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/profile/{profile_id}'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=data).json()
 
   def delete(self, profile_id):
     return requests.delete('{api_endpoint}/profile/{profile_id}'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers).json()
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def usageStatisticList(self, profile_id, date, timezone):
     params = {
       'date': date,
       'timezone': timezone
     }
-    return requests.get('{api_endpoint}/profile/{profile_id}/statistics'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/profile/{profile_id}/statistics'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=params).json()
 
   def tokenList(self, profile_id, page=1, amount=20, filter={}, fields=['name', 'token', 'created_at'], orderBy='created_at,desc'):
     params = {
@@ -50,14 +50,14 @@ class Profiles:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/profile/{profile_id}/token'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/profile/{profile_id}/token'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=params).json()
 
   def shareList(self, profile_id):
     return requests.get('{api_endpoint}/profile/{profile_id}/share'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers).json()
 
   def shareCreate(self, profile_id, email):
     data = {'email': email}
-    return requests.get('{api_endpoint}/profile/{profile_id}/share'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.get('{api_endpoint}/profile/{profile_id}/share'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=data).json()
 
   def shareDelete(self, profile_id, share_id):
     return requests.delete('{api_endpoint}/profile/{profile_id}/share/{share_id}'.format(api_endpoint=API_TAGO, profile_id=profile_id, share_id=share_id), headers=self.default_headers).json()
@@ -65,25 +65,25 @@ class Profiles:
   def tokenCreate(self, profile_id, data):
     data = data if data else {}
     data['profile_id'] = profile_id
-    return requests.post('{api_endpoint}/profile/{profile_id}/token'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/profile/{profile_id}/token'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=data).json()
 
   def tokenDelete(self, profile_id, token):
     return requests.delete('{api_endpoint}/profile/{profile_id}/token/{token}'.format(api_endpoint=API_TAGO, profile_id=profile_id, token=token), headers=self.default_headers).json()
 
   def auditlog(self, profile_id, params = {}):
-    return requests.get('{api_endpoint}/profile/{profile_id}/auditlog'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/profile/{profile_id}/auditlog'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=params).json()
 
   def addonList(self, profile_id):
     return requests.get('{api_endpoint}/profile/{profile_id}/addons'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers).json()
 
   def addonEdit(self, profile_id, data):
-    return requests.post('{api_endpoint}/profile/{profile_id}/addons'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/profile/{profile_id}/addons'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=data).json()
 
   def serviceEdit(self, profile_id, data):
-    return requests.post('{api_endpoint}/profile/{profile_id}/services'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/profile/{profile_id}/services'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, data=data).json()
 
   def transferTokenToAnotherProfile(self, target_profile_id):
     return requests.put('{api_endpoint}/profile/switch/{target_profile_id}'.format(api_endpoint=API_TAGO, target_profile_id=target_profile_id), headers=self.default_headers).json()
 
   def summary(self, profile_id, params):
-    return requests.get('{api_endpoint}/profile/{profile_id}/summary'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/profile/{profile_id}/summary'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers, params=params).json()

@@ -39,13 +39,13 @@ class Account:
     return requests.get('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
   def summary(self, params=None):
-    return requests.get('{api_endpoint}/account/summary'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/account/summary'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=params).json()
 
   def statistics(self, params):
     return requests.get('{api_endpoint}/statistics'.format(api_endpoint=API_TAGO), params=params, headers=self.default_headers).json()
 
   def edit(self, data):
-    return requests.put('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def delete(self):
     return requests.delete('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
@@ -54,7 +54,7 @@ class Account:
     return requests.get('{api_endpoint}/account/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
   def profileCreate(self, data):
-    return requests.post('{api_endpoint}/account/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/account/profile'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def profileDelete(self, profile_id):
     return requests.delete('{api_endpoint}/account/profile/{profile_id}'.format(api_endpoint=API_TAGO, profile_id=profile_id), headers=self.default_headers).json()
@@ -69,16 +69,16 @@ class Account:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
 
   def tokenCreate(self, data):
-    return requests.post('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def tokenDelete(self):
     return requests.delete('{api_endpoint}/account/profile/token'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
   def login(self, data):
-    return requests.post('{api_endpoint}/account/profile/login'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/account/profile/login'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def passwordRecover(self, email):
     return requests.get('{api_endpoint}/account/passwordreset/{email}'.format(api_endpoint=API_TAGO, email=email), headers=self.default_headers).json()
@@ -98,7 +98,7 @@ class Account:
       'newsletter': newsletter,
       'developer': developer,
     }
-    return requests.post('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+    return requests.post('{api_endpoint}/account'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
 
   @staticmethod
   def resendConfirmation(self, email):

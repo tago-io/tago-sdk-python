@@ -16,4 +16,4 @@ class Authorization:
     return requests.get('{api_endpoint}/info'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
 
   def createDevice(self, data):
-    return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), data=json.dumps(data), headers=self.default_headers).json()
+    return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), data=data, headers=self.default_headers).json()

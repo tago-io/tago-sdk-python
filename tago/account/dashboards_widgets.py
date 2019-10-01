@@ -18,7 +18,7 @@ class Widgets:
     # @return {Promise}
   def create(self, dash_id, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/dashboard/{dash_id}/widget/'.format(api_endpoint=API_TAGO, dash_id=dash_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/dashboard/{dash_id}/widget/'.format(api_endpoint=API_TAGO, dash_id=dash_id), headers=self.default_headers, data=data).json()
 
     # Edit the Dashboard Widget
     # @param  {String} dashboard id
@@ -27,7 +27,7 @@ class Widgets:
     # @return {Promise}
   def edit(self, dash_id, widget_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/dashboard/{dash_id}/widget/{widget_id}'.format(api_endpoint=API_TAGO, dash_id=dash_id, widget_id=widget_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/dashboard/{dash_id}/widget/{widget_id}'.format(api_endpoint=API_TAGO, dash_id=dash_id, widget_id=widget_id), headers=self.default_headers, data=data).json()
 
     # Delete the Dashboard Widget
     # @param  {String} dashboard id
@@ -54,7 +54,7 @@ class Widgets:
     params = {
       'overwrite': overwrite,
     }
-    return requests.get('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, params=params).json()
 
     # Update value of variable for the current widget
     # @param  {String} dashboard id
@@ -66,16 +66,16 @@ class Widgets:
     params = {
       'bypass_bucket': bypassBucket or False,
     }
-    return requests.post('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, data=json.dumps(data), params=json.dumps(params)).json()
+    return requests.post('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, data=data, params=params).json()
 
   def runAnalysis(self, dashboard_id, widget_id, data):
-    return requests.post('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, data=data).json()
 
   def deleteData(self, dashboard_id, widget_id, ids):
     params = {
       'ids': ids,
     }
-    return requests.delete('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.delete('{api_endpoint}/data/{dashboard_id}/{widget_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers, params=params).json()
 
   def tokenGenerate(self, dashboard_id, widget_id):
     return requests.get('{api_endpoint}/dashboard/{dashboard_id}/widget/{widget_id}/token'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id, widget_id=widget_id), headers=self.default_headers).json()

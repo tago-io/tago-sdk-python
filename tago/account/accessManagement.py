@@ -24,15 +24,15 @@ class AccessManagement:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/am'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/am'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/am'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/am'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def edit(self, am_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/am/{am_id}'.format(api_endpoint=API_TAGO, am_id=am_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/am/{am_id}'.format(api_endpoint=API_TAGO, am_id=am_id), headers=self.default_headers, data=data).json()
 
   def delete(self, am_id):
     return requests.delete('{api_endpoint}/am/{am_id}'.format(api_endpoint=API_TAGO, am_id=am_id), headers=self.default_headers).json()

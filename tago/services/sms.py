@@ -22,4 +22,4 @@ class Sms:
     data = {'to': to, 'message': message}
     url = '{api_endpoint}/analysis/services/sms/send'.format(
       api_endpoint=API_TAGO)
-    return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
+    return requests.post(url, data=data, headers=self.default_headers).json()

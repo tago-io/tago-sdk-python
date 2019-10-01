@@ -29,11 +29,11 @@ class Devices:
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/device'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def edit(self, device_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=data).json()
 
   def delete(self, device_id):
     return requests.delete('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers).json()
@@ -48,13 +48,13 @@ class Devices:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/device/token/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/device/token/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=params).json()
 
   def tokenCreate(self, device_id, data):
     data = data if data else {}
     data['device'] = device_id
 
-    return requests.post('{api_endpoint}/device/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/device/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def tokenDelete(self, token_id):
     return requests.delete('{api_endpoint}/device/token/{token_id}'.format(api_endpoint=API_TAGO, token_id=token_id), headers=self.default_headers).json()
@@ -67,19 +67,19 @@ class Devices:
     return requests.get('{api_endpoint}/device/{device_id}'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers).json()
 
   def paramSet(self, device_id, data):
-    return requests.post('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=data).json()
 
   def paramCreate(self, device_id, data):
-    return requests.post('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, data=data).json()
 
   def paramEdit(self, device_id, param_id, data):
-    return requests.put('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers, data=data).json()
 
   def paramList(self, device_id, sent_status):
     params = {
       'sent_status': sent_status,
     }
-    return requests.get('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/device/{device_id}/params'.format(api_endpoint=API_TAGO, device_id=device_id), headers=self.default_headers, params=params).json()
 
   def paramRemove(self, device_id, param_id):
     return requests.delete('{api_endpoint}/device/{device_id}/params/{param_id}'.format(api_endpoint=API_TAGO, device_id=device_id, param_id=param_id), headers=self.default_headers).json()

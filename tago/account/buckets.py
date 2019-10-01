@@ -24,22 +24,22 @@ class Buckets:
     }
     params = fixFilter(params, filter)
 
-    return requests.get('{api_endpoint}/bucket'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/bucket'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/bucket'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/bucket'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def edit(self, bkt_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/bucket/{bkt_id}'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/bucket/{bkt_id}'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers, data=data).json()
 
   def delete(self, bkt_id):
     return requests.delete('{api_endpoint}/bucket/{bkt_id}'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers).json()
 
   def deleteVariable(self, bkt_id, data):
     data = data if data else {}
-    return requests.delete('{api_endpoint}/bucket/{bkt_id}/variable'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.delete('{api_endpoint}/bucket/{bkt_id}/variable'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers, data=data).json()
 
   def listVariables(self, bkt_id, show_amount=False, show_deleted=False, resolveOriginName=False):
     params = {
@@ -47,7 +47,7 @@ class Buckets:
       'deleted': show_deleted,
       'resolveOriginName': resolveOriginName,
     }
-    return requests.get('{api_endpoint}/bucket/{bkt_id}/variable'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers, params=json.dumps(params)).json()
+    return requests.get('{api_endpoint}/bucket/{bkt_id}/variable'.format(api_endpoint=API_TAGO, bkt_id=bkt_id), headers=self.default_headers, params=params).json()
 
   def getDevicesAssociated(self, bkt_id):
     if bkt_id is None or bkt_id == '':
@@ -85,7 +85,7 @@ class Buckets:
 
   def backupRecover(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/backup/recover'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/backup/recover'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
 
   def shareList(self, bucket_id):
     # if bucket_id is null, then ERROR
@@ -136,4 +136,4 @@ class Buckets:
     data['start_date'] = options['start_date']
     data['end_date'] = options['end_date']
 
-    return requests.post('{api_endpoint}/data/export?output={output}'.format(api_endpoint=API_TAGO, output=output), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/data/export?output={output}'.format(api_endpoint=API_TAGO, output=output), headers=self.default_headers, data=data).json()
