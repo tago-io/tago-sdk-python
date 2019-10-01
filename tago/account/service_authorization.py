@@ -28,11 +28,11 @@ class ServiceAuth:
 
   def tokenCreate(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/serviceauth'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/serviceauth'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def tokenDelete(self, token):
     return requests.delete('{api_endpoint}/serviceauth/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers).json()
 
   def tokenEdit(self, token, verification_code):
     data = {'verification_code': verification_code}
-    return requests.put('{api_endpoint}/serviceauth/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/serviceauth/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers, json=data).json()

@@ -15,7 +15,7 @@ class TagoIORUN:
 
   def edit(self, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/run'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/run'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def info(self):
     return requests.get('{api_endpoint}/run'.format(api_endpoint=API_TAGO), headers=self.default_headers).json()
@@ -40,11 +40,11 @@ class TagoIORUN:
 
   def userEdit(self, userID, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/run/users/{userID}'.format(api_endpoint=API_TAGO, userID=userID), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/run/users/{userID}'.format(api_endpoint=API_TAGO, userID=userID), headers=self.default_headers, json=data).json()
 
   def createUser(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/run/users'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/run/users'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def deleteUser(self, userID):
     return requests.delete('{api_endpoint}/run/users/{userID}'.format(api_endpoint=API_TAGO, userID=userID), headers=self.default_headers).json()
@@ -54,16 +54,16 @@ class TagoIORUN:
       'subject': dataObj.subject,
       'body': dataObj.body
     }
-    return requests.post('{api_endpoint}/run/email_test'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/run/email_test'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def notificationCreate(self, user_id, data):
     data = data if data else {}
     data['run_user'] = user_id
-    return requests.post('{api_endpoint}/run/notification'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/run/notification'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
   def notificationEdit(self, notification_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/run/notification/{notification_id}'.format(api_endpoint=API_TAGO, notification_id=notification_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/run/notification/{notification_id}'.format(api_endpoint=API_TAGO, notification_id=notification_id), headers=self.default_headers, json=data).json()
 
   def notificationDelete(self, notification_id):
     return requests.delete('{api_endpoint}/run/notification/{notification_id}'.format(api_endpoint=API_TAGO, notification_id=notification_id), headers=self.default_headers).json()

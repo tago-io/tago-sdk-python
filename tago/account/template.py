@@ -17,7 +17,7 @@ class Template:
     return requests.post('{api_endpoint}/template'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(templateObj)).json()
 
   def installTemplate(self, template_id, data={}):
-    return requests.post('{api_endpoint}/template/{template_id}'.format(api_endpoint=API_TAGO, template_id=template_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/template/{template_id}'.format(api_endpoint=API_TAGO, template_id=template_id), headers=self.default_headers, json=data).json()
 
   @staticmethod
   def getTemplateAnonymous(self, template_id):

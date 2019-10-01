@@ -29,12 +29,12 @@ class Dashboards:
     # Create a Dashboard
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, json=data).json()
 
     # Edit a Dashboard
   def edit(self, dashboard_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.put('{api_endpoint}/dashboard/{dashboard_id}'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers, json=data).json()
 
     # Delete a Dashboard
   def delete(self, dashboard_id):
@@ -52,7 +52,7 @@ class Dashboards:
     data = data if data else {}
     if dashboard_id is None or dashboard_id == '':
       raise ValueError('Dashboard ID parameter is obrigatory.')
-    return requests.post('{api_endpoint}/dashboard/{dashboard_id}/duplicate'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers, data=json.dumps(data)).json()
+    return requests.post('{api_endpoint}/dashboard/{dashboard_id}/duplicate'.format(api_endpoint=API_TAGO, dashboard_id=dashboard_id), headers=self.default_headers, json=data).json()
 
     # Get share list of the dashboard
   def shareList(self, dashboard_id):

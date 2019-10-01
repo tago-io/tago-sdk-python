@@ -27,4 +27,4 @@ class Email:
         'from': s_from, 'attachment': attachment, 'html': html, 'whitelabel_url': whitelabel_url}
     url = '{api_endpoint}/analysis/services/email/send'.format(
       api_endpoint=API_TAGO)
-    return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
+    return requests.post(url, json=data, headers=self.default_headers).json()
