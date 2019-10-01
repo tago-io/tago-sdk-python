@@ -27,11 +27,11 @@ class Analysis:
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/analysis'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/analysis'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
   def edit(self, analyze_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/analysis/{analyze_id}'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=data).json()
+    return requests.put('{api_endpoint}/analysis/{analyze_id}'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=json.dumps(data)).json()
 
   def delete(self, analyze_id):
     return requests.delete('{api_endpoint}/analysis/{analyze_id}'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers).json()
@@ -54,7 +54,7 @@ class Analysis:
       'file': file,
       'file_name': file_name,
     }
-    return requests.post('{api_endpoint}/analysis/{analyze_id}/upload'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/analysis/{analyze_id}/upload'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers, data=json.dumps(data)).json()
 
   def downloadScript(self, analyze_id):
     return requests.get('{api_endpoint}/analysis/{analyze_id}/download'.format(api_endpoint=API_TAGO, analyze_id=analyze_id), headers=self.default_headers).json()

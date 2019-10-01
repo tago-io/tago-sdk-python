@@ -19,4 +19,4 @@ class Attachment:
       'filename': filename,
       'type': type,
     }
-    return requests.post('{api_endpoint}/analysis/services/attachment/upload'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/analysis/services/attachment/upload'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()

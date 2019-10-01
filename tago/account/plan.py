@@ -15,7 +15,7 @@ class Plan:
 
   def setPlanParameters(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/account/plan'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/account/plan'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
   def getPriceToUpdate(self, data):
     return requests.get('{api_endpoint}/account/plan_value'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=json.dumps(data)).json()

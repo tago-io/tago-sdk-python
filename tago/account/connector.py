@@ -34,11 +34,11 @@ class Connector:
 
   def create(self, data):
     data = data if data else {}
-    return requests.post('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/connector'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
   def edit(self, connector_id, data):
     data = data if data else {}
-    return requests.put('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, data=data).json()
+    return requests.put('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers, data=json.dumps(data)).json()
 
   def delete(self, connector_id):
     return requests.delete('{api_endpoint}/connector/{connector_id}'.format(api_endpoint=API_TAGO, connector_id=connector_id), headers=self.default_headers).json()
@@ -58,7 +58,7 @@ class Connector:
   def tokenCreate(self, connector_id, data):
     data = data if data else {}
     data['connector'] = connector_id
-    return requests.post('{api_endpoint}/connector/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/connector/token'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=json.dumps(data)).json()
 
   def tokenDelete(self, token):
     return requests.delete('{api_endpoint}/connector/token/{token}'.format(api_endpoint=API_TAGO, token=token), headers=self.default_headers).json()

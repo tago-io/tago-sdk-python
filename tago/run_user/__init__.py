@@ -17,7 +17,7 @@ class RunUser:
 
   def editInfo(self, tagoRunURL, changes={}):
     data = changes
-    return requests.put('{api_endpoint}/run/{tagoRunURL}/info'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=data).json()
+    return requests.put('{api_endpoint}/run/{tagoRunURL}/info'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=json.dumps(data)).json()
 
   @staticmethod
   def create(self, tagoRunURL, newUserObj):
@@ -30,7 +30,7 @@ class RunUser:
       'email': emailAndPasswordObject.email,
       'password': emailAndPasswordObject.password
     }
-    return requests.post('{api_endpoint}/run/{tagoRunURL}/login'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=data).json()
+    return requests.post('{api_endpoint}/run/{tagoRunURL}/login'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=json.dumps(data)).json()
 
   @staticmethod
   def confirmUser(self, tagoRunURL, token):
@@ -51,7 +51,7 @@ class RunUser:
     if not isinstance(notifications, list):
       raise ValueError('Notifications parameter must be a list')
     data = {'notification_ids': notifications}
-    return requests.put('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=data).json()
+    return requests.put('{api_endpoint}/run/{tagoRunURL}/notification'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL), headers=self.default_headers, data=json.dumps(data)).json()
 
   def notificationButton(self, tagoRunURL, notification_id, btn_id):
     return requests.put('{api_endpoint}/run/{tagoRunURL}/notification/{notification_id}/{btn_id}'.format(api_endpoint=API_TAGO, tagoRunURL=tagoRunURL, notification_id=notification_id, btn_id=btn_id), headers=self.default_headers).json()

@@ -19,4 +19,4 @@ class Console:
 
     data = {'message': message, 'timestamp': timestamp}
     url = '{api_endpoint}/analysis/services/console/send'.format(api_endpoint=API_TAGO)
-    return requests.post(url, data=data, headers=self.default_headers).json()
+    return requests.post(url, data=json.dumps(data), headers=self.default_headers).json()
