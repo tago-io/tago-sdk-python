@@ -113,4 +113,4 @@ def myAnalysis(context, scope):
     context.log('No result found for the avg calculation')
 
 # The analysis token in only necessary to run the analysis outside TagoIO
-Analysis('Your-account-token').init(myAnalysis)
+Analysis('Your-analysis-token').init(myAnalysis)
