@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tago SDK for JavaScript'
-copyright = u'2016, Tago LLC'
+project = u'Tago SDK for Python'
+copyright = u'2019, Tago LLC'
 author = u'Tago LLC'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -200,7 +200,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'tago-sdk-js_documentationdoc'
+htmlhelp_basename = 'tago-sdk-py_documentationdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -222,7 +222,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'tago-sdk-js_documentation.tex', u'tago-documentation Documentation',
+  (master_doc, 'tago-sdk-py_documentation.tex', u'tago-documentation Documentation',
    u'Tago LLC', 'manual'),
 ]
 
@@ -252,7 +252,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'tago-sdk-js_documentation', u'tago-sdk-js_documentation Documentation',
+    (master_doc, 'tago-sdk-py_documentation', u'tago-sdk-py_documentation Documentation',
      [author], 1)
 ]
 
@@ -266,8 +266,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'tago-sdk-js_documentation', u'tago-sdk-js_documentation Documentation',
-   author, 'tago-sdk-js_documentation', 'One line description of project.',
+  (master_doc, 'tago-sdk-py_documentation', u'tago-sdk-py_documentation Documentation',
+   author, 'tago-sdk-py_documentation', 'One line description of project.',
    'Miscellaneous'),
 ]
 
