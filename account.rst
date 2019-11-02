@@ -16,18 +16,15 @@ Get all account information
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    myacc.info()
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+    account_info = my_account.info()
+
+    print(account_info)
+
 
 
 .tokenList
@@ -35,24 +32,23 @@ Get all account information
 Get all tokens from the account
 
 | **Syntax**
-| *.tokenList()*
+| *.tokenList(profile_id)*
+|
+| **Arguments**
+| *profile_id(string) id of the profile.*
 |
 | **Returns**
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    myacc.tokenList()
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.profiles.tokenList('PROFILE ID HERE')
+    print(result)
 
 
 .tokenCreate
@@ -65,48 +61,53 @@ Generate and retrieve a new token for the account
 | **Arguments**
 | *data(object) options for the new token.*
 |   *\*name(string)*: *a name for the token;*
-|   *\*expire_time(string)*: *Time when token should expire. It will be randomly generated if not included.*
+|   *\*profile_id(string)*: *profile_id from the profile where token will be created;*
+|   *\*email(string)*: *account email;*
+|   *\*password(string)*: *account password;*
+|   *\*expire_time(string)*: *Relative time when token should expire. It will be randomly generated if not included.*
 |
 | **Returns**
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    myacc.tokenCreate({"name":"My First Token", "expire_time": New Date()})
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_token = { 'name': 'My First Token',
+                'profile_id': 'PROFILE ID HERE',
+                'email': 'ACCOUNT EMAIL HERE',
+                'password': 'ACCOUNT PASSWORD HERE',
+                'expire_time': '1 day' }
+                
+    result = my_account.tokenCreate(new_token)
+    print(result)
+
 
 .tokenDelete
 ************
 Delete current token of the account
 
-| **Syntax**
-| *.tokenDelete()*
+| *.tokenDelete(profile_id, token)*
+|
+| **Arguments**
+| *profile_id(string) id of the profile.*
+| *token(string) profile token.*
 |
 | **Returns**
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    myacc.tokenDelete()
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.profiles.tokenDelete('PROFILE ID HERE', 'PROFILE TOKEN HERE')
+    print(result)
 
 
 Devices
@@ -124,18 +125,14 @@ Retrieve a list with all devices from account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accdevices   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    
-    accdevices.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+    my_devices = my_account.devices.list()
+
+    print(my_devices)
 
 
 .create
@@ -160,31 +157,28 @@ Generate and retrieve a new device for the account
 |   *\*id*: *id of the new device;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accdevices   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    var data = {
-        "name":"My first device",
-        "description":"Creating my first device",
-        "active":true,
-        "visible":true,
-        "tags": [
-            {"key": "client", "value": "John"}
-        ]
-        "configuration_params": [
-            {"sent": false, "key": "check_rate", "value": 600}
-            {"sent": false, "key": "measure_time", "value": 0}
-        ]
-    };
+    import tago
 
-    accdevices.create(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_device = {
+        'name': 'My First Device',
+        'description' : 'Creating my first device',
+        'active': True,
+        'visible': True,
+        'tags': [
+            {'key': 'Client', 'value': 'John'}
+        ],
+        'configuration_params': [
+            {'sent': False, 'key': 'check_rate', 'value': 600},
+            {'sent': False, 'key': 'measure_time', 'value': 0}
+        ]
+    }
+
+    result = my_account.devices.create(new_device)
+    print(result)
 
 
 .edit
@@ -207,27 +201,24 @@ Modify any property of the device.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    var data = {
-        "name":"New name for my device",
-        "description":"In this way I can change the description too",
-        "active":false,
-        "visible":true,
-        "tags": [
-            {"key": "client", "value": "Mark"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    data = {
+        'name': 'New name for my device',
+        'description' : 'In this way I can change the description too',
+        'active': False,
+        'visible': True,
+        'tags': [
+            {'key': 'Client', 'value': 'Mark'}
         ]
-    };
+    }
 
-    accdevices.edit('576dc932415f403531fd2cf6', data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.devices.edit('DEVICE_ID', data)
+    print(result)
 
 
 .info
@@ -244,18 +235,14 @@ Get information about the device
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    
-    accdevices.info('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    device_info = my_account.devices.info('DEVICE_ID')
+    print(device_info)
 
 
 .delete
@@ -272,18 +259,14 @@ Delete device for the account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    
-    accdevices.delete('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    device_info = my_account.devices.delete('DEVICE_ID')
+    print(device_info)
 
 
 .tokenList
@@ -300,18 +283,14 @@ Retrieve a list of all tokens of the device
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    
-    accdevices.tokenList('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    device_token_list = my_account.devices.tokenList('DEVICE_ID')
+    print(device_token_list)
 
 .tokenCreate
 ============
@@ -334,18 +313,21 @@ Generate and retrieve a new token for the device
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
+    import tago
 
-    accdevices.tokenCreate({"name":"My First Token", "expire_time": "never", "permission":"full"})
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_token_data = {
+        'name': 'My First Token',
+        'expire_time': 'never',
+        'permission': 'full'
+    }
+
+    result = my_account.devices.tokenCreate('DEVICE_ID', new_token_data)
+    print(result)
+
 
 .tokenDelete
 ============
@@ -361,18 +343,14 @@ Delete an token of the Device
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
+    import tago
 
-    accdevices.tokenDelete('298d17f0-7061-11e6-ab66-b174d8afb89d')
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.devices.tokenDelete('TOKEN')
+    print(result)
 
 Buckets
 *******
@@ -389,18 +367,14 @@ Retrieve a list with all buckets from account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accbuckets   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
-    
-    accbuckets.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    my_buckets = my_account.buckets.list()
+    print(my_buckets)
 
 
 .create
@@ -419,29 +393,26 @@ Generate and retrieve a new bucket for the account
 |
 | **Returns**
 | *(Promise)*
-|   *\*id*: *id of the new bucket;*
+|   *\*object.bucket*: *id of the new bucket;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accbuckets   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
-    var data = {
-        "name":"My first bucket",
-        "description":"Creating my first bucket",
-        "visible":true,
-        "tags": [
-            {"key": "client", "value": "Francisco"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_bucket_data = {
+        'name':'My first bucket',
+        'description':'Creating my first bucket',
+        'visible': True,
+        'tags': [
+            {'key': 'client', 'value': 'Francisco'}
         ]
-    };
+    }
 
-    accbuckets.create(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.buckets.create(new_bucket_data)
+    print(result)
 
 
 .edit
@@ -463,26 +434,23 @@ Modify any property of the bucket.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
-    var data = {
-        "name":"New name for my bucket",
-        "description":"This way I can change the description too",
-        "visible":true,
-        "tags": [
-            {"key": "client", "value": "Leonardo"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    data = {
+        'name':'New name for my bucket',
+        'description':'This way I can change the description too',
+        'visible': True,
+        'tags': [
+            {'key': 'client', 'value': 'Leonard'}
         ]
-    };
+    }
 
-    accbuckets.edit('576dc932415f403531fd2cf6', data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.buckets.edit('BUCKET_ID_HERE', data)
+    print(result)
 
 
 .info
@@ -499,18 +467,14 @@ Get information about the bucket
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
-    
-    accbuckets.info('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.buckets.info('BUCKET_ID_HERE')
+    print(result)
 
 
 .delete
@@ -527,18 +491,14 @@ Delete bucket for the account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
-    
-    accbuckets.delete('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.buckets.delete('BUCKET_ID_HERE')
+    print(result)
 
 
 Actions
@@ -556,18 +516,14 @@ Retrieve a list with all actions from account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
-    
-    accactions.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    my_actions = my_account.actions.list()
+    print(my_actions)
 
 
 .create
@@ -609,39 +565,36 @@ Generate and retrieve a new action for the account
 |   *\*id*: *id of the new action;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
-    var data = {
-        "name": "a simple action",
-        "description": "trigger when the variable test is higher than 2, and reset it when is less than 2",
-        "when_reset_bucket": "571920982c452fa00c6af660",
-        "when_reset_origin": "571920a5cc7d43a00c642ca1",
-        "when_reset_variable": "test",
-        "when_reset_condition": "<",
-        "when_reset_value": "2",
-        "when_set_bucket": "571920982c452fa00c6af660",
-        "when_set_origin": "571920a5cc7d43a00c642ca1",
-        "when_set_variable": "test",
-        "when_set_condition": ">",
-        "when_set_value": "2",
-        "type": "script",
-        "script": "577d4c457ee399ef1a6e6cf6",
-        "lock": false,
-        "active": true,
-        "tags": [
-            {"key":"Trigger", "value":"2"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_action_data = {
+        'name': 'a simple action',
+        'description': 'trigger when the variable test is higher than 2, and reset it when is less than 2',
+        'when_reset_bucket': '571920982c452fa00c6af660',
+        'when_reset_origin': '571920a5cc7d43a00c642ca1',
+        'when_reset_variable': 'test',
+        'when_reset_condition': '<',
+        'when_reset_value': '2',
+        'when_set_bucket': '571920982c452fa00c6af660',
+        'when_set_origin': '571920a5cc7d43a00c642ca1',
+        'when_set_variable': 'test',
+        'when_set_condition': '>',
+        'when_set_value': '2',
+        'type': 'script',
+        'script': '577d4c457ee399ef1a6e6cf6',
+        'lock': False,
+        'active': True,
+        'tags': [
+            {'key':'Trigger', 'value':'2'}
         ]
-    };
+    }
 
-    accactions.create(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.actions.create(new_action_data)
+    print(result)
 
 
 .edit
@@ -659,26 +612,23 @@ Modify any property of the action.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
-    var data = {
-        "name":"New name for my action",
-        "description":"In this way I can change the description too",
-        "visible":true,
-        "tags": [
-            {"key": "client", "value": "Mark"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    data = {
+        'name':'New name for my action',
+        'description':'In this way I can change the description too',
+        'visible': True,
+        'tags': [
+            {'key': 'client', 'value': 'Mark'}
         ]
-    };
+    }
 
-    accactions.edit('576dc932415f403531fd2cf6', data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.actions.edit('ACTION_ID_HERE', data)
+    print(result)
 
 
 .info
@@ -695,18 +645,14 @@ Get information about the action
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
-    
-    accactions.info('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    action_info = my_account.actions.info('ACTION_ID_HERE')
+    print(action_info)
 
 
 .delete
@@ -723,18 +669,14 @@ Delete action for the account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
-    
-    accactions.delete('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.actions.delete('ACTION_ID_HERE')
+    print(result)
 
 
 Analysis
@@ -752,18 +694,14 @@ Retrieve a list with all analysis from account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
-    
-    accanalysis.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    my_analysis = my_account.analysis.list()
+    print(my_analysis)
 
 
 .create
@@ -788,30 +726,27 @@ Generate and retrieve a new analysis for the account
 |   *\*id*: *id of the new analysis;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
-    var data = {
-        "name":"My first analysis",
-        "description":"Creating my first analysis",
-        "active":true,
-        "interval": '1 minute',
-        "variables": [
-            {"key": "max_battery", "value": "3100"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_analysis_data = {
+        'name':'My first analysis',
+        'description':'Creating my first analysis',
+        'active': True,
+        'interval': '1 minute',
+        'variables': [
+            {'key': 'max_battery', 'value': '3100'}
         ],
-        "tags": [
-            {"key": "client", "value": "Mark"}
+        'tags': [
+            {'key': 'client', 'value': 'Mark'}
         ]
-    };
+    }
 
-    accanalysis.create(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.analysis.create(new_analysis_data)
+    print(result)
 
 
 .edit
@@ -835,30 +770,27 @@ Modify any property of the analysis.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
-    var data = {
-        "name":"New name for my analysis",
-        "description":"In this way I can change the description too",
-        "active":false,
-        "interval": '2 minutes',
-        "variables": [
-            {"key": "max_battery", "value": "3000"}
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    data = {
+        'name':'New name for my analysis',
+        'description':'In this way I can change the description too',
+        'active':False,
+        'interval': '2 minutes',
+        'variables': [
+            {'key': 'max_battery', 'value': '3000'}
         ],
-        "tags": [
-            {"key": "client", "value": "Mark"}
+        'tags': [
+            {'key': 'client', 'value': 'Mark'}
         ]
-    };
+    }
 
-    accanalysis.edit('576dc932415f403531fd2cf6', data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.analysis.create(data)
+    print(result)
 
 
 .info
@@ -875,18 +807,14 @@ Get information about the analysis
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
-    
-    accanalysis.info('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    analysis_info = my_account.analysis.info('ANALYSIS_ID_HERE')
+    print(analysis_info)
 
 
 .delete
@@ -903,18 +831,14 @@ Delete analysis for the account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
-    
-    accanalysis.delete('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.analysis.delete('ANALYSIS_ID_HERE')
+    print(result)
 
 
 .run
@@ -931,18 +855,22 @@ Force Analysis to run immediately
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
-    
-    accanalysis.run('576dc932415f403531fd2cf6')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    # Your scope can be an array with several objects
+    scope = [
+        {
+            'variable': 'alarm',
+            'value:' 'On'
+        }
+    ]
+
+    result = my_account.analysis.run('ANALYSIS_ID_HERE', scope)
+    print(result)
 
 Dashboards
 **********
@@ -959,18 +887,14 @@ Retrieve a list with all dashboards from account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    
-    accdashboards.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    my_dashboards = my_account.dashboards.list()
+    print(my_dashboards)
 
 
 .create
@@ -997,27 +921,24 @@ Generate and retrieve a new dashboard for the account
 |   *\*id*: *id of the new dashboard;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    var data = {
-        "label":"My first dashboard",
-        "arrangement": [
-            {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    new_dashboard_data = {
+        'label':'My first dashboard',
+        'arrangement': [
+            {'widget_id': 'WIDGET_ID_HERE', 'x': 0, 'y': 0, 'width': 2, 'height': 3}
         ],
-        "tags": [
-            {"key": "client", "value": "Mark"}
+        'tags': [
+            {'key': 'client', 'value': 'Mark'}
         ]
-    };
+    }
 
-    accdashboards.create(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.dashboards.create(new_dashboard_data)
+    print(result)
 
 
 .edit
@@ -1043,21 +964,18 @@ Modify any property of the dashboards.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    var data = {
-        "label":"New name for my dashboards",
-    };
+    import tago
 
-    accdashboards.edit('877c28d269d2861f1b2e96b8', data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    data = {
+        'label':'New name for my dashboard',
+    }
+
+    result = my_account.dashboards.edit('DASHBOARD_ID_HERE', data)
+    print(result)
 
 
 .info
@@ -1074,18 +992,14 @@ Get information about the dashboards
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    
-    accdashboards.info('877c28d269d2861f1b2e96b8')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    dashboard_info = my_account.dashboards.info('DASHBOARD_ID_HERE')
+    print(dashboard_info)
 
 
 .delete
@@ -1102,51 +1016,19 @@ Delete dashboards for the account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    
-    accdashboards.delete('877c28d269d2861f1b2e96b8')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    result = my_account.dashboards.delete('DASHBOARD_ID_HERE')
+    print(result)
 
 
 Widgets
 ********
 Inside dashboards, you need widgets to show and control information inside buckets. Every widget have their data slighty different from each other, to know how do they work
-
-.list
-=====
-Retrieve a list with all widgets from dashboard
-
-| **Syntax**
-| *.list()*
-|
-| **Arguments**
-| *dashboard_id(string) dashboard id for the dashboard.*
-| **Returns**
-| *(Promise)*
-|   *\*result(array)*: *Array list of widgets;*
-|
-
-.. code-block:: javascript
-
-    const Account = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    const dashboard_id = '877c28d269d2861f1b2e96b1';
-    accdashboards.widgets.list(dashboard_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
-
 
 .create
 =======
@@ -1217,29 +1099,18 @@ Modify any property of the widget.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    const dashboard_id = '577c28d269d2861f1b2e93ba';
-    const widget_id = '577c28d269d2861f1b2e93be';
-    var data = {
-        "label":"My first dashboard",
-        "arrangement": [
-            {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
-        ],
-        "tags": [
-            {"key": "client", "value": "Mark"}
-        ]
-    };
+import tago
 
-    accdashboards.widgets.edit(dashboard_id, widget_id, data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+account_dashboards = tago.Account('MY_ACCOUNT_TOKEN').dashboards
+
+data = {
+    'label':'New name for my widget',
+}
+
+result = account_dashboards.widgets.edit('DASHBOARD_ID_HERE', 'WIDGET_ID_HERE', data)
+print(result)
 
 
 .info
@@ -1257,19 +1128,14 @@ Get information about the widget
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    const dashboard_id = '576dc932415f403531fd2cf1';
-    const widget_id = '576dc932415f403531fd2cf6';
-    accdashboards.widgets.info(dashboard_id, widget_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    account_dashboards = tago.Account('MY_ACCOUNT_TOKEN').dashboards
+
+    widget_info = account_dashboards.widgets.info('DASHBOARD_ID_HERE', 'WIDGET_ID_HERE')
+    print(widget_info)
 
 
 .delete
@@ -1286,20 +1152,14 @@ Delete access widget for the dashboard
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-   const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+    import tago
 
-    const dashboard_id = '576dc932415f403531fd2cf1';
-    const widget_id = '576dc932415f403531fd2cf6';
+    account_dashboards = tago.Account('MY_ACCOUNT_TOKEN').dashboards
 
-    accdashboards.widgets.delete(dashboard_id, widget_id).then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = account_dashboards.widgets.delete('DASHBOARD_ID_HERE', 'WIDGET_ID_HERE')
+    print(result)
 
 
 notifications to myself
@@ -1318,18 +1178,17 @@ Retrieve a list with all notifications from account
 |   *\*result(array)*: *Array list of notifications;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
-    
-    notifications.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('MY_ACCOUNT_TOKEN')
+
+    # Empty object as params retrive all notifications from account
+    params = {}
+
+    my_notifications = my_account.notifications.list(params)
+    print(my_notifications)
 
 .markAsRead
 ===========
