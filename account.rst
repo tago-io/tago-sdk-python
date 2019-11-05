@@ -1099,16 +1099,16 @@ Modify any property of the widget.
 
 .. code-block:: python
 
-import tago
+    import tago
 
-account_dashboards = tago.Account('MY_ACCOUNT_TOKEN').dashboards
+    account_dashboards = tago.Account('MY_ACCOUNT_TOKEN').dashboards
 
-data = {
-    'label':'New name for my widget',
-}
+    data = {
+        'label':'New name for my widget',
+    }
 
-result = account_dashboards.widgets.edit('DASHBOARD_ID_HERE', 'WIDGET_ID_HERE', data)
-print(result)
+    result = account_dashboards.widgets.edit('DASHBOARD_ID_HERE', 'WIDGET_ID_HERE', data)
+    print(result)
 
 
 .info
