@@ -14,6 +14,5 @@ TagoIO's SDK for Python Documentation
    analysis
    account
    middleware
-   Source Code <https://github.com/tago-io/tago-sdk-js>
-   NPM <https://www.npmjs.com/package/tago>
-   Slack / Community <http://community.tago.io/>
+   Source Code <https://github.com/tago-io/tago-sdk-python>
+   Slack / Community <https://community.tago.io/>
