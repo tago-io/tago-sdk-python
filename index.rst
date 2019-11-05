@@ -15,4 +15,4 @@ TagoIO's SDK for Python Documentation
    account
    middleware
    Source Code <https://github.com/tago-io/tago-sdk-python>
-   Slack / Community <https://community.tago.io/>
+   Community <https://community.tago.io/>
