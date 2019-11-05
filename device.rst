@@ -16,18 +16,14 @@ Get all information from the device
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Device = require('tago/device');
-    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    mydev.info()
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_device = tago.Device('DEVICE_TOKEN_HERE')
+
+    device_information = my_device.info()
+    print(device_information)
 
 
 .insert
@@ -50,58 +46,23 @@ Insert a new data into a bucket. You can get more information about what informa
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Device = require('tago/device');
-    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-    var data = {
-        'variable': 'temperature',
-        'unit'    : 'F',
-        'value'   : 55,
-        'time'    : '2015-11-03 13:44:33',
-        'location': {'lat': 42.2974279, 'lng': -85.628292}
-    };
+    import tago
 
-    mydev.insert(data)
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_device = tago.Device('DEVICE_TOKEN_HERE')
 
-.edit
-*******
-Edit an existing data from bucket. You can get more information about what information can be passed with edit in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
+    data = {
+            'variable': 'temperature',
+            'unit'    : 'F',
+            'value'   : 55,
+            'time'    : '2015-11-03 13:44:33',
+            'location': {'lat': 42.2974279, 'lng': -85.628292}
+    }
 
-| **Syntax**
-| *.edit(/data_id/, /data/)*
-|
-| **Arguments**
-| *variable_id(string) specific ID of a variable data. (optional)*
-| *data(object) properties for the new data.*
-|   *Use any of the insert parameters to be edited*
-|
-| **Returns**
-| *(Promise)*
-|
+    result = my_device.insert(data)
+    print(result)
 
-.. code-block:: javascript
-
-    const Device = require('tago/device');
-    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-    var data = {
-        'unit'    : 'C',
-        'value'   : 12,
-    };
-
-    mydev.edit('57c730af5c00ce0c7046c3c2', data)
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
 
 .find
 *******
@@ -122,24 +83,21 @@ Get a list of data from bucket respecting the query options passed. You can get 
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Device = require('tago/device');
-    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-    var filter = {
-        'variable':   'myvar',
-        'query':      'last_value',
-        'end_date':   '2014-12-25 23:33:22',
-        'start_date': '2014-12-20 23:33:22'
-    };
-    
-    mydev.find(filter)
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_device = tago.Device('DEVICE_TOKEN_HERE')
+
+    filter = {
+            'variable': 'myvar',
+            'query': 'last_value',
+            'end_date': '2014-12-25 23:33:22',
+            'start_date': '2014-12-20 23:33:22'
+    }
+
+    result = my_device.find(filter)
+    print(result)
 
 
 .remove
@@ -161,45 +119,34 @@ Remove a data from the bucket. It's possible to remove in three ways:
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    mydev.remove()
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_device = tago.Device('DEVICE_TOKEN_HERE')
+
+    result = my_device.remove()
+    print(result)
+
 
 or 
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    mydev.remove('myvariable')
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_device = tago.Device('DEVICE_TOKEN_HERE')
+
+    result = my_device.remove('myvariable')
+    print(result)
         
 or 
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+    import tago
 
-    mydev.remove('577d81ac7ee399ef1a6e98da')
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_device = tago.Device('DEVICE_TOKEN_HERE')
+
+    result = my_device.remove('VARIABLE_ID_HERE')
+    print(result)

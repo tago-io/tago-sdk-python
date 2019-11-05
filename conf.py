@@ -46,9 +46,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tago SDK for Python'
-copyright = u'2019, Tago LLC'
-author = u'Tago LLC'
+project = u'TagoIO SDK for Python'
+copyright = u'2019, TagoIO LLC'
+author = u'TagoIO LLC'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -223,7 +223,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   (master_doc, 'tago-sdk-py_documentation.tex', u'tago-documentation Documentation',
-   u'Tago LLC', 'manual'),
+   u'TagoIO LLC', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

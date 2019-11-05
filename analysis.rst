@@ -19,19 +19,18 @@ To setup an analysis, you first need a analysis token. That can be retrieved fro
 | *analysis_token(string) analysis token. Only needed if the script will run remotelly (Optional).*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
+    from tago import Analysis
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        console.log('my context:', context);
-        console.log('my scope:', scope);
-        //Do anything you want here
-    }
+    ANALYSYS_TOKEN = 'ANALYSYS_TOKEN_HERE'
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+    def my_analysis(context, scope):
+        context.log('my context', context)
+        context.log('my scope', scope)
+        # Do anything you want here
+
+    Analysis(ANALYSYS_TOKEN).init(my_analysis)
 
 
 context
@@ -100,20 +99,19 @@ We provide some functions that can greatly help your application. When creating 
 
 When setting up a service, you need to pass an analysis-token. For convenience, the context returns a property token that you can use to setup a service object.
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/services');
+    from tago import Analysis
+    from tago import Services
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        //Setting up a SMS service
-        const sms = new Services(context.token).sms;
+    ANALYSYS_TOKEN = 'ANALYSYS_TOKEN_HERE'
 
-    }
+    def my_analysis(context, scope):
+        sms = Services(ANALYSYS_TOKEN).sms
+        # Do anything you want here
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+    Analysis(ANALYSYS_TOKEN).init(my_analysis)
+
 
 sms
 ===
@@ -136,25 +134,26 @@ Whenever you need to send a sms, use .send function.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/services');
+    from tago import Analysis
+    from tago import Services
 
-    //Main function to be executed when analysis are called
-    function myanalysis(context, scope) {
-        const sms = new Services(context.token).sms;
+    ANALYSYS_TOKEN = 'ANALYSYS_TOKEN_HERE'
 
-        const to      = '2693856214';
-        const message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
+    def my_analysis(context, scope):
+        sms = Services(ANALYSYS_TOKEN).sms
 
-        sms.send(to, message).then(console.log).catch(console.log);
-        //Print "Sending";
+        to      = '2693856214';
+        message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
 
-    }
+        # Print response
+        print(sms.send(to, message))
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+        # Do anything you want here
+
+    Analysis(ANALYSYS_TOKEN).init(my_analysis)
+
 
 email
 =====
@@ -180,31 +179,32 @@ Whenever you need to send an email, use .send function.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/services');
+    from tago import Analysis
+    from tago import Services
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        const email = new Services(context.token).email;
+    ANALYSYS_TOKEN = 'ANALYSYS_TOKEN_HERE'
 
-        const to      = 'myuser@gmail.com';
-        const subject = 'E-mail example';
-        const message = 'Hi! This is an email example. \nWith a breakline in the email message.';
-        const from    = 'me@gmail.com';
-        const attachment = {
-            archive: 'This is a txt archive',
-            filename: 'document.txt'
-        };
+    def my_analysis(context, scope):
+        email = Services(ANALYSYS_TOKEN).email
 
-        email.send(to, subject, message, from, attachment).then(console.log).catch(console.log);
-        //Print "Sending";
+        to = 'myuser@gmail.com',
+        subject = 'E-mail example',
+        message = 'Hi! This is an email example. \nWith a breakline in the email message.',
+        email_origin = 'me@gmail.com',
+        attachment = {
+            'archive': 'This is a txt archive',
+            'filename': 'document.txt',
+        }
 
-    }
+        # Printing response
+        print(email.send(to, subject, message, email_origin, attachment, None, None))
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+        # Do anything you want here
+
+    Analysis(ANALYSYS_TOKEN).init(my_analysis)
+
 
 MQTT
 =====
@@ -230,22 +230,23 @@ Use this topic when you want to send a payload data in any format to be first pa
 
 .. code-block:: javascript
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/services');
+    from tago import Analysis
+    from tago import Services
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        const MQTT = new Services(context.token).MQTT;
+    ANALYSYS_TOKEN = 'ANALYSYS_TOKEN_HERE'
 
-        const topic   = 'my topic';
-        const message = 'new message';
+    def my_analysis(context, scope):
+        MQTT = Services(ANALYSYS_TOKEN).MQTT
 
-        MQTT.publish(topic, message).then(console.log).catch(console.log);
-        //Print "Sending";
-    }
+        topic = 'my topic';
+        message = 'new message';
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+        # Printing response
+        print(MQTT.publish(topic, message, None))
+
+        # Do anything you want here
+
+    Analysis(ANALYSYS_TOKEN).init(my_analysis)
 
 
 Notification to myself
@@ -270,22 +271,24 @@ Use this topic to send a notification.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    'use strict';
-    const Analysis = require('tago/analysis');
-    const Services = require('tago/services');
+    from tago import Analysis
+    from tago import Services
 
-    //Main function to be executed when the analysis are called
-    function myanalysis(context, scope) {
-        const Notification = new Services(context.token).Notification;
+    ANALYSYS_TOKEN = 'ANALYSYS_TOKEN_HERE'
 
-        const title   = 'my title';
-        const message = 'new message';
-        const ref_id = '5915e4a302a0a7002f2a0960'; //bucket id
+    def my_analysis(context, scope):
+        notification = Services(ANALYSYS_TOKEN).notification
 
-        Notification.send(title, message, ref_id).then(console.log).catch(console.log);
-        //Print "Notification sent";
-    }
+        title   = 'my title';
+        message = 'new message';
+        ref_id = 'ID_HERE'; # dashboard/bucket id
 
-    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+        # Printing response
+        print(notification.send(title, message, ref_id))
+
+        # Do anything you want here
+
+    Analysis(ANALYSYS_TOKEN).init(my_analysis)
+

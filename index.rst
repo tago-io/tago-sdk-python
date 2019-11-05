@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Tago's SDK for Python Documentation
+TagoIO's SDK for Python Documentation
 =======================================
 
 .. toctree::
@@ -12,7 +12,6 @@ Tago's SDK for Python Documentation
    Sign up for free! <https://admin.tago.io/signup>
    device
    analysis
-   extra
    account
    middleware
    Source Code <https://github.com/tago-io/tago-sdk-js>

@@ -1052,28 +1052,26 @@ Generate and retrieve a new widget for the dashboard
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    const dashboard_id = '577c28d269d2861f1b2e93ba';
-    var data = {
-        "label":"My first dashboard",
-        "arrangement": [
-            {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
-        ],
-        "tags": [
-            {"key": "client", "value": "Mark"}
-        ]
-    };
+    import tago
 
-    accdashboards.widgets.create(dashboard_id, data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    new_widget = {
+        'label': 'My first widget',
+        'type': 'step_button',
+        'data': [{
+            'bucket': '5d02be12cac6da0026398ed2',
+            'origin': '5d02be12cac6da0026398ed1',
+            'timezone': 'America/Sao_Paulo',
+            'query': 'last_value',
+            'variables': ['humidity']
+        }]
+    }
+
+    result = my_account.dashboards.widgets.create('DASHBOARD_ID_HERE', new_widget)
+    print(result)
 
 
 .edit
@@ -1205,19 +1203,17 @@ Mark a notification as read/ignored.
 |   *\*result*: *Notifications marked as read;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
-    
-    const id_list = ['5915e4a302a0a7002f2a0960', '4915e4a302a0a7002f3a0982']
-    notifications.markAsRead(id_list)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    # Array of notifications ids, this array can have several notifications ids
+    notifications_ids_list = ['NOTIFICATION_ID_HERE', 'ANOTHER_NOTIFICATION_ID_HERE']
+
+    result = my_account.notifications.markAsRead(notifications_ids_list)
+    print(result)
 
 
 .accept
@@ -1235,19 +1231,14 @@ Accept the notification if it has a condition.
 |   *\*result*: *Notification succesfully accepted;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
-    
-    const notification_id = '5915e4a302a0a7002f2a0960'
-    notifications.accept(notification_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    result = my_account.notifications.accept('NOTIFICATION_ID_HERE')
+    print(result)
 
 .refuse
 =======
@@ -1264,19 +1255,14 @@ Refuse the notification if it has a condition.
 |   *\*result*: *Notification succesfully refused;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
-    
-    const notification_id = '5915e4a302a0a7002f2a0960'
-    notifications.refuse(notification_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    result = my_account.notifications.accept('NOTIFICATION_ID_HERE')
+    print(result)
 
 
 TagoRun Users
@@ -1297,18 +1283,14 @@ Get all information from the run
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accrun = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    
-    accrun.info()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    tago_run_info = my_account.run.info()
+    print(tago_run_info)
  
 
 .listUsers
@@ -1322,18 +1304,14 @@ Retrieve a list with all users from Run
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    
-    accrun.listUsers()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    tago_run_users = my_account.run.listUsers()
+    print(tago_run_users)
 
 
 .getUserInfo
@@ -1352,20 +1330,14 @@ Get run user information
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    const user_id = '5d9c6e7945f7ab001b0a32c1';
+    import tago
 
-    myaccrun.getUserInfo(user_id)
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
 
+    run_user_info = my_account.run.getUserInfo('RUN_USER_ID_HERE')
+    print(run_user_info)
 
 
 .userEdit
@@ -1390,24 +1362,22 @@ Modify any property of the Run User.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    var data = {
-        "name":"New name for my Run User",
-        "tags": [
-            {"key": "client", "value": "Mark"}
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    data = {
+        'name':'New name for my Run User',
+        'tags': [
+            {'key': 'client', 'value': 'Mark'}
         ]
-    };
-    const user_id = '5d9c6e7945f7ab001b0a32c1';
-    myaccrun.userEdit(user_id, data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    }
+
+    result = my_account.run.userEdit('RUN_USER_ID_HERE', data)
+    print(result)
+
 
 .createUser
 =====
@@ -1421,8 +1391,8 @@ Create a new Run User.
 |   *\*name(string)*: *a name for the run user.*
 |   *\*email(string)*: *email for the run user.*
 |   *\*password(string)*: *password for the run user.*
+|   *\*timezone(string)*: *timezone for the run user.*
 |   *\*phone(string)*: *phone for the run user. (optional)*
-|   *\*timezone(string)*: *email for the run user. (optional)*
 |   *\*company(string)*: *company for the run user. (optional)*
 |   *\*active(bool)*: *Set if the run user will be active. Default True. (optional)*
 |   *\*tags(array)*: *An array of objects with key and value. (optional)*
@@ -1431,26 +1401,24 @@ Create a new Run User.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    var data = {
-        "name":"John Doe",
-        "email": "jhon@doe.com",
-        "password": "123abc",
-        "tags": [
-            {"key": "employee", "value": "Manager"}
-        ]
-    };
+    import tago
 
-    myaccrun.userEdit(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    new_user = {
+        'name':'John Doe',
+        'email': 'jhon@doe.com',
+        'password': '123abc',
+        'tags': [
+            {'key': 'employee', 'value': 'Manager'}
+        ],
+        'timezone': 'America/Sao_Paulo'
+    }
+
+    result = my_account.run.createUser(new_user)
+    print(result)
 
 
 .deleteUser
@@ -1469,19 +1437,15 @@ Delete run user
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    const user_id = '5d9c6e7945f7ab001b0a32c1';
+    import tago
 
-    myaccrun.deleteUser(user_id)
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    result = my_account.run.deleteUser('5d7adfb1f03154001bbd9d78')
+    print(result)
+
 
 Notification to users
 *************
@@ -1503,19 +1467,14 @@ Retrieve a list with all notifications for the Run user
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    
-    const user_id = '5d9c6e7945f7ab001b0a32c1';
-    accrun.notificationList(user_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    run_user_notifications_list = my_account.run.notificationList('RUN_USER_ID_HERE')
+    print(run_user_notifications_list)
 
 
 .notificationEdit
@@ -1539,29 +1498,25 @@ Modify any property of the user push notification.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    const data = {
-        "title": "Temperature Alert",
-        "message": "The temperature is too high"
-        "buttons": [{
-            "label": "Go to device dashboard",
-            "url": "https://admin.tago.io/dashboard/info/5d9c6e7945f7ab001b0a32c2",
-            "color": "red",
-            // "analysis": "5d9c6e7945f7ab001b0a32c2",
-            
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    data = {
+        'title': 'Temperature Alert',
+        'message': 'The temperature is too high'
+        'buttons': [{
+            'label': 'Go to device dashboard',
+            'url': 'https://admin.tago.io/dashboard/info/5d9c6e7945f7ab001b0a32c2',
+            'color': 'red',
+            # 'analysis': '5d9c6e7945f7ab001b0a32c2',
         }],
-    };
-    const notification_id = '5d9c6e7945f7ab001b0a32c1';
-    myaccrun.notificationEdit(notification_id, data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    }
+
+    result = my_account.run.notificationEdit('NOTIFICATION_ID_HERE', data)
+    print(result)
 
 
 .notificationCreate
@@ -1573,6 +1528,7 @@ Create a new push notification for the user.
 | *.notificationCreate(/data/)*
 |
 | **Arguments**
+| *\*user_id(string)*: *ID of the run user;*
 | *data(object) options to be modified in the notification.*
 |   *\*title(string)*: *a title for the notification.*
 |   *\*message(string)*: *message for the notification.*
@@ -1585,29 +1541,25 @@ Create a new push notification for the user.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    const data = {
-        "title": "Temperature Alert",
-        "message": "The temperature is too high"
-        "buttons": [{
-            "label": "Go to device dashboard",
-            "url": "https://admin.tago.io/dashboard/info/5d9c6e7945f7ab001b0a32c2",
-            "color": "red",
-            // "analysis": "5d9c6e7945f7ab001b0a32c2",
-            
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    data = {
+        'title': 'Temperature Alert',
+        'message': 'The temperature is too high',
+        'buttons': [{
+            'label': 'Go to device dashboard',
+            'url': 'https://admin.tago.io/dashboard/info/5d9c6e7945f7ab001b0a32c2',
+            'color': 'red',
+            # 'analysis': '5d9c6e7945f7ab001b0a32c2',
         }],
-    };
+    }
 
-    myaccrun.notificationCreate(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.run.notificationCreate('RUN_USER_ID_HERE', data)
+    print(result)
 
 
 .notificationDelete
@@ -1626,19 +1578,14 @@ Delete push notifcation for the run user
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
-    
-    const notification_id = '5d9c6e7945f7ab001b0a32c1';
-    accrun.notificationDelete(notification_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    result = my_account.run.notificationDelete('NOTIFICATION_ID_HERE')
+    print(result)
 
 
 Access Management
@@ -1656,18 +1603,15 @@ Retrieve a list with all access management from account.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accam   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').accessManagement;
-    
-    accam.list()
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    access_management_list = my_account.accessManagement.list()
+    print(access_management_list)
+
 
 .create
 =======
@@ -1692,48 +1636,46 @@ Generate and retrieve a new access management for the account.
 |   *\*am_id*: *id of the new access management;*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
-    const user = {
-        id: '576dc932415f403531fd2cf6',
-        name: 'John Doe',
-    };
-    const data = {
-        name: `Dashboards for the user ${user.name}`,
-        tags: [{ key: 'client_id', value: user.id }],
-        targets: [
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    user = {
+        'id': '576dc932415f403531fd2cf6',
+        'name': 'John Doe',
+    }
+
+    new_access_management = {
+        'name': 'Dashboards for the user {}'.format(user['id']),
+        'tags': [{ 'key': 'client_id', 'value': user['id'] }],
+        'targets': [
         [
             'run_user',
             'id',
-            user.id,
+            user['id'],
         ],
         ],
-        permissions: [
+        'permissions': [
         {
-            effect: 'allow',
-            action: [
+            'effect': 'allow',
+            'action': [
             'access',
             ],
-            resource: [
+            'resource': [
             'dashboard',
             'tag.key',
             'client_id',
             'tag.value',
-            user.id,
+            user['id'],
             ],
         },
         ],
-    };
+    }
 
-    accam.create(data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    result = my_account.accessManagement.create(new_access_management)
+    print(result)
 
 
 .edit
@@ -1744,7 +1686,7 @@ Modify any property of the access management.
 | *.edit(/am_id/, /data/)*
 |
 | **Arguments**
-| *data(am_id) id for the new access management.*
+| *am_id(string) reference ID of the access management.*
 | *data(object) options for the new access management.*
 |   *\*name(string)*: *a name for the access management.(optional)*
 |   *\*permissions(array of object)*: *permissions for the access management.(optional)*
@@ -1759,22 +1701,18 @@ Modify any property of the access management.
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account = require('tago/account');
-    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
-    const am_id = '576dc932415f403531fd2cf6'
-    const data = {
-        name: 'my new name of access management',
-    };
+    import tago
 
-    accam.create(am_id, data)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    data = {
+        'name': 'my new name of access management',
+    }
+
+    result = my_account.accessManagement.edit('ACCESS_MANAGEMENT_ID', data)
+    print(result)
 
 
 .info
@@ -1791,18 +1729,14 @@ Get information about the access management
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
-    const access_management_id = '576dc932415f403531fd2cf6';
-    accam.info(access_management_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    import tago
+
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    access_management_info = my_account.accessManagement.info('5dc0b9ab9955dd0026247ce6')
+    print(access_management_info)
 
 
 .delete
@@ -1819,17 +1753,12 @@ Delete access management for the account
 | *(Promise)*
 |
 
-.. code-block:: javascript
+.. code-block:: python
 
-    const Account    = require('tago/account');
-    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
+    import tago
 
-    const access_management_id = '576dc932415f403531fd2cf6';
-    accam.delete(access_management_id')
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
+    my_account = tago.Account('54d83222-6837-4e9e-8f2e-67de8fce5a8b')
+
+    result = my_account.accessManagement.delete('5dc0b9ab9955dd0026247ce6')
+    print(result)
 
