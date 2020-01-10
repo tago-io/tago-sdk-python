@@ -27,11 +27,11 @@ class Device:
 
   def remove(self, args={}):
     queryOrID = args.get('queryOrID')
-    if not args:
+    if not (len(args)):
       queryOrID = {
         'query': 'last_item'
       }
-    query_obj = queryOrID if queryOrID else {}
+    query_obj = queryOrID if queryOrID else args
     return requests.delete('{api_endpoint}/data'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=query_obj).json()
 
   def getParams(self, sent_status):
