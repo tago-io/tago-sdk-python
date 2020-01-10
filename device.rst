@@ -102,18 +102,18 @@ Get a list of data from bucket respecting the query options passed. You can get 
 
 .remove
 *******
-Remove a data from the bucket. It's possible to remove in three ways:
-* The last data inserted by the device
-* The last data inserted by device into a variable
-* A specific data by it ID
+Remove a data from the bucket using a JSON filter.
 
 | **Syntax**
-| *.remove(/variable_or_id/, /qty/)*
+| *.remove(/filter/)*
 |
 | **Arguments**
-| *variable_or_id(string) a variable name or an specific ID. (optional)*
-| *qty(number) specify a number of records to be removed. You can pass "all" to remove all records. Default is 1. (optional)*
-| If no parameter is passed, it will automatically remove the last data inserted by this specific device.
+| *filter(object) filter options when deleting data. (optional)*
+|   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last data (optional);*
+|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/articles/36>`_ *to know what can be passed. (optional)*
+|   *\*end_date(string)*: *Get data older than a specific date. (optional)*
+|   *\*start_date(string)*: *Get data newer than a specific date. (optional)*
+|   *\*qty(number)*: *Number of data to be deleted. Default is 15. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -125,7 +125,13 @@ Remove a data from the bucket. It's possible to remove in three ways:
 
     my_device = tago.Device('DEVICE_TOKEN_HERE')
 
-    result = my_device.remove()
+    filter = {
+        'variable': 'myvar',
+        'query': 'last_value',
+        'end_date':   '2014-12-25 23:33:22',
+        'start_date': '2014-12-20 23:33:22'
+    }
+    result = my_device.remove(filter)
     print(result)
 
 
