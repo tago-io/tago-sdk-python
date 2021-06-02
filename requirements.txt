@@ -1,5 +1,6 @@
 asyncio==3.4.3
 python-socketio==4.3.1
+python-engineio==3.14.2
 websocket-client>=0.54.0
 requests==2.22.0
 promise==2.2.1
