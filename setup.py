@@ -10,7 +10,7 @@ with open('requirements.txt', 'r') as f:
 
 setuptools.setup(
   name='tago',
-  version='3.0.9',
+  version='3.0.10',
   python_requires='>=3.6',
   description='Official Python lib for TagoIO',
   long_description=long_description,
