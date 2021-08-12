@@ -3,8 +3,8 @@ import json  # Used to parse JSON
 import os  # Used to infer environment variables
 from ..internal import fixFilter
 
-API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
-REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
+API_TAGO = os.environ.get('TAGOIO_API') or 'https://api.tago.io'
+REALTIME = os.environ.get('TAGOIO_REALTIME') or 'https://realtime.tago.io'
 
 class Devices:
   def __init__(self, acc_token):
@@ -24,7 +24,7 @@ class Devices:
 
     params = fixFilter(params, filter)
     q = requests.get('{api_endpoint}/device'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=params)
-    
+
     return q.json()
 
   def create(self, data):

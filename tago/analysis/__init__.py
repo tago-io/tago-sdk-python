@@ -1,27 +1,49 @@
 from ..services import Services
 import os
+import json
+from typing import Callable
 
-REALTIME_URL = os.environ.get('TAGO_REALTIME') or 'wss://realtime.tago.io'
-TAGO_RUNTIME = os.environ.get('TAGO_RUNTIME') or False
+REALTIME_URL = os.environ.get('TAGOIO_REALTIME') or 'wss://realtime.tago.io'
+TAGOIO_ANALYSIS_CLOUD = os.environ.get('TAGOIO_ANALYSIS_CLOUD') or False
 
-if TAGO_RUNTIME == False:
+if TAGOIO_ANALYSIS_CLOUD == False:
   import socketio
   import asyncio
   loop = asyncio.new_event_loop()
   asyncio.set_event_loop(loop)
 
 class Analysis:
-  def __init__(self, token):
+  def __init__(self, token: str = 'unknown'):
     self._token = token
 
-  def init(self, analysis):
+  def init(self, analysis: Callable):
     self._analysis = analysis
-    if TAGO_RUNTIME is False:
+
+    if TAGOIO_ANALYSIS_CLOUD is False:
       self.__localRuntime()
     else:
-      return self.run
+      self.__runOnTagoIO()
 
-  def run(self, environment, data, analysis_id, token):
+  def __runOnTagoIO(self):
+    def context():
+      pass
+
+    setattr(context, 'log', print)
+    setattr(context, 'token', os.environ['TAGOIO_ANALYSIS_TOKEN'])
+    setattr(context, 'analysis_id', os.environ['TAGOIO_ANALYSIS_ID'])
+    try:
+      setattr(context, 'environment', json.loads(os.environ['TAGOIO_ANALYSIS_ENV']))
+    except:
+      setattr(context, 'environment', [])
+
+    try:
+      data = json.loads(os.environ['TAGOIO_ANALYSIS_DATA'])
+    except:
+      data = []
+
+    self._analysis(context, data)
+
+  def __runLocal(self, environment, data, analysis_id, token):
     def log(*args):
       print(*args)
       Services(token).console.log(str(args)[1:][:-2])
@@ -42,19 +64,19 @@ class Analysis:
 
     async def connectSocket():
       def ready(analysisObj):
-        print('Analysis [{AnalysisName}] Started\n'.format(AnalysisName=analysisObj['name']))
+        print('Analysis [{AnalysisName}] Started.\n'.format(AnalysisName=analysisObj['name']))
 
       def connect():
-        print('Connected to TagoIO.')
+        print('Connected to TagoIO, Getting analysis information...')
 
       def disconnect():
-        print('Disconnected from TagoIO.\n\n')
+        print('\nDisconnected from TagoIO.\n\n')
 
       def error(e):
         print('Connection error', e)
 
       def analysisTrigger(scope):
-        self.run(scope['environment'], scope['data'], scope['analysis_id'], scope['token'])
+        self.__runLocal(scope['environment'], scope['data'], scope['analysis_id'], scope['token'])
 
       sio.on('ready', ready)
       sio.on('error', error)
@@ -62,7 +84,15 @@ class Analysis:
       sio.on('disconnect', disconnect)
       sio.on('analysis::trigger', analysisTrigger)
 
-      await sio.connect(url=REALTIME_URL + '?token=' + self._token, transports=['websocket'])
+      URLRealtime = '{}{}{}'.format(REALTIME_URL, '?token=', self._token)
+      await sio.connect(url=URLRealtime, transports=['websocket'])
       await sio.wait()
 
-    loop.run_until_complete(connectSocket())
+    try:
+      loop.run_until_complete(connectSocket())
+    except RuntimeError:
+      pass
+
+  @staticmethod
+  def use(analysis: Callable, token: str = 'unknown'):
+    Analysis(token).init(analysis)

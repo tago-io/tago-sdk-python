@@ -10,7 +10,6 @@ from.buckets import Buckets
 from.dashboards import Dashboards
 from.devices import Devices
 from.notifications import Notifications
-from.middlewares import Middlewares
 from.tags import Tags
 from.paymentMethods import PaymentMethods
 from.plan import Plan
@@ -23,8 +22,8 @@ from.run import TagoIORUN
 from.profiles import Profiles
 from.service_authorization import ServiceAuth
 
-API_TAGO=os.environ.get('TAGO_API') or 'https://api.tago.io'
-REALTIME=os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
+API_TAGO=os.environ.get('TAGOIO_API') or 'https://api.tago.io'
+REALTIME=os.environ.get('TAGOIO_REALTIME') or 'https://realtime.tago.io'
 
 class Account:
   def __init__(self, token):
@@ -134,10 +133,6 @@ class Account:
   @property
   def notifications(self):
     return Notifications(self.token)
-
-  @property
-  def middlewares(self):
-    return Middlewares(self.token)
 
   @property
   def tags(self):

@@ -1,6 +1,5 @@
-asyncio==3.4.3
-python-socketio==4.3.1
-websocket-client>=0.54.0
-requests==2.22.0
-promise==2.2.1
-websockets==8.0.2
+python-socketio==5.4.0
+requests==2.26.0
+promise==2.3
+websockets==9.1
+aiohttp==3.7.4

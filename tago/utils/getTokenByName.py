@@ -2,12 +2,12 @@ import requests
 import json
 import os
 
-API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
+API_TAGO = os.environ.get('TAGOIO_API') or 'https://api.tago.io'
 
 def getTokenByName(account, device_id, names=None):
   tokens = account.devices.tokenList(device_id)
   if not tokens['status']: return None
-  
+
   if names:
     names = [names] if isinstance(names, str) else names
     for name in names:

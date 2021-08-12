@@ -2,8 +2,8 @@ import requests  # Used to make HTTP requests
 import json  # Used to parse JSON
 import os  # Used to infer environment variables
 
-API_TAGO = os.environ.get('TAGO_API') or 'https://api.tago.io'
-REALTIME = os.environ.get('TAGO_REALTIME') or 'https://realtime.tago.io'
+API_TAGO = os.environ.get('TAGOIO_API') or 'https://api.tago.io'
+REALTIME = os.environ.get('TAGOIO_REALTIME') or 'https://realtime.tago.io'
 
 
 class Plan:
