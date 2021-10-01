@@ -4,9 +4,9 @@ import json
 from typing import Callable
 
 REALTIME_URL = os.environ.get('TAGOIO_REALTIME') or 'wss://realtime.tago.io'
-TAGOIO_ANALYSIS_CLOUD = os.environ.get('TAGOIO_ANALYSIS_CLOUD') or False
+T_ANALYSIS_CONTEXT = os.environ.get('T_ANALYSIS_CONTEXT') or False
 
-if TAGOIO_ANALYSIS_CLOUD == False:
+if T_ANALYSIS_CONTEXT == False:
   import socketio
   import asyncio
   loop = asyncio.new_event_loop()
@@ -19,7 +19,7 @@ class Analysis:
   def init(self, analysis: Callable):
     self._analysis = analysis
 
-    if TAGOIO_ANALYSIS_CLOUD is False:
+    if T_ANALYSIS_CONTEXT is False:
       self.__localRuntime()
     else:
       self.__runOnTagoIO()
@@ -29,15 +29,15 @@ class Analysis:
       pass
 
     setattr(context, 'log', print)
-    setattr(context, 'token', os.environ['TAGOIO_ANALYSIS_TOKEN'])
-    setattr(context, 'analysis_id', os.environ['TAGOIO_ANALYSIS_ID'])
+    setattr(context, 'token', os.environ['T_ANALYSIS_TOKEN'])
+    setattr(context, 'analysis_id', os.environ['T_ANALYSIS_ID'])
     try:
-      setattr(context, 'environment', json.loads(os.environ['TAGOIO_ANALYSIS_ENV']))
+      setattr(context, 'environment', json.loads(os.environ['T_ANALYSIS_ENV']))
     except:
       setattr(context, 'environment', [])
 
     try:
-      data = json.loads(os.environ['TAGOIO_ANALYSIS_DATA'])
+      data = json.loads(os.environ['T_ANALYSIS_DATA'])
     except:
       data = []
 
