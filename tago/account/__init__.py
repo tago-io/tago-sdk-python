@@ -1,8 +1,6 @@
 import requests # Used to make HTTP requests
 import json # Used to parse JSON
-import os
-
-#from tago_sdk_python.tago.account.integration_network import Network # Used to infer environment variables
+import os # Used to infer environment variables
 from ..internal import fixFilter
 
 from.actions import Actions
@@ -23,7 +21,6 @@ from.accessManagement import AccessManagement
 from.run import TagoIORUN
 from.profiles import Profiles
 from.service_authorization import ServiceAuth
-from.integration_network import Network
 
 API_TAGO=os.environ.get('TAGOIO_API') or 'https://api.tago.io'
 REALTIME=os.environ.get('TAGOIO_REALTIME') or 'https://realtime.tago.io'
@@ -180,7 +177,3 @@ class Account:
   @property
   def profiles(self):
     return Profiles(self.token)
-
-  @property
-  def integration_network(self):
-    return Network(self.token)
