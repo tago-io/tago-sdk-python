@@ -1,4 +1,4 @@
-python-socketio==5.4.0
+python-socketio==5.5.2
 requests==2.26.0
 promise==2.3
 websockets==9.1
