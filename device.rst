@@ -66,7 +66,7 @@ Insert a new data into a bucket. You can get more information about what informa
 
 .find
 *******
-Get a list of data from bucket respecting the query options passed. You can get more information about what information can be passed with .find in our `get documentation <https://tago.elevio.help/en/articles/36>`_
+Get a list of data from bucket respecting the query options passed. You can get more information about what information can be passed with .find in our `get documentation <https://docs.tago.io/en/articles/36>`_
 
 | **Syntax**
 | *.find(/filter/)*
@@ -74,7 +74,7 @@ Get a list of data from bucket respecting the query options passed. You can get 
 | **Arguments**
 | *filter(object) filter options when retrieving data. (optional)*
 |   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last data (optional);*
-|   *\*query(string)*: *Do a specific query. See the* `query documentation <https://tago.elevio.help/en/articles/31>`_ *to know what can be passed. (optional)*
+|   *\*query(string)*: *Do a specific query. See the* `query documentation <https://docs.tago.io/en/articles/31>`_ *to know what can be passed. (optional)*
 |   *\*end_date(string)*: *Get data older than a specific date. (optional)*
 |   *\*start_date(string)*: *Get data newer than a specific date. (optional)*
 |   *\*qty(number)*: *Number of data to be retrieved. Default is 15. (optional)*
