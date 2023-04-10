@@ -24,7 +24,8 @@ class Dashboards:
       'amount': amount,
       'orderBy': orderBy,
     }
-    return requests.get('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, data=params).json()
+    params = fixFilter(params, filter)
+    return requests.get('{api_endpoint}/dashboard'.format(api_endpoint=API_TAGO), headers=self.default_headers, params=params).json()
 
     # Create a Dashboard
   def create(self, data):
