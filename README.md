@@ -1,6 +1,9 @@
 ## TagoIO - Python Lib
+> (Deprecated - Support until 2030-07-20)
 
-Official Python lib for TagoIO
+Use tagoio_sdk instead. https://github.com/tago-io/sdk-python
+
+---
 
 ## Documentation
 
